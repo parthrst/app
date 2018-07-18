@@ -48,7 +48,10 @@
 
         <activity android:name=".Payment_details" />
         <activity android:name=".g_signin" />
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".SignUp" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>
