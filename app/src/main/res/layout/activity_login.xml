@@ -98,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:hint="username"
                     android:gravity="center"
+                    android:id="@+id/username"
                     android:background="@drawable/input_round"
                     android:padding="8dp"
                     android:textColorHint="#626262"
@@ -111,6 +112,7 @@
                     android:layout_width="220dp"
                     android:layout_height="wrap_content"
                     android:hint="password"
+                    android:id="@+id/password"
                     android:gravity="center"
                     android:background="@drawable/input_round"
                     android:padding="8dp"
@@ -224,7 +226,7 @@
             android:textColorHint="#656565"
             android:textSize="16dp"
             android:layout_marginTop="15dp"
-            android:onClick="signup"
+            android:onClick="signUpButton"
 
             />
 

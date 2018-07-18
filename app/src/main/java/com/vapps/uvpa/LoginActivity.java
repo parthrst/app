@@ -28,7 +28,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-Button Payment;
+    EditText usernameEditText;
+
+    EditText passwordEditText;
 
 
       /*
@@ -128,6 +130,9 @@ Button Payment;
 
 
 
+            usernameEditText = (EditText) findViewById(R.id.username);
+
+             passwordEditText = (EditText) findViewById(R.id.password);
 
 
 
@@ -161,14 +166,29 @@ Button Payment;
         public void Payment(View view)
         {
 
-            startActivity(new Intent(LoginActivity.this,Payment_details.class));
-            finish();
+            ParseUser.logInInBackground(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+
+                    if (user != null) {
+
+                        Log.i("Signup", "Login successful");
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+            });
 
         }
 
-    public void signup(View view){
+    public void signUpButton(View view){
         startActivity(new Intent(LoginActivity.this,SignUp.class));
-        finish();
+
     }
 
     }

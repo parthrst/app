@@ -29,8 +29,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
     }
-}
-/*    public void signUp(View view) {
+public void signUpAct(View view) {
 
         EditText emailEditText =  findViewById(R.id.email);
         EditText usernameEditText =  findViewById(R.id.uname);
@@ -43,52 +42,27 @@ public class SignUp extends AppCompatActivity {
 
         } else {
 
-            if (signUpModeActive) {
 
-                ParseUser user = new ParseUser();
-                user.setEmail(emailEditText.getText().toString());
-                user.setUsername(usernameEditText.getText().toString());
-                user.setPassword(passwordEditText.getText().toString());
+            ParseUser user = new ParseUser();
+            user.setEmail(emailEditText.getText().toString());
+            user.setUsername(usernameEditText.getText().toString());
+            user.setPassword(passwordEditText.getText().toString());
 
-                user.signUpInBackground(new SignUpCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
+            user.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
 
-                            Log.i("Signup", "Successful");
+                        Log.i("Signup", "Successful");
 
-                        } else {
+                    } else {
 
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-
-            } else {
-
-                ParseUser.logInInBackground(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new LogInCallback() {
-                    @Override
-                    public void done(ParseUser user, ParseException e) {
-
-                        if (user != null) {
-
-                            Log.i("Signup", "Login successful");
-
-                        } else {
-
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
-                });
+                }
+            });
+
+        }}}
 
 
-            }
-        }
-
-
-    }
-*/
