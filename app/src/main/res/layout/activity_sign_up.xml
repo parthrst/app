@@ -115,7 +115,6 @@
                     android:gravity="center"
                     android:background="@drawable/input_round"
                     android:padding="8dp"
-                    android:inputType="textPassword"
                     android:textColorHint="#626262"
                     android:layout_marginTop="15dp"
                     android:id="@+id/uname"
