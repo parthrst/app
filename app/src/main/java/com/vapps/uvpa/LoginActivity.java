@@ -166,23 +166,7 @@ public class LoginActivity extends AppCompatActivity {
         public void Payment(View view)
         {
 
-            ParseUser.logInInBackground(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new LogInCallback() {
-                @Override
-                public void done(ParseUser user, ParseException e) {
-
-                    if (user != null) {
-
-                        Log.i("Signup", "Login successful");
-
-                    } else {
-
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-
-
-                }
-            });
+           startActivity(new Intent(LoginActivity.this,MapsActivity.class));
 
         }
 

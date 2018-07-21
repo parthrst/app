@@ -52,6 +52,12 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".OrderRepair"></activity>
+
+
+
     </application>
+
+
+
 
 </manifest>
