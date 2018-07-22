@@ -24,8 +24,10 @@ public class OrderRepair extends AppCompatActivity {
 
     private Spinner spinner;
     private Spinner seriesSearch;
+    private Spinner typeRepair;
 
     private Button Login;
+    private Button OderRepairButton;
 
 
     @Override
@@ -36,7 +38,11 @@ public class OrderRepair extends AppCompatActivity {
 
         Login = (Button)findViewById(R.id.login_button);
 
+        OderRepairButton = findViewById(R.id.order_repair_button);
+
         spinner = findViewById(R.id.spinner_search);
+
+        typeRepair = findViewById(R.id.type_repair);
 
         seriesSearch = findViewById(R.id.spinner_seriesSearch);
 
@@ -55,11 +61,14 @@ public class OrderRepair extends AppCompatActivity {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         String Phones="";
+
         try {
+
             Phones = bufferedReader.readLine();
 
+        }
 
-        } catch (IOException e)
+        catch (IOException e)
         {
             e.printStackTrace();
         }
@@ -81,7 +90,6 @@ public class OrderRepair extends AppCompatActivity {
 
             contentValues.put(PhoneDataContract.PhonedData.COLUNMN_MI,0);
 
-
             sqLiteDatabase.insert(PhoneDataContract.PhonedData.TABLE_NAME, null ,contentValues);
 
             contentValues = new ContentValues();
@@ -91,12 +99,8 @@ public class OrderRepair extends AppCompatActivity {
         String XiaomiPhones[] = SplittedPhones[4].split(",");
 
 
-
-
-
         Cursor cursor = sqLiteDatabase.query
                 (
-
                         PhoneDataContract.PhonedData.TABLE_NAME,
                         null,
                         null,
@@ -116,7 +120,6 @@ public class OrderRepair extends AppCompatActivity {
         while(cursor.moveToNext())
         {
 
-
             String seriesName= cursor.getString(cursor.getColumnIndex(PhoneDataContract.PhonedData.COLUNMN_SAMSUNG));
 
 
@@ -132,8 +135,15 @@ public class OrderRepair extends AppCompatActivity {
 
         seriesSearch.setAdapter(adapter1);
 
+        ArrayAdapter<CharSequence> adapter3  = ArrayAdapter.createFromResource(this,R.array.type_repair,R.layout.support_simple_spinner_dropdown_item);
+
+        adapter3.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        typeRepair.setAdapter(adapter3);
+
 
     }
+
+
 
 
     public void Login(View view)
@@ -143,10 +153,5 @@ public class OrderRepair extends AppCompatActivity {
 
 
     }
-
-
-
-
-
 }
 
