@@ -52,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         Intent intent = new Intent(MainActivity.this, OrderRepair.class);
                         startActivity(intent);
-                        overridePendingTransition(R.animator.in_right, R.animator.in_left);
+
+                        finish();
                     }
-                }, 4000);
+                }, 2000);
 
 
     }
