@@ -34,6 +34,23 @@
         <item>NOKIA</item>
         <item>GIONEE</item>
     </string-array>
+
+
+    <string-array name="type_repair">
+        <item>Battery Problem</item>
+        <item>Broken Buttons</item>
+        <item>Cracked Screen</item>
+        <item>Charging Problem</item>
+        <item>Camera Lens Is Broken </item>
+        <item>Camera Lens Hazy</item>
+        <item>Faulty Power Button</item>
+        <item>Unresponsive Touch Screen</item>
+        <item>Water Damage</item>
+
+
+
+    </string-array>
+
     <string name="title_activity_maps">Map</string>
 
     <string name="sign_up"><u>Create an Account</u></string>

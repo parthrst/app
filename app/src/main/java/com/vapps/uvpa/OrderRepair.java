@@ -38,7 +38,7 @@ public class OrderRepair extends AppCompatActivity {
 
         Login = (Button)findViewById(R.id.login_button);
 
-        OderRepairButton = findViewById(R.id.order_repair_button);
+        OderRepairButton = findViewById(R.id.order_repair_but);
 
         spinner = findViewById(R.id.spinner_search);
 

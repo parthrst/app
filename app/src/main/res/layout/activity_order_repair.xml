@@ -9,7 +9,6 @@
     >
 
 
-
     <Button
         android:layout_width="45dp"
         android:layout_height="47dp"
@@ -61,10 +60,35 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="15dp"
+            android:autofillHints="Series"
             android:paddingRight="15dp"
             />
 
 
 
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:paddingTop="20dp"
+            android:id="@+id/type_repair"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            />
+
+
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Order Repair"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:onClick="Login"
+            android:id="@+id/order_repair_but"
+
+            />
+        
+        
     </LinearLayout>
 </RelativeLayout>
