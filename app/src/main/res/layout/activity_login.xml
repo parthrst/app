@@ -43,13 +43,14 @@
 
 
 
-
-                <Button
+                 <Button
 
                     android:layout_width="45dp"
                     android:layout_height="47dp"
                     android:background="@drawable/menu"
                     android:layout_alignParentLeft="true"
+                     android:id="@+id/drawer_icon"
+                     android:onClick="drawerClick"
 
                     />
 
