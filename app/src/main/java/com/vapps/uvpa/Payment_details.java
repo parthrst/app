@@ -1,10 +1,9 @@
 package com.vapps.uvpa;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import retrofit2.Call;
-import retrofit2.http.GET;
+import android.view.View;
 
 
 public class Payment_details extends AppCompatActivity {
@@ -20,6 +19,11 @@ public class Payment_details extends AppCompatActivity {
         cardForm = findViewById(R.id.card_form);
 
 
-    }
 
-}
+cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
+        @Override
+        public void onClick(Card card) {
+            startActivity(new Intent(Payment_details.this,QR.class));
+        }
+    });
+}}

@@ -3,6 +3,7 @@ package com.vapps.uvpa;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -93,7 +94,9 @@ public class CardForm extends LinearLayoutCompat {
 
         return new Card(getString(cardNumber).replaceAll(String.valueOf(space), "")
                 , month, year, getString(cvc), getString(cardName), "", "", "", "", "", "", "");
-    }
+
+
+        }
 
     private String parseDate(String str) {
 
@@ -407,6 +410,5 @@ public class CardForm extends LinearLayoutCompat {
     public void setPayBtnClickListner(OnPayBtnClickListner onPayBtnClickListner) {
         this.onPayBtnClickListner = onPayBtnClickListner;
     }
-
 
 }

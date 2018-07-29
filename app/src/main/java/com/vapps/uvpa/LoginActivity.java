@@ -221,10 +221,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void drawerClick(View view)
+   /* public void drawerClick(View view)
     {
         startActivity(new Intent(LoginActivity.this,QrGen.class));
-    }
+    }*/
 
     }
 
