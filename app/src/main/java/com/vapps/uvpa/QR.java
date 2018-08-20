@@ -19,6 +19,7 @@ import org.json.JSONObject;
 public class QR extends AppCompatActivity implements View.OnClickListener{
 
     private Button buttonScan;
+
     private TextView textViewName, textViewAddress;
 
     //qr code scanner object
@@ -78,7 +79,8 @@ public class QR extends AppCompatActivity implements View.OnClickListener{
 
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         //initiating the qr code scan
         qrScan.initiateScan();
 
