@@ -60,7 +60,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.3'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
 
-
+//fb sign in
+    implementation 'com.facebook.android:facebook-android-sdk:4.27.0'
 
 }
 
