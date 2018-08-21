@@ -196,6 +196,7 @@
             android:drawableStart="@drawable/search"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:onClick="GsignIn"
 
 
             />

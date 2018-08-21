@@ -1,6 +1,7 @@
 package com.vapps.uvpa;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
@@ -24,10 +31,16 @@ import java.util.List;
 
 public class SignUp extends AppCompatActivity {
 
+
+    FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 public void signUpAct(View view)
 {
@@ -44,7 +57,7 @@ public void signUpAct(View view)
         } else {
 
 
-            ParseUser user = new ParseUser();
+       /*     ParseUser user = new ParseUser();
             user.setEmail(emailEditText.getText().toString());
             user.setUsername(usernameEditText.getText().toString());
             user.setPassword(passwordEditText.getText().toString());
@@ -63,7 +76,31 @@ public void signUpAct(View view)
 
                     }
                 }
-            });
+            });*/
+
+            String email = emailEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(SignUp.this, user.toString(), Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+                                Toast.makeText(SignUp.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    });
+
+
+
 
         }}}
 

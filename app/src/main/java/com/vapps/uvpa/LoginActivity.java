@@ -2,7 +2,9 @@ package com.vapps.uvpa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +18,20 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
@@ -37,9 +53,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class LoginActivity extends AppCompatActivity {
-
-
+public class LoginActivity extends AppCompatActivity
+{
 
     EditText usernameEditText;
 
@@ -47,6 +62,10 @@ public class LoginActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
     Retrofit retrofit;
+
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
 
 
 
@@ -144,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //    changeSignupModeTextView.setOnClickListener(this);
 
-            retrofit = new Retrofit.Builder()
+        /*    retrofit = new Retrofit.Builder()
                     .baseUrl("http://192.168.1.12:3000")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -164,9 +183,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Connection error",Toast.LENGTH_SHORT).show();
                 }
             });
+*/
 
-
-
+            mAuth = FirebaseAuth.getInstance();
 
             usernameEditText = (EditText) findViewById(R.id.username);
 
@@ -175,7 +194,13 @@ public class LoginActivity extends AppCompatActivity {
 
            // drawer = findViewById(R.id.drawer_layout);
 
+            // Configure Google Sign In
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .build();
 
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
 
@@ -205,11 +230,42 @@ public class LoginActivity extends AppCompatActivity {
             */
 
 
+
+
+
+
+
+
         }
 
 
         public void Payment(View view)
+
         {
+            String email = usernameEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> task) {
+
+                            if (task.isSuccessful())
+                            {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(LoginActivity.this, user.toString(),Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+
+
+
+                    });
 
            startActivity(new Intent(LoginActivity.this,MapsActivity.class));
 
@@ -221,10 +277,71 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void GsignIn(View view)
+    {
+
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+
+
+    }
+
    /* public void drawerClick(View view)
     {
         startActivity(new Intent(LoginActivity.this,QrGen.class));
     }*/
+
+
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+
+                // ...
+            }
+        }
+    }
+
+
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful()) {
+
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                         //   Snackbar.make(findViewById(R.id.o), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+
+                });
+    }
 
     }
 

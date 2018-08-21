@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             address = addressList.get(0).getPostalCode()+" ";
                         }
 
-                        Toast.makeText(MapsActivity.this,address,Toast.LENGTH_SHORT).show();
+
 
                     }
                 }
