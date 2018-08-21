@@ -9,8 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -269,7 +267,7 @@ public class LoginActivity extends AppCompatActivity
                             if (task.isSuccessful())
                             {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                //Toast.makeText(LoginActivity.this, user.toString(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, user.toString(),Toast.LENGTH_SHORT).show();
 
                             } else {
 
@@ -296,11 +294,15 @@ public class LoginActivity extends AppCompatActivity
     public void GsignIn(View view)
     {
 
+if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+    Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+    startActivityForResult(signInIntent, RC_SIGN_IN);
+}
 
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-
-
+else
+{
+    startActivity(new Intent(LoginActivity.this,MapsActivity.class));
+}
 
 
     }
@@ -350,7 +352,7 @@ public class LoginActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
 
                             FirebaseUser user = mAuth.getCurrentUser();
-                           startActivity(new Intent(LoginActivity.this,Payment_details.class));
+                            startActivity(new Intent(LoginActivity.this,Payment_details.class));
 
                         } else {
                             // If sign in fails, display a message to the user.

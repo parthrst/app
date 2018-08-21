@@ -44,10 +44,10 @@ cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
         // Handle item selection
         if (item.getItemId() == R.id.SignOut) {
             FirebaseAuth.getInstance().signOut();
-            if(FirebaseAuth.getInstance().getCurrentUser()==null) {
-             startActivity(new Intent(Payment_details.this,OrderRepair.class));
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                startActivity(new Intent(Payment_details.this, OrderRepair.class));
             }
-            }
+        }
 
         return true;
     }
