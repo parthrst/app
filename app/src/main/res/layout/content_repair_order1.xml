@@ -1,0 +1,189 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFF"
+    tools:context=".MainActivity"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/uname"
+        android:layout_marginTop="50dp"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/myrect"
+        android:elevation="20dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="80dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/floatingCard"
+
+  >
+
+        <!--TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="15dp"
+            android:textSize="15sp"
+            android:text="Please place your order"
+            android:layout_gravity="center"
+            android:id="@+id/demoText"
+            /-->
+
+
+
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spinner_search"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:hintText="Select Brand"
+            android:background="@drawable/myrect"
+
+
+            />
+
+
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spinner_seriesSearch"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:autofillHints="Series"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:paddingRight="15dp"
+            android:layout_below="@+id/spinner_search"
+            app:hintText="Select Model"
+           />
+
+
+
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/type_repair"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:paddingRight="15dp"
+            android:layout_below="@+id/spinner_seriesSearch"
+            app:hintText="Issue"
+            />
+
+
+        <!--Button
+            android:id="@+id/order_repair_but"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="45dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/rounded_button"
+            android:hint="Order Repair"
+            android:onClick="Login"
+            android:paddingLeft="12dp"
+            android:paddingTop="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="12dp"
+
+            android:textSize="30dp"
+
+            /-->
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/gradient"
+        android:id="@+id/imageLayout"
+        >
+
+
+
+        <ImageView
+            android:id="@+id/circleLeft"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/ic_concentric_circles"
+            />
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="200dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/ic_concentric_circles"
+            android:id="@+id/circleRight"
+            />
+
+        <ImageView
+            android:id="@+id/plantLeft"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="74dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_plant" />
+
+
+        <ImageView
+            android:id="@+id/plantRight"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/circleRight"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_plant" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/myrect"
+        android:elevation="5dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/floatingCard"
+
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerVew"
+            android:scrollbars="horizontal"
+
+            >
+
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
+</RelativeLayout>

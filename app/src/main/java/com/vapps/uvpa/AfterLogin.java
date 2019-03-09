@@ -1,12 +1,9 @@
 package com.vapps.uvpa;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 
-import android.graphics.BitmapFactory;
-import android.media.ImageReader;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import android.os.Handler;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
@@ -35,9 +28,6 @@ public class AfterLogin extends AppCompatActivity {
     public String menuUserName = "";
     private URL iconUrl;
     public ImageView imageView;
-
-
-
 
 
 
@@ -64,17 +54,14 @@ public class AfterLogin extends AppCompatActivity {
      //   menuUserName = user.getDisplayName();
 
 
-
-
     }
-
 
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.afterlogin,menu);
+        getMenuInflater().inflate(R.menu.repair_order1,menu);
 
         menu.add(menuUserName);
 
@@ -118,6 +105,34 @@ public class AfterLogin extends AppCompatActivity {
 
 */
     }
+
+
+    boolean twice;
+    @Override
+    public void onBackPressed() {
+
+        if (twice == true)
+        {
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory(Intent.CATEGORY_HOME);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
+        }
+
+        twice = true;
+
+        Toast.makeText(this, "Please press BACK again to EXIT", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                twice = false;
+
+
+            }
+        }, 3000);
+    }
+
 
 
 

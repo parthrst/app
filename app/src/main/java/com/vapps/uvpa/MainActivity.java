@@ -22,17 +22,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
 
 
@@ -46,16 +39,18 @@ public class MainActivity extends AppCompatActivity {
             Window window = getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.colorBlack));
         }
+
         new Handler().postDelayed
                 (new Runnable() {
                     @Override
-                    public void run() {
-                        Intent intent = new Intent(MainActivity.this, OrderRepair.class);
+                    public void run()
+                    {
+                        Intent intent = new Intent(MainActivity.this, RepairOrder1.class);
                         startActivity(intent);
-
+   
                         finish();
                     }
-                }, 2000);
+                }, 1000);
 
 
     }

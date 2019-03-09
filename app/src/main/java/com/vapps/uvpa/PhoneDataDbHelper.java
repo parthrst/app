@@ -23,13 +23,12 @@ public class PhoneDataDbHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        final String SQ_CREATE_PHONE_TABLE = "CREATE TABLE " + PhoneDataContract.PhonedData.TABLE_NAME + " (" +
+        final String SQL_CREATE_PHONE_TABLE = "CREATE TABLE " + PhoneDataContract.PhonedData.TABLE_NAME + " (" +
                 PhoneDataContract.PhonedData._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                PhoneDataContract.PhonedData.COLUNMN_SAMSUNG + " TEXT, " +
-                PhoneDataContract.PhonedData.COLUNMN_MI + " TEXT )";
+                PhoneDataContract.PhonedData.COLUNMN_SAMSUNG+ " TEXT )";
 
 
-        sqLiteDatabase.execSQL(SQ_CREATE_PHONE_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_PHONE_TABLE);
 
     }
 
@@ -39,8 +38,4 @@ public class PhoneDataDbHelper extends SQLiteOpenHelper
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ PhoneDataContract.PhonedData.TABLE_NAME);
         onCreate(sqLiteDatabase);
 
-    }
-
-
-
-}
+    }}

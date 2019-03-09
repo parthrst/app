@@ -3,22 +3,13 @@ package com.vapps.uvpa;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -53,14 +44,6 @@ import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
 
 
 public class LoginActivity extends AppCompatActivity
@@ -70,8 +53,9 @@ public class LoginActivity extends AppCompatActivity
 
     EditText passwordEditText;
 
-    DrawerLayout drawer;
-    Retrofit retrofit;
+    CoordinatorLayout coordinatorLayout;
+
+
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
@@ -197,11 +181,13 @@ public class LoginActivity extends AppCompatActivity
             });
 */
 
-            mAuth = FirebaseAuth.getInstance();
+
 
             usernameEditText = (EditText) findViewById(R.id.username);
 
              passwordEditText = (EditText) findViewById(R.id.password);
+
+
 
 
            // drawer = findViewById(R.id.drawer_layout);
@@ -209,12 +195,13 @@ public class LoginActivity extends AppCompatActivity
             // Configure Google Sign In
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
-                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestIdToken(getString(R.string.server_client_id))
                     .build();
 
             mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+            mAuth = FirebaseAuth.getInstance();
 
-            mCallbackManager = CallbackManager.Factory.create();
+           // mCallbackManager = CallbackManager.Factory.create();
 
 
 
@@ -253,7 +240,7 @@ public class LoginActivity extends AppCompatActivity
         }
 
 
-        public void Payment(View view)
+        public void SignInIcon(View view)
 
         {
             String email = usernameEditText.getText().toString();
@@ -266,10 +253,10 @@ public class LoginActivity extends AppCompatActivity
 
                             if (task.isSuccessful())
                             {
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(LoginActivity.this, user.toString(),Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this,MapsActivity.class));
 
-                            } else {
+                            } else
+                                {
 
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
 
@@ -281,7 +268,7 @@ public class LoginActivity extends AppCompatActivity
 
                     });
 
-           startActivity(new Intent(LoginActivity.this,MapsActivity.class));
+
 
         }
 
@@ -294,9 +281,12 @@ public class LoginActivity extends AppCompatActivity
     public void GsignIn(View view)
     {
 
-if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+if (FirebaseAuth.getInstance().getCurrentUser() == null)
+{
     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
     startActivityForResult(signInIntent, RC_SIGN_IN);
+    Toast.makeText(this,"not null",Toast.LENGTH_LONG).show();
+  //  startActivity(new Intent(LoginActivity.this,MapsActivity.class));
 }
 
 else
@@ -315,24 +305,28 @@ else
 
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+       // mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+            Toast.makeText(this," rcode fine ",Toast.LENGTH_LONG).show();
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
 
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Toast.makeText(this,account.toString(),Toast.LENGTH_LONG).show();
+
+                firebaseAuthWithGoogle(account);
+            }
+            catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+               // Snackbar.make(coordinatorLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                 // ...
             }
         }
@@ -342,6 +336,7 @@ else
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
 
+        coordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -350,14 +345,15 @@ else
                     public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> task)
                     {
                         if (task.isSuccessful()) {
-
+                            Toast.makeText(LoginActivity.this," rcodeq fine ",Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(LoginActivity.this,Payment_details.class));
+                            startActivity(new Intent(LoginActivity.this,MapsActivity.class));
 
                         } else {
+                            Toast.makeText(LoginActivity.this," error ",Toast.LENGTH_LONG).show();
                             // If sign in fails, display a message to the user.
 
-                         //   Snackbar.make(findViewById(R.id.o), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+                         //   Snackbar.make(coordinatorLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
 
                         }
                     }
@@ -365,6 +361,8 @@ else
 
                 });
     }
+
+
 
     public void FbSignIn(View view)
     {
@@ -408,6 +406,8 @@ else
 
                             FirebaseUser user = mAuth.getCurrentUser();
 
+
+
                         } else {
                             // If sign in fails, display a message to the user.
 
@@ -419,7 +419,6 @@ else
                     }
                 });
     }
-
 
 
 }

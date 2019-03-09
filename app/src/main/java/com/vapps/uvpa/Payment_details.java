@@ -33,9 +33,10 @@ cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
         }
     });
 } @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.afterlogin, menu);
+        inflater.inflate(R.menu.repair_order1, menu);
         return true;
     }
    
@@ -45,7 +46,7 @@ cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
         if (item.getItemId() == R.id.SignOut) {
             FirebaseAuth.getInstance().signOut();
             if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                startActivity(new Intent(Payment_details.this, OrderRepair.class));
+                startActivity(new Intent(Payment_details.this, RepairOrder1.class));
             }
         }
 

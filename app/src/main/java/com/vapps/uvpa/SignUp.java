@@ -1,6 +1,8 @@
 package com.vapps.uvpa;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -85,7 +87,8 @@ public void signUpAct(View view)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+                            if (task.isSuccessful())
+                            {
 
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(SignUp.this, user.toString(), Toast.LENGTH_SHORT).show();
@@ -100,8 +103,16 @@ public void signUpAct(View view)
                     });
 
 
+        }}
 
 
-        }}}
+
+
+
+}
+
+
+
+
 
 

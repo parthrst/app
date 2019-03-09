@@ -1,3 +1,4 @@
+
 package com.vapps.uvpa;
 
 import android.content.Intent;
@@ -16,7 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class QR extends AppCompatActivity implements View.OnClickListener{
+public class QR extends AppCompatActivity {
 
     private Button buttonScan;
 
@@ -36,15 +37,12 @@ public class QR extends AppCompatActivity implements View.OnClickListener{
 
 
         //View objects
-        buttonScan = (Button) findViewById(R.id.buttonScan);
-        textViewName = (TextView) findViewById(R.id.textViewName);
-        textViewAddress = (TextView) findViewById(R.id.textViewAddress);
+
 
         //intializing scan object
         qrScan = new IntentIntegrator(this);
 
-        //attaching onclick listener
-        buttonScan.setOnClickListener(this);
+
     }
 
     //Getting the scan results
@@ -60,30 +58,25 @@ public class QR extends AppCompatActivity implements View.OnClickListener{
                 try {
                     //converting the data to json
                     JSONObject obj = new JSONObject(result.getContents());
-                    //setting values to textviews
+
                     textViewName.setText(obj.getString("name"));
                     textViewAddress.setText(obj.getString("address"));
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    //if control comes here
-                    //that means the encoded format not matches
-                    //in this case you can display whatever data is available on the qrcode
-                    //to a toast
+
                     Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 }
             }
-        } else {
+        } else
+            {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
 
-    @Override
-    public void onClick(View view)
+
+    public void buttonScanQr(View view)
     {
-        //initiating the qr code scan
         qrScan.initiateScan();
-
-
     }
 }
