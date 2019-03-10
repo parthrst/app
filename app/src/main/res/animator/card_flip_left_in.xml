@@ -16,7 +16,7 @@
         android:valueTo="0" />
 
     <!-- Half-way through the rotation (see startOffset), set the alpha to 1. -->
-    <objectAnimator
+    <objectAnimatoranimator
 
         android:duration="1"
         android:propertyName="alpha"

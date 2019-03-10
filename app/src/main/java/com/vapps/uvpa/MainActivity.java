@@ -21,7 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-
+import com.parse.ParseAnalytics;
 
 
 public class MainActivity extends AppCompatActivity
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
         if (Build.VERSION.SDK_INT > 21) {
             Window window = getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.colorBlack));
@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void run()
                     {
-                        Intent intent = new Intent(MainActivity.this, RepairOrder1.class);
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
    
                         finish();
                     }
-                }, 1000);
+                }, 700);
 
 
     }

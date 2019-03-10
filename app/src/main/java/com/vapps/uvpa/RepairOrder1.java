@@ -57,9 +57,7 @@ import java.util.ListIterator;
 public class RepairOrder1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
 
-    private Spinner spinner;
-    private Spinner seriesSearch;
-    private Spinner typeRepair;
+
 
     private Button Login;
     private Button OderRepairButton;
@@ -70,8 +68,8 @@ public class RepairOrder1 extends AppCompatActivity
     private TextView uname;
     private IntentIntegrator qrScan;
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+   // RecyclerView recyclerView;
+   // RecyclerView.LayoutManager layoutManager;
 
 
     List<String> seriesNames = new ArrayList<String>();
@@ -83,7 +81,7 @@ public class RepairOrder1 extends AppCompatActivity
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        spinner = findViewById(R.id.spinner_search);
+      //  spinner = findViewById(R.id.spinner_search);
         fetchData(parent.getSelectedItem().toString(),position);
 
     }
@@ -166,13 +164,7 @@ public class RepairOrder1 extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        spinner = findViewById(R.id.spinner_search);
 
-        spinner.setOnItemSelectedListener(this);
-        typeRepair = findViewById(R.id.type_repair);
-        seriesSearch = findViewById(R.id.spinner_seriesSearch);
-
-        recyclerView = findViewById(R.id.recyclerVew);
 
 
 
@@ -190,23 +182,11 @@ public class RepairOrder1 extends AppCompatActivity
 
     }
 
-        layoutManager = new GridLayoutManager(this,brandsNamesList.size());
+        List.size());
 
 
        BrandViewAdapter brandViewAdapter = new BrandViewAdapter(this,brandsNamesList);
 
-       recyclerView.setLayoutManager(layoutManager);
-
-       recyclerView.setAdapter(brandViewAdapter);
-
-
-     //  OderRepairButton = findViewById(R.id.order_repair_but);
-
-
-
-
-        uname = findViewById(R.id.uname);
-                           //Navigation header customization
 
 View headerView = navigationView.getHeaderView(0);
 
