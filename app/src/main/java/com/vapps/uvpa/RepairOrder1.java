@@ -10,8 +10,7 @@ import android.os.Bundle;
 
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -92,6 +91,9 @@ public class RepairOrder1 extends AppCompatActivity
 
 
 
+    }
+
+    public void OrderRepair(View view) {
     }
 
 
@@ -182,7 +184,7 @@ public class RepairOrder1 extends AppCompatActivity
 
     }
 
-        List.size());
+       // List.size());
 
 
        BrandViewAdapter brandViewAdapter = new BrandViewAdapter(this,brandsNamesList);
@@ -219,12 +221,12 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
 
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 
-        spinner.setAdapter(adapter);
+      //  spinner.setAdapter(adapter);
 
         ArrayAdapter<CharSequence> adapter3  = ArrayAdapter.createFromResource(this,R.array.type_repair,R.layout.support_simple_spinner_dropdown_item);
 
         adapter3.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        typeRepair.setAdapter(adapter3);
+        //typeRepair.setAdapter(adapter3);
         qrScan = new IntentIntegrator(this);
 
     }
@@ -375,7 +377,7 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
            });
 
            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
-           seriesSearch.setAdapter(adapter);
+           //seriesSearch.setAdapter(adapter);
 
         }
 

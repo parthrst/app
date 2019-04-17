@@ -63,46 +63,27 @@
     android:orientation="vertical"
     android:layout_centerInParent="true">
 
-    <EditText
-        android:id="@+id/spinner_search"
+ <android.support.v7.widget.RecyclerView
+
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/recyleview"
+     android:scrollbars="vertical"
+
+     />
+
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/myrect"
-        android:hint="Email"
-        android:padding="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_margin="10dp"
-
-        />
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:background="@drawable/myrect"
-        android:hint="Username"
         android:padding="15dp"
         android:layout_margin="10dp"
-        android:id="@+id/username"
-        />
-
-
-    <EditText
-        android:id="@+id/spinner_seriesSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:background="@drawable/myrect"
-        android:hint="Password"
-        android:padding="15dp"
-        android:layout_margin="10dp"
+        android:background="@drawable/button_design"
+        android:textColor="#FFFFFF"
+        android:onClick="OrderRepair"
+        android:text="Order Repair"
 
         />
-
-
-
 
 
 
