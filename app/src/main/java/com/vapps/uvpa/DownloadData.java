@@ -3,9 +3,7 @@ package com.vapps.uvpa;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.util.Log;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -19,9 +17,6 @@ public class  DownloadData extends AppCompatActivity {
 
     ArrayList<String> phoneURLs = new ArrayList<String>();
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +25,7 @@ public class  DownloadData extends AppCompatActivity {
         for (int i = 1 ; i <2 ; ++i )
 
         { newlist(i);}
-
-
-    }
-
+ }
 
 
 
@@ -43,46 +35,24 @@ public void newlist(int i) {
     String result = null;
 
     try {
-
-
-
         result = task.execute("https://www.gsmarena.com/xiaomi-phones-f-80-0-p"+i+".php").get();
-
         String[] splitResult = result.split("<div class=\"review-nav pullNeg col pushT10 \">");
-
         Pattern p = Pattern.compile("<strong><span>(.*?)</span></strong>");
         Matcher m = p.matcher(splitResult[0]);
-
         while (m.find()) {
-
             phoneURLs.add(m.group(1));
-
         }
-
-
 
     } catch (InterruptedException | ExecutionException e1) {
         e1.printStackTrace();
     }
-
-
     Log.i("META",phoneURLs.toString());
     phoneURLs.clear();
-
-
 }
 
 
-
-
-
-
-
-
-
-    class DownloadTask extends AsyncTask<String, Void, String> {
-
-
+    class DownloadTask extends AsyncTask<String, Void, String>
+    {
         @Override
         protected String doInBackground(String... urls) {
 

@@ -366,6 +366,8 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
                        String series = postSnapshot.getValue(String.class);
                           seriesNames.add(series);
 
+
+
                }
 
            }
