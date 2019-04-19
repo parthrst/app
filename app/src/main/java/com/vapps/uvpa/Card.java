@@ -663,14 +663,7 @@ public class Card {
         private String country;
         private String currency;
 
-        /**
-         * Constructor with most common {@link com.stripe.android.model.Card} fields.
-         *
-         * @param number   the credit card number
-         * @param expMonth the expiry month, as an integer value between 1 and 12
-         * @param expYear  the expiry year
-         * @param cvc      the card CVC number
-         */
+
         public Builder(
                 String number,
                 @IntRange(from = 1, to = 12) Integer expMonth,

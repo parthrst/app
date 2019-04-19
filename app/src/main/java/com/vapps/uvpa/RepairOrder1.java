@@ -66,7 +66,7 @@ public class RepairOrder1 extends AppCompatActivity
 
     private Spinner spinner;
     private Spinner seriesSearch;
-    private Spinner typeRepair;
+
 
 
     private Button OderRepairButton;
@@ -80,6 +80,7 @@ public class RepairOrder1 extends AppCompatActivity
    // RecyclerView recyclerView;
    // RecyclerView.LayoutManager layoutManager;
      private ProgressBar progressBar;
+     private ArrayList<String> list2=new ArrayList<>();
 
 
     List<String>  seriesNames = new ArrayList<>();
@@ -87,6 +88,8 @@ public class RepairOrder1 extends AppCompatActivity
     private  DatabaseReference mDatabase = firebaseDatabase.getReference();
 
     public void OrderRepair(View view) {
+        startActivity(new Intent(RepairOrder1.this,MapsActivity.class));
+
     }
 
 
@@ -171,17 +174,11 @@ public class RepairOrder1 extends AppCompatActivity
 
         spinner = findViewById(R.id.spinner_search);
 
-      //  spinner.setTitle("CHose BRamd");
-
-
-        seriesSearch = findViewById(R.id.spinner_seriesSearch);
+              seriesSearch = findViewById(R.id.spinner_seriesSearch);
         progressBar=findViewById(R.id.progBar);
 
 
 
-       // List.size());
-
-//
 
 View headerView = navigationView.getHeaderView(0);
 
@@ -217,14 +214,17 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
        spinner.setAdapter(adapter);
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+       spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                /*Log.i("info","method called");*/
                 Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.VISIBLE);
+                    //progressBar.setVisibility(View.VISIBLE);
+        // seriesNames.clear();
                     fetchData(parent.getSelectedItem().toString(), position);
+
+
+
 
             }
 
@@ -233,7 +233,6 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
                 //Another interface callback
             }
         });
-
 
 
      qrScan = new IntentIntegrator(this);
@@ -308,7 +307,7 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
         }
         else if (id == R.id.nav_send)
         {
-              startActivity(new Intent(RepairOrder1.this,Demo.class));
+              //startActivity(new Intent(RepairOrder1.this,Demo.class));
 
         }
 
@@ -365,19 +364,22 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
 
     public void fetchData(String company,int pos)
     {
-        seriesNames = new ArrayList<>();
+        progressBar.setVisibility(View.VISIBLE);
+        //seriesNames = new ArrayList<>();
 
         mDatabase.child("MODEL/"+pos+"/"+company+"/").addValueEventListener(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
+                    list2.addAll(seriesNames);
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren())
                 {
                     String  series = postSnapshot.getValue(String.class);
                           seriesNames.add(series);
 
                }
+                seriesNames.removeAll(list2);
+
 
            }
 
@@ -388,7 +390,9 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
            });
 
            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
+
            seriesSearch.setAdapter(adapter);
+
            progressBar.setVisibility(View.GONE);
            seriesSearch.setVisibility(View.VISIBLE);
           // seriesNames.clear();
