@@ -1,295 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<android.support.design.widget.CoordinatorLayout
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:id="@+id/coordinatorLayout"
-    >
-
-
-<LinearLayout
-
-
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vapps.uvpa.LoginActivity"
-    android:background="#fff"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    tools:context=".LoginActivity"
+    android:background="@drawable/card_gradient">
 
-     >
 
+    <ImageView
+        android:id="@+id/circleLeft"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_concentric_circles"
+        />
 
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="200dp"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitCenter"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_concentric_circles"
+        android:id="@+id/circleRight"
+        />
 
-    <RelativeLayout
+    <ImageView
 
-        android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:id="@+id/plantLeft"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="74dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_plant"
 
-        >
+        />
 
 
-        <LinearLayout
+    <ImageView
+        android:id="@+id/plantRight"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/circleRight"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_plant" />
 
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@drawable/bg"
-            android:padding="20dp"
-            android:orientation="vertical"
 
-            >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
 
+          >
 
-            <!--   <RelativeLayout
+          <de.hdodenhof.circleimageview.CircleImageView
 
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+              android:layout_width="150dp"
+              android:layout_height="150dp"
+              android:padding="5dp"
 
-                  >
+              android:layout_gravity="center"
+              android:layout_marginTop="100dp"
 
-                  <Button
+              />
 
-                      android:layout_width="45dp"
-                      android:layout_height="47dp"
-                      android:background="@drawable/menu"
-                      android:layout_alignParentLeft="true"
-                       android:id="@+id/drawer_icon"
 
 
-                      />
-
-
-                  <Button
-
-                      android:layout_width="45dp"
-                      android:layout_height="47dp"
-                      android:background="@drawable/logo"
-                      android:layout_alignParentRight="true"
-
-                      />
-
-              </RelativeLayout>Menu-->
-
-
-
-            <LinearLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-
-                >
-
-
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LOGIN"
-                    android:textStyle="bold"
-                    android:textSize="24dp"
-                    android:layout_marginTop="20dp"
-                    android:textColor="#fff"
-
-                    />
-
-
-
-                <EditText
-
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:hint="username"
-                    android:gravity="center"
-                    android:id="@+id/username"
-                    android:background="@drawable/input_round"
-                    android:padding="8dp"
-                    android:textColorHint="#626262"
-                    android:layout_marginTop="40dp"
-
-                    />
-
-
-                <EditText
-
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:hint="password"
-                    android:id="@+id/password"
-                    android:gravity="center"
-                    android:background="@drawable/input_round"
-                    android:padding="8dp"
-                    android:inputType="textPassword"
-                    android:textColorHint="#626262"
-                    android:layout_marginTop="15dp"
-
-                    />
-
-            <!--    <Button
-                    android:layout_width="90dp"
-                    android:layout_height="40dp"
-                    android:hint="Go !"
-                    android:textSize="22dp"
-                    android:textColorHint="#fff"
-                    android:background="@drawable/go_button"
-                    android:layout_marginTop="15dp"
-                    android:id="@+id/Payment"
-                    android:onClick="Payment"/>
-
-                    -->
-
-            </LinearLayout>
-
-
-
-        </LinearLayout><!--Menu and login-->
-
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-
-            >
-
-
-
-            <ImageView
-
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/roundbtn"
-                android:layout_marginTop="250dp"
-                android:onClick="SignInIcon"
-
-                />
-
-
-
-        </RelativeLayout>
-
-
-
-    </RelativeLayout><!--Top content-->
-
-
-
-    <LinearLayout
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/myrect"
+        android:hint="Username"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
+        android:id="@+id/username"
+
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:background="@drawable/myrect"
+        android:hint="Password"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:id="@+id/password"
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_design"
+        android:textColor="#FFFFFF"
+        android:onClick="login"
+        android:text="Log In"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        >
+        android:text="You haven't an account yet?"
+        android:onClick="SignUp"
+        android:layout_marginBottom="10dp"
 
 
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Forgot your password?"
 
 
+        />
+ </LinearLayout>
 
-        <Button
-
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:hint="Login with Google"
-            android:background="#fff"
-            android:textColorHint="#272728"
-            android:textSize="16dp"
-            android:paddingTop="5dp"
-            android:drawableStart="@drawable/search"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:onClick="GsignIn"
-
-            />
-
-
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/fb_login_button"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:hint="Login with facebook"
-            android:background="#3b5999"
-            android:textColorHint="#fff"
-            android:textSize="16dp"
-            android:drawableStart="@drawable/fb"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="20dp"
-            android:layout_marginTop="15dp"
-            android:onClick="FbSignIn"
-            android:layout_gravity="center"
-            />
-
-
-
-
-        <Button
-
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:padding="6dp"
-            android:hint="@string/sign_up"
-            android:background="@null"
-            android:textColorHint="#656565"
-            android:textSize="16dp"
-            android:paddingTop="5dp"
-            android:onClick="signUpButton"
-            android:layout_marginTop="20dp"
-
-            />
-
-
-
-    </LinearLayout>
-
-
-
-
-    <!-- <LinearLayout
-
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal"
-         android:layout_gravity="center"
-         android:layout_marginTop="10dp"
-
-         >
-
-
-
-         <Button
-
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:hint="ABOUT"
-             android:textColorHint="#656565"
-             android:background="@null"
-
-             />
-
-
-         <Button
-
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:hint="CONTACT"
-             android:textColorHint="#656565"
-             android:background="@null"
-
-             />
-
-    </LinearLayout> -->
-
-
-
-</LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
