@@ -96,7 +96,7 @@ public class CardForm extends LinearLayoutCompat {
                 , month, year, getString(cvc), getString(cardName), "", "", "", "", "", "", "");
 
 
-        }
+    }
 
     private String parseDate(String str) {
 
@@ -300,7 +300,7 @@ public class CardForm extends LinearLayoutCompat {
                 new OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View view, boolean b) {
-                        if (b) showBack();
+                       // if (b) showBack();
                     }
                 });
 

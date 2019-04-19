@@ -17,6 +17,7 @@ public class PhoneDataContract
 
         public static final String TABLE_NAME = "phoneData";
         public static final String COLUNMN_SAMSUNG = "samsung";
+        public static final String COLUNMN_MI = "mi";
 
 
 
