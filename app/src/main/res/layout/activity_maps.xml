@@ -13,7 +13,7 @@ tools:context=".MapsActivity">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".MapsActivity"
-    map:cameraZoom="17"/>
+    map:cameraZoom="15"/>
 <android.support.design.widget.FloatingActionButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
