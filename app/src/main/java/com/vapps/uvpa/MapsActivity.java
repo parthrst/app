@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -84,6 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
@@ -105,9 +108,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
 
-        textView = findViewById(R.id.address);
+        textView = findViewById(R.id.location);
 
-
+        textView.setMovementMethod(new ScrollingMovementMethod());
     }
 
 
@@ -116,12 +119,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        //   LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.clear();
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.setMinZoomPreference(5);
+        //LatLng sydney = new LatLng(-34, 151);
+
     }
 
 
@@ -143,7 +142,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 for (Location location : locationResult.getLocations()) {
 
-
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.clear();
+                    mMap.addMarker(new MarkerOptions().position(latLng).title("Your Location"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    mMap.setMinZoomPreference(10);
                     geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
                     try {
                         addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);

@@ -1,37 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".MapsActivity">
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".MapsActivity"
-    map:cameraZoom="17"/>
-<android.support.design.widget.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    android:background="@color/colorWhite"
-    android:layout_marginBottom="10dp"
-    android:layout_marginRight="10dp"
-    android:src="@drawable/go"
-    android:id="@+id/next"
-    android:onClick="nextActivity"/>
+tools:context=".MapsActivity"
+    android:orientation="vertical">
+
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+
+        tools:context=".MapsActivity" />
+
+
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="8.24sp"
+        android:gravity="center_horizontal"
+        android:text="Set pickup location"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+        android:fontFamily="@font/averin"
+
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#525050"
+
+        android:lineSpacingExtra="6.867sp"
+        android:gravity="center_horizontal"
+        android:text="Location"
+        android:layout_marginTop="11.44dp"
+        android:layout_marginLeft="22.5dp"
+        android:fontFamily="@font/averinroman"
+        android:layout_marginRight="22.5dp"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="18sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+        android:fontFamily="@font/avenirlight"
+        android:id="@+id/location"
+        android:scrollbars="vertical"
+        android:layout_marginTop="12dp"
+
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#525050"
+        android:lineSpacingExtra="6.867sp"
+        android:gravity="center_horizontal"
+        android:text="House/Flat No."
+        android:layout_marginTop="25.117dp"
+        android:layout_marginLeft="22.5dp"
+        android:fontFamily="@font/averinroman"
+          android:layout_marginRight="22.5dp"
+        />
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/address"
-        android:padding="20dp"
-        android:textSize="12sp"
-        android:layout_alignParentBottom="true"
+        android:textSize="18.311sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+        android:layout_marginTop="1.373dp"
+        android:layout_marginLeft="22.5dp"
+        android:fontFamily="@font/avenirlight"
+        android:id="@+id/hno"
+android:layout_marginRight="22.5dp"
+
         />
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#525050"
+        android:lineSpacingExtra="6.867sp"
+        android:gravity="center_horizontal"
+        android:text="Landmark"
+        android:layout_marginTop="25.117dp"
+        android:layout_marginLeft="22.5dp"
+        android:fontFamily="@font/averinroman"
+        android:layout_marginRight="22.5dp"
+
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+         android:layout_marginTop="1.373dp"
+        android:layout_marginLeft="22.5dp"
+        android:fontFamily="@font/avenirlight"
+        android:id="@+id/lndmrk"
+android:layout_marginRight="22.5dp"
+        />
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBlack"
+    android:text="CONTINUE"
+    android:textColor="#ffffff"
+    android:fontFamily="@font/avenirheavy"
+    android:textSize="22.8sp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="15dp"
+    android:onClick="nextActivity"/>
+
+</LinearLayout>
