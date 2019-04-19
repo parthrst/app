@@ -48,7 +48,8 @@
         <activity android:name=".SignUp" />
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity
             android:name=".QR"
             android:screenOrientation="portrait" />

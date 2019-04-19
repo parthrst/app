@@ -24,7 +24,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -35,7 +34,8 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    LatLng latLng;
+
+
     private static final int REQUEST_CODE = 1000;
 
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -44,7 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Geocoder geocoder;
     List<Address> addresses;
     TextView textView;
-
+    LatLng latLng;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -116,8 +116,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-
-
+        LatLng sydney = new LatLng(-34, 151);
+        //   LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.setMinZoomPreference(5);
     }
 
 
@@ -137,8 +141,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationResult(LocationResult locationResult) {
 
-                for (Location location : locationResult.getLocations())
-                {
+                for (Location location : locationResult.getLocations()) {
+
 
                     geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
                     try {
@@ -161,12 +165,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.clear();
-                    mMap.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title(completeAddress)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(completeAddress));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                   // mMap.setMinZoomPreference(10);
+                    mMap.setMinZoomPreference(5);
 
 
 
