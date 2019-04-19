@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -104,9 +105,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
+    textView = findViewById(R.id.location);
 
-        textView = findViewById(R.id.address);
-
+textView.setMovementMethod(new ScrollingMovementMethod());
 
     }
 
@@ -116,12 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        //   LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.clear();
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.setMinZoomPreference(5);
+
     }
 
 

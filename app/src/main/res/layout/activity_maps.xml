@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
+
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".MapsActivity"
@@ -16,7 +22,7 @@ tools:context=".MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-
+        map:cameraZoom="12"
         tools:context=".MapsActivity" />
 
 
@@ -62,7 +68,7 @@ tools:context=".MapsActivity"
         android:layout_marginRight="22.5dp"
         android:fontFamily="@font/avenirlight"
         android:id="@+id/location"
-        android:scrollbars="vertical"
+        android:scrollbars="horizontal"
         android:layout_marginTop="12dp"
 
 
@@ -119,17 +125,22 @@ android:layout_marginRight="22.5dp"
         android:id="@+id/lndmrk"
 android:layout_marginRight="22.5dp"
         />
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBlack"
-    android:text="CONTINUE"
-    android:textColor="#ffffff"
-    android:fontFamily="@font/avenirheavy"
-    android:textSize="22.8sp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="15dp"
-    android:onClick="nextActivity"/>
+
 
 </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:text="CONTINUE"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/avenirheavy"
+        android:textSize="22.8sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
+        android:onClick="nextActivity"/>
+
+    </RelativeLayout>

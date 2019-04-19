@@ -191,7 +191,7 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
     textViewEmail.setText(user.getEmail());
     textViewUsername.setText(user.getDisplayName());
 
-    uname.setText("Hi! "+user.getDisplayName());
+//    uname.setText("Hi! "+user.getDisplayName());
 
 
     imageDownloader = new ImageDownloader();
