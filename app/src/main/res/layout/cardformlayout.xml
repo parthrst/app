@@ -53,10 +53,8 @@
                         android:hint="CCV"
                         android:text="CCV"
                         android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"
-                        android:textSize="18.311sp"
-                        android:fontFamily="@font/averinroman"
-                        />
+                        android:textColorHint="@android:color/white" />
+
                 </LinearLayout>
             </RelativeLayout>
 
@@ -70,7 +68,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/card_gradient" />
-
                 <TextView
                     android:id="@+id/card_preview_name"
                     android:layout_width="wrap_content"
@@ -82,8 +79,7 @@
                     android:textAllCaps="true"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
-                    android:textSize="18.311sp"
-                    android:fontFamily="@font/averinroman"/>
+                    android:textSize="15.311sp"/>
 
                 <TextView
                     android:id="@+id/card_preview_expiry"
@@ -97,8 +93,7 @@
                     android:textAllCaps="true"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
-                    android:textSize="18.311sp"
-                    android:fontFamily="@font/averinroman"/>
+                    android:textSize="15.311sp"/>
 
                 <TextView
                     android:id="@+id/card_preview_type"
