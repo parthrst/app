@@ -31,6 +31,7 @@
         android:fontFamily="@font/avenirlight"
         android:layout_marginRight="22.5dp"
         android:layout_marginLeft="22.5dp"
+        android:autofillHints="Choose Your Brand"
 
         />
     <ProgressBar
@@ -55,6 +56,7 @@
         android:fontFamily="@font/avenirlight"
         android:layout_marginRight="22.5dp"
         android:layout_marginLeft="22.5dp"
+        android:autofillHints="Choose Your Model"
         />
 
 
