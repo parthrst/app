@@ -48,7 +48,7 @@
         <activity android:name=".SignUp" />
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
+            android:label="Pick Up Location"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity
             android:name=".QR"

@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/padding_horizontal"
-    android:paddingRight="@dimen/padding_horizontal">
+ >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginRight="22.5dp"
+        android:layout_marginLeft="22.5dp"
         android:weightSum="1">
 
         <RelativeLayout
@@ -52,7 +53,10 @@
                         android:hint="CCV"
                         android:text="CCV"
                         android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white" />
+                        android:textColorHint="@android:color/white"
+                        android:textSize="18.311sp"
+                        android:fontFamily="@font/averinroman"
+                        />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -77,7 +81,9 @@
                     android:hint="Name Of Card"
                     android:textAllCaps="true"
                     android:textColor="#fff"
-                    android:textColorHint="#fff" />
+                    android:textColorHint="#fff"
+                    android:textSize="18.311sp"
+                    android:fontFamily="@font/averinroman"/>
 
                 <TextView
                     android:id="@+id/card_preview_expiry"
@@ -90,7 +96,9 @@
                     android:hint="Expiry Date"
                     android:textAllCaps="true"
                     android:textColor="#fff"
-                    android:textColorHint="#fff" />
+                    android:textColorHint="#fff"
+                    android:textSize="18.311sp"
+                    android:fontFamily="@font/averinroman"/>
 
                 <TextView
                     android:id="@+id/card_preview_type"
@@ -140,10 +148,11 @@
                     android:id="@+id/payment_amount_holder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
+                    android:textSize="18.311sp"
                     android:text="Payment Amount"
+                    android:fontFamily="@font/averinroman"
                     android:textColor="@color/text_color"
-                    android:textSize="17sp" />
+                     />
 
             </LinearLayout>
 
@@ -159,7 +168,8 @@
                 android:inputType="textPersonName"
                 android:lines="1"
                 android:maxLines="1"
-                android:paddingLeft="15dp" />
+                android:paddingLeft="15dp"
+                android:fontFamily="@font/averinroman"/>
 
             <EditText
                 android:id="@+id/card_number"
@@ -173,7 +183,9 @@
                 android:lines="1"
                 android:maxLength="19"
                 android:maxLines="1"
-                android:paddingLeft="15dp" />
+                android:paddingLeft="15dp"
+                android:textSize="18.311sp"
+                android:fontFamily="@font/averinroman"/>
 
             <LinearLayout
                 android:id="@+id/expiry_date_layout"
@@ -195,7 +207,8 @@
                     android:lines="1"
                     android:maxLength="5"
                     android:maxLines="1"
-                    android:paddingLeft="15dp" />
+                    android:paddingLeft="15dp"
+                    android:fontFamily="@font/averinroman"/>
 
                 <android.support.v4.widget.Space
                     android:layout_width="0dp"
@@ -213,20 +226,12 @@
                     android:lines="1"
                     android:maxLength="3"
                     android:maxLines="1"
-                    android:paddingLeft="15dp" />
+                    android:paddingLeft="15dp"
+                    android:fontFamily="@font/averinroman"
+                  />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_pay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/expiry_date_layout"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/background_pay_btn"
-                android:padding="5dp"
-                android:text="Pay"
-                android:textColor="@android:color/white"
-                />
+
 
             <TextView
                 android:id="@+id/payment_amount"
@@ -235,12 +240,30 @@
                 android:layout_above="@+id/card_name"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:fontFamily="sans-serif"
+
                 android:paddingRight="10dp"
                 android:text="0.00"
                 android:textColor="@color/text_color"
-                android:textSize="25sp" />
+                android:textSize="18.311sp"
+                android:fontFamily="@font/averinroman"/>
         </RelativeLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_pay_btn"
+
+        android:text="Pay"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/avenirheavy"
+        android:textSize="22.8sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>
