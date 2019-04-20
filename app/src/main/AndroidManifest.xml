@@ -75,7 +75,9 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".RepairOrder1"></activity>
+        <activity android:name=".RepairOrder1"
+            android:label="Choose Your Device"
+            />
     </application>
 
 </manifest>

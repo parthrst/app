@@ -3,122 +3,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
     tools:context=".SignUp"
-    android:background="@drawable/card_gradient">
-
-
-    <ImageView
-        android:id="@+id/circleLeft"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="fitXY"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_concentric_circles"
-        />
-
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="200dp"
-        android:layout_alignParentRight="true"
-        android:scaleType="fitCenter"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_concentric_circles"
-        android:id="@+id/circleRight"
-        />
-
-    <ImageView
-
-        android:id="@+id/plantLeft"
-        android:layout_width="100dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="74dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_plant"
-
-        />
-
-
-    <ImageView
-        android:id="@+id/plantRight"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/circleRight"
-        android:layout_alignParentRight="true"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_plant" />
+    >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_centerInParent="true"
 
         >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        <de.hdodenhof.circleimageview.CircleImageView
+            android:text="Let's Get Started!"
+            android:onClick="Login"
+            android:gravity="center_horizontal"
 
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:padding="5dp"
+            android:textSize="22.88sp"
+            android:textColor="#525050"
 
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="5.117dp"
+            android:layout_marginLeft="22.5dp"
+            android:fontFamily="@font/averin"
+            android:layout_marginRight="22.5dp"
+
 
             />
 
-
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/myrect"
+                android:inputType="textEmailAddress"
+
         android:hint="Email"
         android:padding="15dp"
-        android:layout_marginTop="10dp"
         android:layout_margin="10dp"
         android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+        android:layout_marginTop="1.373dp"
+        android:fontFamily="@font/avenirlight"
+        android:layout_marginRight="22.5dp"
+        android:layout_marginLeft="22.5dp"
+
         />
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:background="@drawable/myrect"
         android:hint="Username"
         android:padding="15dp"
         android:layout_margin="10dp"
         android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+        android:layout_marginTop="1.373dp"
+        android:fontFamily="@font/avenirlight"
+        android:layout_marginRight="22.5dp"
+        android:layout_marginLeft="22.5dp"
+
         />
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:background="@drawable/myrect"
         android:hint="Password"
         android:padding="15dp"
         android:layout_margin="10dp"
         android:id="@+id/password"
-        />
-
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/button_design"
-        android:textColor="#FFFFFF"
-        android:text="Sign Up"
-        android:onClick="SignUpViaParse"
+        android:textSize="18.311sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+        android:layout_marginTop="1.373dp"
+        android:fontFamily="@font/avenirlight"
+        android:layout_marginRight="22.5dp"
+        android:layout_marginLeft="22.5dp"
+
         />
+
+
+
 
     <TextView
         android:layout_width="match_parent"
@@ -126,7 +99,14 @@
         android:gravity="center"
         android:text="Already have an account?"
         android:onClick="Login"
-        android:layout_marginTop="15dp"
+
+        android:textSize="15.311sp"
+        android:textColor="#525050"
+        android:lineSpacingExtra="6.867sp"
+        android:layout_marginTop="5.117dp"
+        android:layout_marginLeft="22.5dp"
+        android:fontFamily="@font/averinroman"
+        android:layout_marginRight="22.5dp"
 
 
         />
@@ -135,4 +115,19 @@
 
 
 </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#000000"
+        android:textColor="#FFFFFF"
+        android:text="Sign Up"
+        android:onClick="SignUpViaParse"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/avenirheavy"
+        android:textSize="22.8sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
 </RelativeLayout>
