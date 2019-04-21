@@ -218,7 +218,7 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
                     //progressBar.setVisibility(View.VISIBLE);
         // seriesNames.clear();
                     fetchData(parent.getSelectedItem().toString(), position);
@@ -236,6 +236,7 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
 
 
      qrScan = new IntentIntegrator(this);
+
 
     }
 

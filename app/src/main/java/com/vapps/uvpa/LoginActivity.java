@@ -98,7 +98,6 @@ public class LoginActivity extends AppCompatActivity
 
         });
 
-        startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
 
 
     }

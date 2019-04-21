@@ -116,8 +116,14 @@ textView.setMovementMethod(new ScrollingMovementMethod());
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+      //  Location location = LocationServices.getFusedLocationProviderClient(fusedLocationProviderClient).getLastLocation();
 
         // Add a marker in Sydney and move the camera
+        //latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        mMap.clear();
+       // mMap.addMarker(new MarkerOptions().position(latLng).title(completeAddress));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+      //  mMap.setMinZoomPreference(5);
 
     }
 

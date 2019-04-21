@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto">
 
-    >
 <LinearLayout
 
 android:layout_width="match_parent"
@@ -15,9 +16,7 @@ tools:context=".MapsActivity"
 
 
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
@@ -92,11 +91,12 @@ tools:context=".MapsActivity"
         android:textSize="18.311sp"
         android:textColor="#0d0101"
         android:lineSpacingExtra="6.867sp"
-
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/avenirlight"
         android:id="@+id/hno"
-android:layout_marginRight="22.5dp"
+         android:layout_marginRight="22.5dp"
 
         />
     <TextView
@@ -119,16 +119,14 @@ android:layout_marginRight="22.5dp"
         android:textSize="18.311sp"
         android:textColor="#0d0101"
         android:lineSpacingExtra="6.867sp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
 
         android:fontFamily="@font/avenirlight"
         android:id="@+id/lndmrk"
        android:layout_marginRight="22.5dp"
         android:layout_marginLeft="22.5dp"
         />
-
-
-</LinearLayout>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -139,8 +137,12 @@ android:layout_marginRight="22.5dp"
         android:textSize="22.8sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
-        android:layout_alignParentBottom="true"
         android:onClick="nextActivity"/>
 
-    </RelativeLayout>
+</LinearLayout>
+
+
+
+</ScrollView>
