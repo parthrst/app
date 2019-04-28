@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:map="http://schemas.android.com/apk/res-auto">
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    >
 
 <LinearLayout
 
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".MapsActivity"
-    android:orientation="vertical">
+android:orientation="vertical">
 
 
 
@@ -46,7 +47,6 @@ tools:context=".MapsActivity"
         android:layout_height="wrap_content"
         android:textSize="18.311sp"
         android:textColor="#525050"
-
         android:lineSpacingExtra="6.867sp"
         android:gravity="center_horizontal"
         android:text="Location"
@@ -54,6 +54,7 @@ tools:context=".MapsActivity"
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
         android:layout_marginRight="22.5dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
 
         />
     <TextView
@@ -62,14 +63,11 @@ tools:context=".MapsActivity"
         android:textSize="18sp"
         android:textColor="#0d0101"
         android:lineSpacingExtra="6.867sp"
-
         android:layout_marginLeft="22.5dp"
         android:layout_marginRight="22.5dp"
         android:fontFamily="@font/avenirlight"
         android:id="@+id/location"
-        android:scrollbars="horizontal"
         android:layout_marginTop="12dp"
-
 
         />
     <TextView
@@ -83,8 +81,9 @@ tools:context=".MapsActivity"
         android:layout_marginTop="15.117dp"
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
-          android:layout_marginRight="22.5dp"
+        android:layout_marginRight="22.5dp"
         />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -96,7 +95,7 @@ tools:context=".MapsActivity"
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/avenirlight"
         android:id="@+id/hno"
-         android:layout_marginRight="22.5dp"
+        android:layout_marginRight="22.5dp"
 
         />
     <TextView
@@ -111,8 +110,8 @@ tools:context=".MapsActivity"
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
         android:layout_marginRight="22.5dp"
-
         />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -121,10 +120,9 @@ tools:context=".MapsActivity"
         android:lineSpacingExtra="6.867sp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-
         android:fontFamily="@font/avenirlight"
         android:id="@+id/lndmrk"
-       android:layout_marginRight="22.5dp"
+        android:layout_marginRight="22.5dp"
         android:layout_marginLeft="22.5dp"
         />
     <Button

@@ -22,6 +22,11 @@
         android:roundIcon="@drawable/rb1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ConfirnmationActivity"></activity>
+        <activity
+            android:name=".BackupPhoneSelection"
+            android:label="Need a backup device?"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,13 +49,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity android:name=".Payment_details" />
         <activity android:name=".SignUp" />
         <activity
             android:name=".MapsActivity"
             android:label="Pick Up Location"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".QR"
             android:screenOrientation="portrait" />
@@ -76,9 +82,9 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".RepairOrder1"
-            android:label="Choose Your Device"
-            />
+        <activity
+            android:name=".RepairOrder1"
+            android:label="Choose Your Device" />
     </application>
 
 </manifest>

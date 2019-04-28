@@ -16,6 +16,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -58,12 +59,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case REQUEST_CODE: {
 
                 if (grantResults.length > 0) {
-                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    {
+                        buildLocationRequest();
+                        buildLocationCallback();
 
-
-                    } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-
-
+                    } else if (grantResults[0] == PackageManager.PERMISSION_DENIED)
+                    {
+                        Toast.makeText(getApplicationContext(), "Please allow permission", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MapsActivity.this,RepairOrder1.class));
                     }
 
 
@@ -106,9 +110,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-    textView = findViewById(R.id.location);
+        textView = findViewById(R.id.location);
 
-textView.setMovementMethod(new ScrollingMovementMethod());
+        textView.setMovementMethod(new ScrollingMovementMethod());
 
     }
 
@@ -138,7 +142,8 @@ textView.setMovementMethod(new ScrollingMovementMethod());
     }
 
 
-    public void buildLocationCallback() {
+    public void buildLocationCallback()
+    {
 
         locationCallback = new LocationCallback() {
             @Override
@@ -150,12 +155,13 @@ textView.setMovementMethod(new ScrollingMovementMethod());
                     geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
                     try {
                         addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                    } catch (IOException e) {
+                    } catch (IOException e)
+                    {
                         e.printStackTrace();
                     }
 
 
-                    String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                    String address = addresses.get(0).getAddressLine( 0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                     String city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();
                     String country = addresses.get(0).getCountryName();
@@ -164,7 +170,7 @@ textView.setMovementMethod(new ScrollingMovementMethod());
 
                     String completeAddress = address + "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode;
 
-                 textView.setText(completeAddress);
+                    textView.setText(completeAddress);
 
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.clear();
@@ -185,7 +191,7 @@ textView.setMovementMethod(new ScrollingMovementMethod());
     public void nextActivity(View view)
     {
 
-        startActivity(new Intent(MapsActivity.this, Payment_details.class));
+        startActivity(new Intent(MapsActivity.this, BackupPhoneSelection.class));
     }
 
 }

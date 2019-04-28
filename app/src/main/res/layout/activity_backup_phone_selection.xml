@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BackupPhoneSelection"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="330.89dp"
+    android:orientation="vertical"
+    android:elevation="5dp"
+    android:background="@drawable/myrect"
+    android:layout_margin="17.458dp"
+   >
+
+    <TextView
+
+        android:text="We care about you!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="8.24sp"
+        android:gravity="left"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+        android:fontFamily="@font/averin"
+        />
+
+    <TextView
+
+        android:text="During the period of repair,we will provide you with a spare basic phone with a minimal price of ₹20/- day . If our delivery is not on promised day , after that its free. "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#525050"
+        android:lineSpacingExtra="6.867sp"
+        android:gravity="left"
+        android:layout_marginTop="11.44dp"
+        android:layout_marginLeft="22.5dp"
+        android:fontFamily="@font/averinroman"
+        android:layout_marginRight="22.5dp"
+
+
+
+
+        />
+    <TextView
+        android:textColor="#454343"
+        android:fontFamily="@font/avenirlightoblique"
+        android:text="(Approx. repair time : 7 Days)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:lineSpacingExtra="6.867sp"
+        android:gravity="left"
+        android:layout_marginTop="11.44dp"
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+
+        />
+</LinearLayout>
+
+
+
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+           <RadioButton
+               android:id="@+id/backup_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I want a spare phone."
+               android:textSize="21sp"
+               android:textColor="#0d0101"
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="22.5dp"
+               android:layout_marginRight="22.5dp"
+               android:fontFamily="@font/averin"
+                />
+            <RadioButton android:id="@+id/backup_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I don’t want a spare phone."
+                android:textSize="21sp"
+                android:textColor="#0d0101"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="22.5dp"
+                android:layout_marginRight="22.5dp"
+                android:fontFamily="@font/averin"
+                />
+        </RadioGroup>
+
+
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:text="CONTINUE"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/avenirheavy"
+        android:textSize="22.8sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:onClick="nextActivity"/>
+</RelativeLayout>
