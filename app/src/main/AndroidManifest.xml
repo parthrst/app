@@ -84,7 +84,9 @@
         </activity>
         <activity
             android:name=".RepairOrder1"
-            android:label="Choose Your Device" />
+            android:theme="@style/MyWhiteColorTheme"
+            android:label="Choose Your Device"
+            />
     </application>
 
 </manifest>

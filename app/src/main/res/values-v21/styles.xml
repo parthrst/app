@@ -5,4 +5,17 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="MyWhiteColorTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <!--do this for changing the color-->
+        <item name="drawerArrowStyle">@style/DrawerHamburgerStyle</item>
+    </style>
+
+    <style name="DrawerHamburgerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/colorWhite</item>
+    </style>
 </resources>

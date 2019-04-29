@@ -144,15 +144,13 @@ public class RepairOrder1 extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
-
-
-    setContentView(R.layout.activity_repair_order1);
+setContentView(R.layout.activity_repair_order1);
                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+       getSupportActionBar().setDisplayShowTitleEnabled(true);
+       getSupportActionBar().setTitle("Choose your device");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+
 
     //    FirebaseApp.initializeApp(RepairOrder1.this);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
