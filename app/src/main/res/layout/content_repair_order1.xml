@@ -5,7 +5,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".RepairOrder1"
     >
 
@@ -20,14 +19,12 @@
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinner_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/spinnerbackground"
          android:layout_marginTop="10dp"
         android:textSize="21sp"
         android:textColor="#0d0101"
-        android:lineSpacingExtra="6.867sp"
         android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="18dp"
-        android:layout_marginLeft="18dp"
         app:hintText="Brand"
         app:fontFamily="@font/avenirlight"
 
@@ -42,14 +39,13 @@
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinner_seriesSearch"
         android:layout_width="match_parent"
+        android:background="@drawable/spinnerbackground"
         android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:textSize="21sp"
         android:textColor="#0d0101"
         android:lineSpacingExtra="6.867sp"
         android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="18dp"
-        android:layout_marginLeft="18dp"
         app:hintText="Model"
         app:fontFamily="@font/avenirlight"
         />
