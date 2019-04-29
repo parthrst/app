@@ -160,6 +160,8 @@ public class LoginActivity extends AppCompatActivity
                         String success = jsonResponse.getString("success");
                         if (success == "true") {
                             Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
