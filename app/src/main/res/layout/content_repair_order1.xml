@@ -20,18 +20,16 @@
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinner_search"
         android:layout_width="match_parent"
-
-        android:layout_height="50dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_height="wrap_content"
          android:layout_marginTop="10dp"
-        android:textSize="18.311sp"
+        android:textSize="21sp"
         android:textColor="#0d0101"
         android:lineSpacingExtra="6.867sp"
         android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginLeft="22.5dp"
-        android:autofillHints="Choose Your Brand"
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="18dp"
+        app:hintText="Brand"
+        app:fontFamily="@font/avenirlight"
 
         />
     <ProgressBar
@@ -44,19 +42,16 @@
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinner_seriesSearch"
         android:layout_width="match_parent"
-        android:paddingLeft="15dp"
-        android:paddingTop="20dp"
-        android:paddingRight="15dp"
         android:layout_marginTop="5dp"
-        android:visibility="gone"
-        android:layout_height="50dp"
-             android:textSize="18.311sp"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
         android:textColor="#0d0101"
         android:lineSpacingExtra="6.867sp"
         android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginLeft="22.5dp"
-        android:autofillHints="Choose Your Model"
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="18dp"
+        app:hintText="Model"
+        app:fontFamily="@font/avenirlight"
         />
 
 
@@ -66,8 +61,6 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
         android:background="@color/colorBlack"
         android:textColor="#FFFFFF"
         android:onClick="OrderRepair"

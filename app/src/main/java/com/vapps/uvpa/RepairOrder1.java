@@ -171,10 +171,8 @@ setContentView(R.layout.activity_repair_order1);
         OderRepairButton = findViewById(R.id.order_repair_but);
 
         spinner = findViewById(R.id.spinner_search);
-
-              seriesSearch = findViewById(R.id.spinner_seriesSearch);
+        seriesSearch = findViewById(R.id.spinner_seriesSearch);
         progressBar=findViewById(R.id.progBar);
-
 
 
 
@@ -211,9 +209,10 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
 
        spinner.setAdapter(adapter);
 
+        spinner.setTransitionName("Selerct");
 
-
-       spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+       {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
               //  Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
@@ -221,14 +220,15 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
         // seriesNames.clear();
                     fetchData(parent.getSelectedItem().toString(), position);
 
-
-
-
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent)
+            {
                 //Another interface callback
+
+
+
             }
         });
 
@@ -363,7 +363,7 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
 
     public void fetchData(String company,int pos)
     {
-        progressBar.setVisibility(View.VISIBLE);
+      //  progressBar.setVisibility(View.VISIBLE);
         //seriesNames = new ArrayList<>();
 
         mDatabase.child("MODEL/"+pos+"/"+company+"/").addValueEventListener(new ValueEventListener() {
@@ -375,27 +375,19 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
                 {
                     String  series = postSnapshot.getValue(String.class);
                           seriesNames.add(series);
-
-
-
                }
                 seriesNames.removeAll(list2);
-
-
            }
-
-               @Override
+           @Override
                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                }
            });
 
            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
-
            seriesSearch.setAdapter(adapter);
+          // progressBar.setVisibility(View.GONE);
 
-           progressBar.setVisibility(View.GONE);
-           seriesSearch.setVisibility(View.VISIBLE);
           // seriesNames.clear();
 
         }
