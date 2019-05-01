@@ -77,7 +77,7 @@ public class RepairOrder1 extends AppCompatActivity
 
     public void OrderRepair(View view)
     {
-        startActivity(new Intent(RepairOrder1.this,MapsActivity.class));
+        startActivity(new Intent(RepairOrder1.this,IssueActivity.class));
 
     }
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap>
