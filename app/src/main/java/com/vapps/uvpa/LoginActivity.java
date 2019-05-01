@@ -1,27 +1,20 @@
 package com.vapps.uvpa;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
-
 import com.parse.LogInCallback;
-
 import com.parse.ParseException;
-
 import com.parse.ParseUser;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -38,6 +31,8 @@ public class LoginActivity extends AppCompatActivity
     private EditText mUserEmail;
     private EditText mUserPassword;
     int resp;
+    private ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +42,8 @@ public class LoginActivity extends AppCompatActivity
 //        getSupportActionBar().hide();
         mUserEmail = findViewById(R.id.username);
         mUserPassword = findViewById(R.id.password);
-
+         progressBar = findViewById(R.id.checkCredentials);
+         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
 
     }
 
@@ -75,8 +71,7 @@ public class LoginActivity extends AppCompatActivity
             { loginDetails.put("email", mUserEmail.getText().toString());
                 loginDetails.put("password", mUserPassword.getText().toString());
                 holder.put("user", loginDetails);
-
-                CredentialsVerifier task = new CredentialsVerifier();
+               CredentialsVerifier task = new CredentialsVerifier();
                 task.execute("http://www.amxdp.fun/api/sessions", holder.toString());
 
             }
@@ -98,6 +93,13 @@ public class LoginActivity extends AppCompatActivity
 
     class CredentialsVerifier extends AsyncTask<String,Void,String>
     {
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+
+        }
 
         @Override
         protected String doInBackground(String... params)
@@ -146,11 +148,11 @@ public class LoginActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String response)
         {
-            //progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
 
             if (response != null)
             {
-                if(response.equals("401"))
+                if(response == "401")
                 {
                     Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
                 }
@@ -158,8 +160,15 @@ public class LoginActivity extends AppCompatActivity
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
                         String success = jsonResponse.getString("success");
-                        if (success == "true") {
-                            Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
+                        if (success.equals("true"))
+                        {
+                            JSONObject jsonUser = jsonResponse.getJSONObject("data");
+                            String username = jsonUser.getString("name");
+                            String email = jsonUser.getString("email");
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("username",username);
+                            editor.putString("email",email);
+                            editor.apply();
                             startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
                             finish();
                         }

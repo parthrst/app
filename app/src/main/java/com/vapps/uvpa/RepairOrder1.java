@@ -3,6 +3,7 @@ package com.vapps.uvpa;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,10 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-
 import android.support.annotation.NonNull;
-
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -32,9 +30,6 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,8 +39,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,9 +59,6 @@ public class RepairOrder1 extends AppCompatActivity
 
     private Spinner spinner;
     private Spinner seriesSearch;
-
-
-
     private Button OderRepairButton;
     private ImageView imageViewDp;
     private TextView textViewEmail;
@@ -76,86 +66,60 @@ public class RepairOrder1 extends AppCompatActivity
     private ImageDownloader imageDownloader;
     private TextView uname;
     private IntentIntegrator qrScan;
-
-   // RecyclerView recyclerView;
+    // RecyclerView recyclerView;
    // RecyclerView.LayoutManager layoutManager;
      private ProgressBar progressBar;
      private ArrayList<String> list2=new ArrayList<>();
+     SharedPreferences sharedPreferences;
+     List<String>  seriesNames = new ArrayList<>();
+     private  FirebaseDatabase firebaseDatabase =  FirebaseDatabase.getInstance();
+     private  DatabaseReference mDatabase = firebaseDatabase.getReference();
 
-
-    List<String>  seriesNames = new ArrayList<>();
-    private  FirebaseDatabase firebaseDatabase =  FirebaseDatabase.getInstance();
-    private  DatabaseReference mDatabase = firebaseDatabase.getReference();
-
-    public void OrderRepair(View view) {
-        startActivity(new Intent(RepairOrder1.this,MapsActivity.class));
+    public void OrderRepair(View view)
+    {
+        startActivity(new Intent(RepairOrder1.this,IssueActivity.class));
 
     }
-
-
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap>
     {
-
-
         @Override
         protected Bitmap doInBackground(String... urls) {
-
             try {
-
                 URL url = new URL(urls[0]);
-
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
                 connection.connect();
-
                 InputStream inputStream = connection.getInputStream();
-
                 Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
-
                 return myBitmap;
-
-
-            } catch (MalformedURLException e) {
-
-                e.printStackTrace();
-
-            } catch (IOException e) {
-
-                e.printStackTrace();
-
             }
-
+            catch (MalformedURLException e)
+            { e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
             return null;
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
+        protected void onPostExecute(Bitmap bitmap)
+        {
             super.onPostExecute(bitmap);
-
             imageViewDp.setImageBitmap(bitmap);
-
         }
     }
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_repair_order1);
 
-setContentView(R.layout.activity_repair_order1);
-               Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       getSupportActionBar().setDisplayShowTitleEnabled(true);
-       getSupportActionBar().setTitle("Choose your device");
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Choose your device");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-
-
-    //    FirebaseApp.initializeApp(RepairOrder1.this);
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -165,96 +129,60 @@ setContentView(R.layout.activity_repair_order1);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
         OderRepairButton = findViewById(R.id.order_repair_but);
-
         spinner = findViewById(R.id.spinner_search);
         seriesSearch = findViewById(R.id.spinner_seriesSearch);
         progressBar=findViewById(R.id.progBar);
+        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
 
+         View headerView = navigationView.getHeaderView(0);
 
+         textViewEmail = headerView.findViewById(R.id.textViewEmail);
+         imageViewDp = headerView.findViewById(R.id.imageView);
+         textViewUsername = headerView.findViewById(R.id.textViewUsername);
 
-View headerView = navigationView.getHeaderView(0);
-
-textViewEmail = headerView.findViewById(R.id.textViewEmail);
-imageViewDp = headerView.findViewById(R.id.imageView);
-textViewUsername = headerView.findViewById(R.id.textViewUsername);
-
-  if (user!=null)
-   {
-    textViewEmail.setText(user.getEmail());
-    textViewUsername.setText(user.getDisplayName());
-
+         textViewEmail.setText(sharedPreferences.getString("email",null));
+         textViewUsername.setText(sharedPreferences.getString("username",null));
 //    uname.setText("Hi! "+user.getDisplayName());
-
-
-    imageDownloader = new ImageDownloader();
-
-
-            if(user.getPhotoUrl().toString() != null)
-            {
-                imageDownloader.execute(user.getPhotoUrl().toString());
-
-            }
-
-     }
-
-
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
-
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-
-       spinner.setAdapter(adapter);
-
-        spinner.setTransitionName("Selerct");
-
-       spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+           @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+           {
               //  Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
                     //progressBar.setVisibility(View.VISIBLE);
         // seriesNames.clear();
                     fetchData(parent.getSelectedItem().toString(), position);
-
-            }
-
-            @Override
+           }
+           @Override
             public void onNothingSelected(AdapterView<?> parent)
             {
                 //Another interface callback
-
-
-
             }
         });
-
-
-     qrScan = new IntentIntegrator(this);
-
-
+        qrScan = new IntentIntegrator(this);
     }
-
-
       @Override
     public void onBackPressed()
       {
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        else
+            {
+            super.onBackPressed();
+            }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-           getMenuInflater().inflate(R.menu.repair_order1, menu);
+        getMenuInflater().inflate(R.menu.repair_order1, menu);
         return true;
     }
 
@@ -266,70 +194,45 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
         int id = item.getItemId();
          //noinspection SimplifiableIfStatement
         if (item.getItemId()==R.id.SignOut)
-        {
-            SignOut();
+        {   SignOut();
             return true;
-
         }
          return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_qr)
-        {
-
-            qrScan.initiateScan();
-
-   }
+        { qrScan.initiateScan(); }
         else if (id == R.id.nav_location)
         {
             startActivity(new Intent(RepairOrder1.this, MapsActivity.class));
         }
         else if (id == R.id.nav_payment)
-        {
-
-            startActivity(new Intent(RepairOrder1.this, Payment_details.class));
-
+        { startActivity(new Intent(RepairOrder1.this, Payment_details.class));
         }
         else if (id == R.id.nav_manage)
-        {
-            startActivity(new Intent(RepairOrder1.this,QrGen.class));
+        { startActivity(new Intent(RepairOrder1.this,QrGen.class));
         }
         else if (id == R.id.nav_share)
         {
-
         }
         else if (id == R.id.nav_send)
-        {
-              //startActivity(new Intent(RepairOrder1.this,Demo.class));
-
+        {//startActivity(new Intent(RepairOrder1.this,Demo.class));
         }
-
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     public void Login(View view)
-    {
-        startActivity(new Intent(RepairOrder1.this,LoginActivity.class));
-
+    { startActivity(new Intent(RepairOrder1.this,LoginActivity.class));
     }
-
 
     public void SignOut()
-    {
-        FirebaseAuth.getInstance().signOut();
+    { FirebaseAuth.getInstance().signOut();
     }
-
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -353,53 +256,31 @@ textViewUsername = headerView.findViewById(R.id.textViewUsername);
             }
         } else
 
-            {
-                super.onActivityResult(requestCode, resultCode, data);
-
+            { super.onActivityResult(requestCode, resultCode, data);
             }
     }
-
-
-
     public void fetchData(String company,int pos)
     {
       //  progressBar.setVisibility(View.VISIBLE);
         //seriesNames = new ArrayList<>();
-
         mDatabase.child("MODEL/"+pos+"/"+company+"/").addValueEventListener(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    list2.addAll(seriesNames);
+                   list2.addAll(seriesNames);
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren())
-                {
-                    String  series = postSnapshot.getValue(String.class);
+                { String  series = postSnapshot.getValue(String.class);
                           seriesNames.add(series);
                }
                 seriesNames.removeAll(list2);
            }
            @Override
-               public void onCancelled(@NonNull DatabaseError databaseError) {
-
-               }
+               public void onCancelled(@NonNull DatabaseError databaseError)
+           {
+           }
            });
-
            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
            seriesSearch.setAdapter(adapter);
-          // progressBar.setVisibility(View.GONE);
-
-          // seriesNames.clear();
-
+          // progressBar.setVisibility(View.GONE);// seriesNames.clear();
         }
         //spinner.OnItemSelectedListener()
-
-
-
-
 }
-
-        
-        
-        
-        
-        

@@ -22,7 +22,10 @@
         android:roundIcon="@drawable/rb1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ConfirnmationActivity"></activity>
+        <activity android:name=".IssueActivity"
+            android:label="Select Issues"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name=".ConfirnmationActivity" />
         <activity
             android:name=".BackupPhoneSelection"
             android:label="Need a backup device?"
@@ -84,9 +87,8 @@
         </activity>
         <activity
             android:name=".RepairOrder1"
-            android:theme="@style/MyWhiteColorTheme"
             android:label="Choose Your Device"
-            />
+            android:theme="@style/MyWhiteColorTheme" />
     </application>
 
 </manifest>

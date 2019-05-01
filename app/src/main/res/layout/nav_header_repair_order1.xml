@@ -10,17 +10,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-
-        app:srcCompat="@drawable/rb1"
+        android:src="@drawable/rb1"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="15.311sp"
         android:fontFamily="@font/avenirlight"
@@ -34,7 +32,6 @@
         android:layout_height="wrap_content"
         android:textSize="15.311sp"
         android:fontFamily="@font/avenirlight"
-        android:text="@string/nav_header_subtitle"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_gravity="center"

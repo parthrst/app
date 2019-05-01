@@ -4,14 +4,11 @@ package com.vapps.uvpa;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-
 import android.database.sqlite.SQLiteDatabase;
-
 import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +17,6 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
 import com.parse.ParseAnalytics;
 
 
