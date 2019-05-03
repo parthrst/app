@@ -5,12 +5,318 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfirnmationActivity">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="17.458dp"
+        android:layout_marginLeft="17.458dp"
+        android:layout_marginBottom="15dp"
         >
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:textColor="#070606"
+        android:lineSpacingExtra="2sp"
+        android:gravity="left"
+        android:fontFamily="@font/avenirheavy"
+        android:text="Your Repair details:"
+        android:layout_marginBottom="8dp"
+
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/myrect"
+        android:elevation="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#070606"
+            android:lineSpacingExtra="1.8sp"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/avenirheavy"
+            android:text="Device"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#070606"
+            android:lineSpacingExtra="1.8sp"
+            android:layout_gravity="left"
+            android:fontFamily="@font/avenirbook"
+            android:text="Company"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#070606"
+            android:lineSpacingExtra="1.8sp"
+            android:layout_gravity="end"
+            android:fontFamily="@font/avenirmedium"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:gravity="start"
+                android:fontFamily="@font/avenirbook"
+                android:text="Company"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="end"
+                android:fontFamily="@font/avenirmedium"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#070606"
+            android:lineSpacingExtra="1.8sp"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/avenirheavy"
+            android:text="Issue"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#070606"
+            android:fontFamily="@font/avenirmedium"
+            android:lineSpacingExtra="1.8sp"
+            android:gravity="center_horizontal"
+            android:text="Battery issue"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="start"
+                android:fontFamily="@font/avenirheavy"
+                android:text="Basic Charge:"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="end"
+                android:fontFamily="@font/avenirmedium"
+                android:text="$"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="start"
+                android:fontFamily="@font/avenirheavy"
+                android:text="Company"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="end"
+                android:fontFamily="@font/avenirmedium"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="start"
+                android:fontFamily="@font/avenirheavy"
+                android:text="Company"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:gravity="end"
+                android:fontFamily="@font/avenirmedium"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="start"
+                android:fontFamily="@font/avenirheavy"
+                android:text="Total"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18.311sp"
+                android:textColor="#070606"
+                android:lineSpacingExtra="1.8sp"
+                android:layout_gravity="end"
+                android:fontFamily="@font/avenirmedium"
+                android:text="$"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/myrect"
+        android:elevation="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="21sp"
+            android:textColor="#070606"
+            android:lineSpacingExtra="2sp"
+            android:layout_gravity="left"
+            android:fontFamily="@font/avenirheavy"
+            android:text="Pickup Address:"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16.24sp"
+            android:textColor="#070606"
+            android:lineSpacingExtra="1.8sp"
+            android:fontFamily="@font/avenirlight"
+            android:text="30,  UthsuryanNagar, Urapakkam, Guduvancherry , Chennai , Tamil Nadu ,
+603202"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            />
+    </LinearLayout>
 
     </LinearLayout>
 

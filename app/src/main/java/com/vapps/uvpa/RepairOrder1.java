@@ -219,7 +219,8 @@ public class RepairOrder1 extends AppCompatActivity
         { startActivity(new Intent(RepairOrder1.this, Payment_details.class));
         }
         else if (id == R.id.nav_manage)
-        { startActivity(new Intent(RepairOrder1.this,QrGen.class));
+        {
+            startActivity(new Intent(RepairOrder1.this,QrGen.class));
         }
         else if (id == R.id.nav_share)
         {

@@ -17,7 +17,7 @@ public class BackupPhoneSelection extends AppCompatActivity {
 
     public void nextActivity(View view)
     {
-        startActivity(new Intent(BackupPhoneSelection.this,Payment_details.class));
+        startActivity(new Intent(BackupPhoneSelection.this,ConfirnmationActivity.class));
     }
 
 
