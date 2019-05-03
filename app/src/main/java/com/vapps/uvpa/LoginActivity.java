@@ -169,7 +169,7 @@ public class LoginActivity extends AppCompatActivity
                             editor.putString("username",username);
                             editor.putString("email",email);
                             editor.apply();
-                            startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
+                            startActivity(new Intent(LoginActivity.this,DeviceSelectionActivity.class));
                             finish();
                         }
                     } catch (JSONException e) {

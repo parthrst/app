@@ -22,9 +22,13 @@
         android:roundIcon="@drawable/rb1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".IssueActivity"
-            android:label="Select Issues"
+        <activity android:name=".DeviceSelectionActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity
+            android:name=".IssueActivity"
+            android:label="Select Issues"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ConfirnmationActivity" />
         <activity
             android:name=".BackupPhoneSelection"
