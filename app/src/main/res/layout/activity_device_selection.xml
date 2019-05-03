@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeviceSelectionActivity"
+    android:orientation="vertical"
+    android:padding="25dp">
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/flip"
+        android:background="@drawable/spinnerbackground"
+        />
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="150dp">
+
+       <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/phon1"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+           android:onClick="mobile"
+        />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentBottom="true"
+           android:text="MOBILE"
+           android:fontFamily="@font/averin"
+           android:textColor="@color/colorWhite"
+           android:textSize="30sp"/>
+   </RelativeLayout>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="150dp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/laptop"
+        android:scaleType="fitXY"
+        android:onClick="laptop"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="LAPTOP"
+        android:fontFamily="@font/averin"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        />
+</RelativeLayout>
+
+</LinearLayout>

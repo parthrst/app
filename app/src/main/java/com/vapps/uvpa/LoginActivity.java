@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity
                             editor.putString("email",email);
                             editor.putString("auth_token",token);
                             editor.apply();
-                            startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
+                            startActivity(new Intent(LoginActivity.this,DeviceSelectionActivity.class));
                             finish();
                         }
                     } catch (JSONException e) {
