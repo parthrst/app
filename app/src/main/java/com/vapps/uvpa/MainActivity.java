@@ -3,6 +3,7 @@ package com.vapps.uvpa;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -23,7 +24,7 @@ import com.parse.ParseAnalytics;
 public class MainActivity extends AppCompatActivity
 {
 
-
+SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +37,24 @@ public class MainActivity extends AppCompatActivity
             window.setStatusBarColor(this.getResources().getColor(R.color.colorBlack));
         }
 
+        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
+
+
         new Handler().postDelayed
                 (new Runnable() {
                     @Override
                     public void run()
                     {
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
-   
+                        String token = sharedPreferences.getString("auth_token",null);
+                        if (token != null)
+                        {
+                            startActivity(new Intent(MainActivity.this, RepairOrder1.class));
+
+                        }
+                        else {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         finish();
                     }
                 }, 700);

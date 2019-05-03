@@ -180,7 +180,8 @@ public class SignUp extends AppCompatActivity {
 
 
     public String getResponse(HttpURLConnection httpURLConnection)
-    { String result = "";
+    {
+        String result = "";
         try { InputStream inputStream = httpURLConnection.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             int data = inputStreamReader.read();
