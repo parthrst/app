@@ -1,9 +1,11 @@
 package com.vapps.uvpa;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import javax.microedition.khronos.egl.EGLDisplay;
+
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -42,8 +46,7 @@ public class LoginActivity extends AppCompatActivity
 //        getSupportActionBar().hide();
         mUserEmail = findViewById(R.id.username);
         mUserPassword = findViewById(R.id.password);
-         progressBar = findViewById(R.id.checkCredentials);
-         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
 
     }
 
@@ -97,7 +100,7 @@ public class LoginActivity extends AppCompatActivity
         protected void onPreExecute()
         {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+          setDialog(true);
 
         }
 
@@ -148,7 +151,7 @@ public class LoginActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String response)
         {
-            progressBar.setVisibility(View.INVISIBLE);
+            setDialog(false);
 
             if (response != null)
             {
@@ -165,9 +168,11 @@ public class LoginActivity extends AppCompatActivity
                             JSONObject jsonUser = jsonResponse.getJSONObject("data");
                             String username = jsonUser.getString("name");
                             String email = jsonUser.getString("email");
+                            String token = jsonUser.getString("auth_token");
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("username",username);
                             editor.putString("email",email);
+                            editor.putString("auth_token",token);
                             editor.apply();
                             startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
                             finish();
@@ -215,6 +220,13 @@ public class LoginActivity extends AppCompatActivity
 
 
 
-
+    private void setDialog(boolean show){
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        //View view = getLayoutInflater().inflate(R.layout.progress);
+        builder.setView(R.layout.progress);
+        Dialog dialog = builder.create();
+        if (show)dialog.show();
+        else dialog.dismiss();
+    }
 
 }
