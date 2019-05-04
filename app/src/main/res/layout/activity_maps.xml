@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
 
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     >
 
 <LinearLayout
 
 android:layout_width="match_parent"
-android:layout_height="match_parent"
+android:layout_height="wrap_content"
 tools:context=".MapsActivity"
 android:orientation="vertical">
 
@@ -21,7 +22,7 @@ android:orientation="vertical">
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="250dp"
         map:cameraZoom="12"
         tools:context=".MapsActivity" />
 
@@ -40,8 +41,8 @@ android:orientation="vertical">
         android:layout_marginRight="22.5dp"
         android:fontFamily="@font/averin"
 
-
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,35 +50,7 @@ android:orientation="vertical">
         android:textColor="#525050"
         android:lineSpacingExtra="6.867sp"
         android:gravity="center_horizontal"
-        android:text="Location"
-        android:layout_marginTop="11.44dp"
-        android:layout_marginLeft="22.5dp"
-        android:fontFamily="@font/averinroman"
-        android:layout_marginRight="22.5dp"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:textSize="18sp"
-        android:textColor="#0d0101"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginLeft="22.5dp"
-        android:layout_marginRight="22.5dp"
-        android:fontFamily="@font/avenirlight"
-        android:id="@+id/location"
-        android:layout_marginTop="12dp"
-
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18.311sp"
-        android:textColor="#525050"
-        android:lineSpacingExtra="6.867sp"
-        android:gravity="center_horizontal"
-        android:text="House/Flat No."
+        android:text="House/Flat No:"
         android:layout_marginTop="15.117dp"
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
@@ -105,7 +78,7 @@ android:orientation="vertical">
         android:textColor="#525050"
         android:lineSpacingExtra="6.867sp"
         android:gravity="center_horizontal"
-        android:text="Landmark"
+        android:text="Locality/Landmark:"
         android:layout_marginTop="15.117dp"
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
@@ -125,6 +98,43 @@ android:orientation="vertical">
         android:layout_marginRight="22.5dp"
         android:layout_marginLeft="22.5dp"
         />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.311sp"
+        android:textColor="#525050"
+        android:gravity="center_horizontal"
+        android:text="Your Coordinated Location:"
+        android:layout_marginTop="15.44dp"
+        android:fontFamily="@font/averin"
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+
+
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorBlack"
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+        android:fontFamily="@font/avenirheavy"
+        android:id="@+id/location"
+        android:layout_marginTop="12dp"
+
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -137,10 +147,12 @@ android:orientation="vertical">
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
         android:onClick="nextActivity"/>
 
+
 </LinearLayout>
-
-
-
 </ScrollView>
+
+
+

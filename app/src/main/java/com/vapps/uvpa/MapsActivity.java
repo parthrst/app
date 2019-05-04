@@ -112,7 +112,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         textView = findViewById(R.id.location);
 
-        textView.setMovementMethod(new ScrollingMovementMethod());
+
 
     }
 
@@ -160,21 +160,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         e.printStackTrace();
                     }
 
-
                     String address = addresses.get(0).getAddressLine( 0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                    String city = addresses.get(0).getLocality();
-                    String state = addresses.get(0).getAdminArea();
-                    String country = addresses.get(0).getCountryName();
-                    String postalCode = addresses.get(0).getPostalCode();
-
-
-                    String completeAddress = address + "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode;
-
-                    textView.setText(completeAddress);
-
+                    textView.setText(address);
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.clear();
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(completeAddress));
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(address));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     mMap.setMinZoomPreference(5);
 

@@ -71,7 +71,8 @@ public class LoginActivity extends AppCompatActivity
 
             if (!(mUserEmail.getText().toString().equals("") || mUserPassword.getText().toString().equals("")))
 
-            { loginDetails.put("email", mUserEmail.getText().toString());
+            {
+                loginDetails.put("email", mUserEmail.getText().toString());
                 loginDetails.put("password", mUserPassword.getText().toString());
                 holder.put("user", loginDetails);
                CredentialsVerifier task = new CredentialsVerifier();

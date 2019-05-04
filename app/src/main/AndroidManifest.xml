@@ -22,29 +22,49 @@
         android:roundIcon="@drawable/rb1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".DeviceSelectionActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".DeviceSelectionActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity
             android:name=".IssueActivity"
             android:label="Select Issues"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ConfirnmationActivity" />
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ConfirnmationActivity"
+            android:label="RepairBuck"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".BackupPhoneSelection"
             android:label="Need a backup device?"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity android:name=".MainActivity">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DownloadData" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".AfterLogin" />
-        <activity android:name=".UserSymbol" />
+        <activity
+            android:name=".DownloadData"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".AfterLogin"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UserSymbol"
+            android:screenOrientation="portrait"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -57,17 +77,24 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Payment_details" />
-        <activity android:name=".SignUp" />
+        <activity
+            android:name=".Payment_details"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SignUp"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MapsActivity"
             android:label="Pick Up Location"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".QR"
             android:screenOrientation="portrait" />
-        <activity android:name=".QrGen" />
+        <activity
+            android:name=".QrGen"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -76,10 +103,12 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -92,7 +121,8 @@
         <activity
             android:name=".RepairOrder1"
             android:label="Choose Your Device"
-            android:theme="@style/MyWhiteColorTheme" />
+            android:theme="@style/MyWhiteColorTheme"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

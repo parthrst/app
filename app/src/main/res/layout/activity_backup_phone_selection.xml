@@ -49,11 +49,8 @@
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
         android:layout_marginRight="22.5dp"
+    />
 
-
-
-
-        />
     <TextView
         android:textColor="#454343"
         android:fontFamily="@font/avenirlightoblique"
@@ -70,11 +67,7 @@
         />
 </LinearLayout>
 
-
-
-
-
-        <RadioGroup
+      <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
