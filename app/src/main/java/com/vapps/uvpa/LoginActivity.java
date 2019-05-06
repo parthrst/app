@@ -1,23 +1,18 @@
 package com.vapps.uvpa;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,17 +21,14 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import javax.microedition.khronos.egl.EGLDisplay;
-
-
 public class LoginActivity extends AppCompatActivity
 {
-
     private EditText mUserEmail;
     private EditText mUserPassword;
     int resp;
     private ProgressBar progressBar;
     SharedPreferences sharedPreferences;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +39,7 @@ public class LoginActivity extends AppCompatActivity
         mUserEmail = findViewById(R.id.username);
         mUserPassword = findViewById(R.id.password);
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
-
+        linearLayout=findViewById(R.id.progressbar_layout);
     }
 
     //---------------------------Sign Up-------------------------------------//
@@ -55,7 +47,6 @@ public class LoginActivity extends AppCompatActivity
     public void SignUp(View view)
     {
         startActivity(new Intent(LoginActivity.this, SignUp.class));
-
     }
 
 
@@ -63,20 +54,16 @@ public class LoginActivity extends AppCompatActivity
 
     public void login(View view)
     {
-
         JSONObject loginDetails = new JSONObject();
         JSONObject holder = new JSONObject();
-
         try {
-
             if (!(mUserEmail.getText().toString().equals("") || mUserPassword.getText().toString().equals("")))
-
-            { loginDetails.put("email", mUserEmail.getText().toString());
+            {
+                loginDetails.put("email", mUserEmail.getText().toString());
                 loginDetails.put("password", mUserPassword.getText().toString());
                 holder.put("user", loginDetails);
-               CredentialsVerifier task = new CredentialsVerifier();
+                CredentialsVerifier task = new CredentialsVerifier();
                 task.execute("http://www.amxdp.fun/api/sessions", holder.toString());
-
             }
             else
                 {
@@ -87,7 +74,6 @@ public class LoginActivity extends AppCompatActivity
         {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 
 
@@ -98,25 +84,18 @@ public class LoginActivity extends AppCompatActivity
     {
         @Override
         protected void onPreExecute()
-        {
-            super.onPreExecute();
-          setDialog(true);
-
+        { super.onPreExecute();
+            linearLayout.setVisibility(View.VISIBLE);
         }
-
         @Override
         protected String doInBackground(String... params)
         {
-
             try {
                 URL url = new URL(params[0]);
-
                 HttpURLConnection connection=(HttpURLConnection)url.openConnection();
                 connection.addRequestProperty("Accept","application/json");
                 connection.addRequestProperty("Content-Type","application/json");
-
                 connection.setRequestMethod("POST");
-
                 connection.setDoOutput(true);
                 connection.connect();
                 DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
@@ -127,32 +106,24 @@ public class LoginActivity extends AppCompatActivity
                  Log.i("RESPONSE CODE",String.valueOf(resp));
                  Log.i("RESPONSE",response);
                 if(resp!=200)
-                {
-                    Log.i("LOGIN RESPONSE CODE",String.valueOf(resp));
+                { Log.i("LOGIN RESPONSE CODE",String.valueOf(resp));
                     return String.valueOf(resp);
                 }
-
                 return response;
             }
             catch (ProtocolException e)
-            {
-                e.printStackTrace();
+            { e.printStackTrace();
             }
-
             catch (IOException e)
-            {
-                e.printStackTrace();
+            { e.printStackTrace();
             }
-
             return null;
-
         }
 
         @Override
         protected void onPostExecute(String response)
         {
-            setDialog(false);
-
+            linearLayout.setVisibility(View.INVISIBLE);
             if (response != null)
             {
                 if(response == "401")
@@ -190,43 +161,22 @@ public class LoginActivity extends AppCompatActivity
 
     }
 
-
-
-
     public String getResponse(HttpURLConnection httpURLConnection)
     {
         String result = "";
         try {
-
             InputStream inputStream = httpURLConnection.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             int data = inputStreamReader.read();
-
             while(data!= -1 )
-            {
-                result += (char)data;
+            { result += (char)data;
                 data = inputStreamReader.read();
             }
-
             return result;
-
                }
-
         catch(Exception e)
-        {
-            return e.getMessage();
+        { return e.getMessage();
         }
-    }
-
-
-
-    private void setDialog(boolean show){
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        //View view = getLayoutInflater().inflate(R.layout.progress);
-        builder.setView(R.layout.progress);
-        Dialog dialog = builder.create();
-        if (show)dialog.show();
-        else dialog.dismiss();
     }
 
 }

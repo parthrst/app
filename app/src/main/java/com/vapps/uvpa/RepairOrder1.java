@@ -1,20 +1,12 @@
 package com.vapps.uvpa;
 
-
-import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,12 +20,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +32,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import java.io.BufferedReader;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -49,10 +44,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 
 public class RepairOrder1 extends AppCompatActivity
@@ -65,7 +57,6 @@ public class RepairOrder1 extends AppCompatActivity
     private ImageView imageViewDp;
     private TextView textViewEmail;
     private TextView textViewUsername;
-    private ImageDownloader imageDownloader;
     private TextView uname;
     private IntentIntegrator qrScan;
     // RecyclerView recyclerView;
@@ -76,52 +67,24 @@ public class RepairOrder1 extends AppCompatActivity
      List<String>  seriesNames = new ArrayList<>();
      private  FirebaseDatabase firebaseDatabase =  FirebaseDatabase.getInstance();
      private  DatabaseReference mDatabase = firebaseDatabase.getReference();
-int val;
+    LinearLayout linearLayout;
+
     public void OrderRepair(View view)
     {
         startActivity(new Intent(RepairOrder1.this,IssueActivity.class));
 
     }
-    public class ImageDownloader extends AsyncTask<String, Void, Bitmap>
-    {
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            try {
-                URL url = new URL(urls[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-                InputStream inputStream = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
-                return myBitmap;
-            }
-            catch (MalformedURLException e)
-            { e.printStackTrace();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
-        }
 
-        @Override
-        protected void onPostExecute(Bitmap bitmap)
-        {
-            super.onPostExecute(bitmap);
-            imageViewDp.setImageBitmap(bitmap);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_order1);
-           Intent intent=getIntent();
-           val=intent.getIntExtra("val",0);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
+        getSupportActionBar().setTitle("Choose your device");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -136,6 +99,9 @@ int val;
         spinner = findViewById(R.id.spinner_search);
         seriesSearch = findViewById(R.id.spinner_seriesSearch);
         progressBar=findViewById(R.id.progBar);
+        linearLayout=findViewById(R.id.progressbar_layout);
+
+
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
 
          View headerView = navigationView.getHeaderView(0);
@@ -146,37 +112,24 @@ int val;
 
          textViewEmail.setText(sharedPreferences.getString("email",null));
          textViewUsername.setText(sharedPreferences.getString("username",null));
-//    uname.setText("Hi! "+user.getDisplayName());
-        if(val==0) {
-            getSupportActionBar().setTitle("Choose your Mobile");
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.brand_names, R.layout.support_simple_spinner_dropdown_item);
-            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    setDialog(true);
-                    //  Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-                    //progressBar.setVisibility(View.VISIBLE);
-                    // seriesNames.clear();
-                    fetchData(parent.getSelectedItem().toString(), position);
-                    setDialog(false);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    //Another interface callback
-                }
-            });
-        }
-
-        else {
-            getSupportActionBar().setTitle("Choose your Laptop");
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.lap_brand, R.layout.support_simple_spinner_dropdown_item);
-            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
-            seriesSearch.setAdapter(adapter);
-        }
+//       uname.setText("Hi! "+user.getDisplayName());
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+       {
+           @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+           {
+                    ModelLoader modelLoader = new ModelLoader();
+                    modelLoader.execute("http://www.amxdp.club/models/cmodel?name="+parent.getSelectedItem().toString());
+           }
+           @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+                //Another interface callback
+            }
+        });
         qrScan = new IntentIntegrator(this);
     }
       @Override
@@ -229,7 +182,8 @@ int val;
         { startActivity(new Intent(RepairOrder1.this, Payment_details.class));
         }
         else if (id == R.id.nav_manage)
-        { startActivity(new Intent(RepairOrder1.this,QrGen.class));
+        {
+            startActivity(new Intent(RepairOrder1.this,QrGen.class));
         }
         else if (id == R.id.nav_share)
         {
@@ -239,6 +193,7 @@ int val;
         {
             SignOut();
             startActivity(new Intent(RepairOrder1.this,LoginActivity.class));
+            finish();
 
         }
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
@@ -282,7 +237,7 @@ int val;
             { super.onActivityResult(requestCode, resultCode, data);
             }
     }
-    public void fetchData(String company,int pos)
+   /* public void fetchData(String company,int pos)
     {
       //  progressBar.setVisibility(View.VISIBLE);
         //seriesNames = new ArrayList<>();
@@ -307,15 +262,72 @@ int val;
 
         }
         //spinner.OnItemSelectedListener()
+*/
+
+      class ModelLoader extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            linearLayout.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                String result = "";
+                URL url = new URL(urls[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream inputStream = connection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                int data = inputStreamReader.read();
+                while(data != -1)
+                {
+                 result +=(char)data;
+                 data = inputStreamReader.read();
+                }
+         return result;
 
 
+            }
+            catch (MalformedURLException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
 
-    private void setDialog(boolean show){
-        AlertDialog.Builder builder = new AlertDialog.Builder(RepairOrder1.this);
-        //View view = getLayoutInflater().inflate(R.layout.progress);
-        builder.setView(R.layout.progress);
-        Dialog dialog = builder.create();
-        if (show)dialog.show();
-        else dialog.dismiss();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String response)
+        {
+            super.onPostExecute(response);
+            linearLayout.setVisibility(View.INVISIBLE);
+            list2.addAll(seriesNames);
+            try {
+                JSONArray jsonArray = new JSONArray(response);
+                for(int i=0; i < jsonArray.length() ; ++i)
+                {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String series = jsonObject.getString("name");
+                    seriesNames.add(series);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            seriesNames.removeAll(list2);
+            list2.clear();
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(RepairOrder1.this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
+            seriesSearch.setAdapter(adapter);
+
+        }
     }
+
+
+
 }

@@ -6,7 +6,35 @@
     tools:context=".SignUp"
     >
 
+    <LinearLayout
 
+        android:orientation="horizontal"
+        android:padding="13dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/progressbar_layout"
+        android:background="@drawable/myrect"
+        android:elevation="5dp">
+
+        <ProgressBar
+            android:id="@+id/loader"
+            android:layout_marginEnd="5dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:theme="@style/AppTheme"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Registering..."
+            android:layout_gravity="center_vertical"
+            android:id="@+id/loading_msg"
+            android:fontFamily="@font/avenirlight"
+            android:textSize="15.311sp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -141,15 +169,7 @@
 
 
 </LinearLayout>
-    <ProgressBar
 
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/registerCredentials"
-        android:visibility="invisible"
-        android:background="@color/colorWhite"
-        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
