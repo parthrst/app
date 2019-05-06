@@ -23,10 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".DeviceSelectionActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:label="Choose Your Device"/>
         <activity
             android:name=".IssueActivity"
-            android:label="Select Issues"
+            android:label="Select problem with your device"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ConfirnmationActivity" />
@@ -91,7 +92,7 @@
         </activity>
         <activity
             android:name=".RepairOrder1"
-            android:label="Choose Your Device"
+
             android:theme="@style/MyWhiteColorTheme" />
     </application>
 

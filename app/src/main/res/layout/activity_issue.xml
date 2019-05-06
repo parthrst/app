@@ -5,255 +5,21 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     >
 <LinearLayout
      android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    android:padding="15dp">
 
-            android:text="Battery Problem"
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="Button Problem"
-            android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="Broken Screen"
-            android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="Charging Problem"
-            android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="Camera Problem"
-            android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="Water Damage"
-            android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="Headphone Jack Issue"
-            android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/spinnerbackground"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        >
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="Software Issue"
-            android:fontFamily="@font/averinroman"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Approx Price:14000"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:fontFamily="@font/avenirlight"
-            />
-
-
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/spinnerbackground">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="@font/averinroman"
-            android:textSize="20sp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:fontFamily="@font/avenirlight"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                />
-        </LinearLayout>
-
-
-
+            android:gravity="center_vertical"
+            android:textSize="22sp"
+            android:id="@+id/list"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -268,6 +34,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
         android:onClick="nextActivity"/>
+
 
     </LinearLayout>
 </ScrollView>

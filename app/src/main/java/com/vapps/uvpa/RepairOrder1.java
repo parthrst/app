@@ -76,7 +76,7 @@ public class RepairOrder1 extends AppCompatActivity
      List<String>  seriesNames = new ArrayList<>();
      private  FirebaseDatabase firebaseDatabase =  FirebaseDatabase.getInstance();
      private  DatabaseReference mDatabase = firebaseDatabase.getReference();
-
+int val;
     public void OrderRepair(View view)
     {
         startActivity(new Intent(RepairOrder1.this,IssueActivity.class));
@@ -116,11 +116,12 @@ public class RepairOrder1 extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_order1);
-
+           Intent intent=getIntent();
+           val=intent.getIntExtra("val",0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Choose your device");
+
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -146,27 +147,36 @@ public class RepairOrder1 extends AppCompatActivity
          textViewEmail.setText(sharedPreferences.getString("email",null));
          textViewUsername.setText(sharedPreferences.getString("username",null));
 //    uname.setText("Hi! "+user.getDisplayName());
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-       {
-           @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-           {
-               setDialog(true);
-              //  Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+        if(val==0) {
+            getSupportActionBar().setTitle("Choose your Mobile");
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.brand_names, R.layout.support_simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    setDialog(true);
+                    //  Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
                     //progressBar.setVisibility(View.VISIBLE);
-        // seriesNames.clear();
+                    // seriesNames.clear();
                     fetchData(parent.getSelectedItem().toString(), position);
-               setDialog(false);
-           }
-           @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-                //Another interface callback
-            }
-        });
+                    setDialog(false);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    //Another interface callback
+                }
+            });
+        }
+
+        else {
+            getSupportActionBar().setTitle("Choose your Laptop");
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.lap_brand, R.layout.support_simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            seriesSearch.setAdapter(adapter);
+        }
         qrScan = new IntentIntegrator(this);
     }
       @Override
