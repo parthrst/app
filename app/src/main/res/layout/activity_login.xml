@@ -8,120 +8,148 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LoginActivity">
 
+    <LinearLayout
+
+                   android:orientation="horizontal"
+                   android:padding="13dp"
+                   android:layout_centerInParent="true"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:visibility="invisible"
+                   android:id="@+id/progressbar_layout"
+                   android:background="@drawable/myrect"
+                   android:elevation="5dp">
+
+    <ProgressBar
+                   android:id="@+id/loader"
+                   android:layout_marginEnd="5dp"
+                   android:layout_width="45dp"
+                   android:layout_height="45dp"
+                   android:theme="@style/AppTheme"
+        />
+    <TextView
+                   android:layout_width="wrap_content"
+                   android:text="Checking Credentials..."
+                   android:layout_gravity="center_vertical"
+                   android:id="@+id/loading_msg"
+                   android:fontFamily="@font/avenirlight"
+                   android:textSize="15.311sp"
+                   android:layout_height="wrap_content" />
+    </LinearLayout>
+
       <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:layout_centerInParent="true"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_centerInParent="true"
         >
 
 
           <TextView
-              android:text="Welcome to Repairbuck!"
-              android:onClick="SignUp"
-              android:layout_marginBottom="10dp"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="22.88sp"
-              android:textColor="#525050"
-              android:lineSpacingExtra="6.867sp"
-              android:gravity="center_horizontal"
-              android:layout_marginTop="25.117dp"
-              android:layout_marginLeft="22.5dp"
-              android:layout_gravity="center"
-              android:fontFamily="@font/averin"
-              android:layout_marginRight="22.5dp"
+                   android:text="Welcome to Repairbuck!"
+                   android:onClick="SignUp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="22.88sp"
+                   android:textColor="#525050"
+                   android:lineSpacingExtra="6.867sp"
+                   android:gravity="center_horizontal"
+                   android:layout_marginTop="25.117dp"
+                   android:layout_marginLeft="22.5dp"
+                   android:layout_gravity="center"
+                   android:fontFamily="@font/averin"
+                   android:layout_marginRight="22.5dp"
           />
 
 
+          <EditText
 
-    <EditText
-
-        android:inputType="textEmailAddress"
-        android:hint="Username"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18.311sp"
-        android:textColor="#0d0101"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginTop="1.373dp"
-        android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginLeft="22.5dp"
+                    android:inputType="textEmailAddress"
+                    android:hint="Username"
+                    android:padding="15dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18.311sp"
+                    android:textColor="#0d0101"
+                    android:lineSpacingExtra="6.867sp"
+                    android:layout_marginTop="1.373dp"
+                    android:fontFamily="@font/avenirlight"
+                    android:layout_marginRight="22.5dp"
+                    android:layout_marginLeft="22.5dp"
 
         />
 
           <EditText
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18.311sp"
-        android:textColor="#0d0101"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginTop="1.373dp"
-        android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginLeft="22.5dp"
+                     android:inputType="textPassword"
+                     android:hint="Password"
+                     android:padding="15dp"
+                     android:layout_margin="10dp"
+                     android:id="@+id/password"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:textSize="18.311sp"
+                     android:textColor="#0d0101"
+                     android:lineSpacingExtra="6.867sp"
+                     android:layout_marginTop="1.373dp"
+                     android:fontFamily="@font/avenirlight"
+                     android:layout_marginRight="22.5dp"
+                     android:layout_marginLeft="22.5dp"
 
         />
 
 
     <TextView
 
-        android:text="You haven't an account yet?"
-        android:onClick="SignUp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18.311sp"
-        android:textColor="#525050"
-        android:lineSpacingExtra="6.867sp"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="25.117dp"
-        android:layout_marginLeft="22.5dp"
-        android:fontFamily="@font/averinroman"
-        android:layout_gravity="center"
-        android:layout_marginRight="22.5dp"
+                    android:text="You haven't an account yet?"
+                    android:onClick="SignUp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18.311sp"
+                    android:textColor="#525050"
+                    android:lineSpacingExtra="6.867sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="25.117dp"
+                    android:layout_marginLeft="22.5dp"
+                    android:fontFamily="@font/averinroman"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="22.5dp"
 
   />
 
     <TextView
-        android:layout_gravity="center"
-        android:text="Forgot your password?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15.311sp"
-        android:textColor="#525050"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginTop="5.117dp"
-        android:layout_marginLeft="22.5dp"
-        android:fontFamily="@font/averinroman"
-        android:layout_marginRight="22.5dp"
+                    android:layout_gravity="center"
+                    android:text="Forgot your password?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15.311sp"
+                    android:textColor="#525050"
+                    android:lineSpacingExtra="6.867sp"
+                    android:layout_marginTop="5.117dp"
+                    android:layout_marginLeft="22.5dp"
+                    android:fontFamily="@font/averinroman"
+                    android:layout_marginRight="22.5dp"
 
 
         />
  </LinearLayout>
 
     <Button
-        android:onClick="login"
-        android:text="Log In"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
-        android:textColor="#ffffff"
-        android:fontFamily="@font/avenirheavy"
-        android:textSize="22.8sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
+                   android:onClick="login"
+                   android:text="Log In"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="@color/colorBlack"
+                   android:textColor="#ffffff"
+                   android:fontFamily="@font/avenirheavy"
+                   android:textSize="22.8sp"
+                   android:layout_marginLeft="20dp"
+                   android:layout_marginRight="20dp"
+                   android:layout_marginBottom="20dp"
+                   android:layout_alignParentBottom="true"
 
         />
 

@@ -1,14 +1,18 @@
 package com.vapps.uvpa;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -34,7 +38,8 @@ public class SignUp extends AppCompatActivity {
     EditText name;
     EditText mobileNo;
     int resp;
-    private ProgressBar progressBar;
+    LinearLayout linearLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +52,8 @@ public class SignUp extends AppCompatActivity {
         name = findViewById(R.id.name);
         cpassword = findViewById(R.id.cpassword);
         mobileNo = findViewById(R.id.mobile);
-        progressBar = findViewById(R.id.registerCredentials);
+        linearLayout=findViewById(R.id.progressbar_layout);
+
        // getSupportActionBar().hide();
 
     }
@@ -67,11 +73,11 @@ public class SignUp extends AppCompatActivity {
 
             if (!(email.getText().toString().equals("") || password.getText().toString().equals("")))
 
-            { regDetails.put("email", email.getText().toString());
-              regDetails.put("name",name.getText().toString());
-              regDetails.put("mob", mobileNo.getText().toString());
-              regDetails.put("password", password.getText().toString());
-              regDetails.put("password_confirmation", password.getText().toString());
+            {   regDetails.put("email", email.getText().toString());
+                regDetails.put("name",name.getText().toString());
+                regDetails.put("mob", mobileNo.getText().toString());
+                regDetails.put("password", password.getText().toString());
+                regDetails.put("password_confirmation", password.getText().toString());
                 holder.put("user",regDetails);
                 CredentialsReg task = new CredentialsReg();
                 task.execute("http://www.amxdp.fun/api/registrations", holder.toString());
@@ -97,7 +103,7 @@ public class SignUp extends AppCompatActivity {
         protected void onPreExecute()
         {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.VISIBLE);
 
         }
 
@@ -111,9 +117,7 @@ public class SignUp extends AppCompatActivity {
                 HttpURLConnection connection=(HttpURLConnection)url.openConnection();
                 connection.addRequestProperty("Accept","application/json");
                 connection.addRequestProperty("Content-Type","application/json");
-
                 connection.setRequestMethod("POST");
-
                 connection.setDoOutput(true);
                 connection.connect();
                 DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
@@ -148,7 +152,8 @@ public class SignUp extends AppCompatActivity {
         @Override
         protected void onPostExecute(String response)
         {
-            progressBar.setVisibility(View.INVISIBLE);
+            linearLayout.setVisibility(View.INVISIBLE);
+
             if (response != null)
             {
                 if(response == "401")
@@ -177,8 +182,6 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-
-
     public String getResponse(HttpURLConnection httpURLConnection)
     {
         String result = "";
@@ -192,7 +195,8 @@ public class SignUp extends AppCompatActivity {
             return result;
         }
         catch(Exception e)
-        { return e.getMessage();
+        {
+            return e.getMessage();
         } }
 
 }

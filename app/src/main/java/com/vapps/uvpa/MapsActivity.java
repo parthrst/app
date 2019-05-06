@@ -1,6 +1,7 @@
 package com.vapps.uvpa;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -11,10 +12,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +51,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     List<Address> addresses;
     TextView textView;
     LatLng latLng;
+    LinearLayout linearLayout;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -61,6 +65,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (grantResults.length > 0) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     {
+                        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+                        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
                         buildLocationRequest();
                         buildLocationCallback();
 
@@ -69,13 +75,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Toast.makeText(getApplicationContext(), "Please allow permission", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MapsActivity.this,RepairOrder1.class));
                     }
-
-
-                }
+          }
             }
-
-
-        }
+      }
 
     }
 
@@ -85,9 +87,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        linearLayout=findViewById(R.id.progressbar_layout);
 
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -95,6 +99,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
 
         } else {
+
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
             buildLocationRequest();
             buildLocationCallback();
@@ -110,7 +116,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-        textView = findViewById(R.id.location);
+
 
 
 
@@ -124,15 +130,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Add a marker in Sydney and move the camera
         //latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.clear();
+
+        buildLocationRequest();
+        buildLocationCallback();
        // mMap.addMarker(new MarkerOptions().position(latLng).title(completeAddress));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
       //  mMap.setMinZoomPreference(5);
+
 
     }
 
 
     public void buildLocationRequest() {
+        linearLayout.setVisibility(View.VISIBLE);
         locationRequest = new LocationRequest();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
@@ -159,16 +169,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     {
                         e.printStackTrace();
                     }
-
+                    textView = findViewById(R.id.location);
                     String address = addresses.get(0).getAddressLine( 0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                     textView.setText(address);
+                    linearLayout.setVisibility(View.INVISIBLE);
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.clear();
                     mMap.addMarker(new MarkerOptions().position(latLng).title(address));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     mMap.setMinZoomPreference(5);
-
-
 
                 }
 
@@ -183,7 +192,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         startActivity(new Intent(MapsActivity.this, BackupPhoneSelection.class));
     }
-
 }
 /*
 
