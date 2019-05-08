@@ -12,12 +12,18 @@ public class DeviceSelectionActivity extends AppCompatActivity {
 
     ViewFlipper flipper;
     public void mobile(View view){
-        startActivity(new Intent(DeviceSelectionActivity.this,RepairOrder1.class));
+  Intent intent=new Intent(DeviceSelectionActivity.this,RepairOrder1.class);
+  intent.putExtra("val",0);
+        startActivity(intent);
+
 
 
     }
     public void laptop(View view){
-        startActivity(new Intent(DeviceSelectionActivity.this,RepairOrder1.class));
+        Intent intent=new Intent(DeviceSelectionActivity.this,RepairOrder1.class);
+        intent.putExtra("val",1);
+        startActivity(intent);
+
     }
 
     @Override
