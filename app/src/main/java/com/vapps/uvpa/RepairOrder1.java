@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -37,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,17 +69,31 @@ public class RepairOrder1 extends AppCompatActivity
      List<String>  seriesNames = new ArrayList<>();
      private  FirebaseDatabase firebaseDatabase =  FirebaseDatabase.getInstance();
      private  DatabaseReference mDatabase = firebaseDatabase.getReference();
-    LinearLayout linearLayout;
+     LinearLayout linearLayout;
+     PostOrder postOrder = new PostOrder();
 
     public void OrderRepair(View view)
     {
-        startActivity(new Intent(RepairOrder1.this,IssueActivity.class));
+        JSONObject repairDetails = new JSONObject();
+        try {
+            repairDetails.put("id","1");
+            repairDetails.put("company_id","60");
+            repairDetails.put("model_id","1280");
+            repairDetails.put("problem_ids","[1,2]");
+            repairDetails.put("other","");
+            repairDetails.put("pick_up","");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        postOrder.execute("http://www.amxdp.club/repairs.json?auth_token="+sharedPreferences.getString("auth_token",null),repairDetails.toString());
 
+     //   startActivity(new Intent(RepairOrder1.this,IssueActivity.class));
     }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_order1);
 
@@ -135,7 +151,7 @@ public class RepairOrder1 extends AppCompatActivity
       @Override
     public void onBackPressed()
       {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START))
         {
             drawer.closeDrawer(GravityCompat.START);
@@ -237,32 +253,7 @@ public class RepairOrder1 extends AppCompatActivity
             { super.onActivityResult(requestCode, resultCode, data);
             }
     }
-   /* public void fetchData(String company,int pos)
-    {
-      //  progressBar.setVisibility(View.VISIBLE);
-        //seriesNames = new ArrayList<>();
-        mDatabase.child("MODEL/"+pos+"/"+company+"/").addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   list2.addAll(seriesNames);
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren())
-                { String  series = postSnapshot.getValue(String.class);
-                          seriesNames.add(series);
-               }
-                seriesNames.removeAll(list2);
-           }
-           @Override
-               public void onCancelled(@NonNull DatabaseError databaseError)
-           {
-           }
-           });
-           ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
-           seriesSearch.setAdapter(adapter);
-          // progressBar.setVisibility(View.GONE);// seriesNames.clear();
 
-        }
-        //spinner.OnItemSelectedListener()
-*/
 
       class ModelLoader extends AsyncTask<String, Void, String>
     {
@@ -275,20 +266,12 @@ public class RepairOrder1 extends AppCompatActivity
         @Override
         protected String doInBackground(String... urls) {
             try {
-                String result = "";
+                String result;
                 URL url = new URL(urls[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
-                InputStream inputStream = connection.getInputStream();
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                int data = inputStreamReader.read();
-                while(data != -1)
-                {
-                 result +=(char)data;
-                 data = inputStreamReader.read();
-                }
-         return result;
-
+                result = getResponse(connection);
+                return result;
 
             }
             catch (MalformedURLException e)
@@ -327,6 +310,73 @@ public class RepairOrder1 extends AppCompatActivity
 
         }
     }
+
+
+    class PostOrder extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+           // linearLayout.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String result;
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+                connection.addRequestProperty("Accept","application/json");
+                connection.addRequestProperty("Content-Type","application/json");
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                connection.connect();
+                DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
+                outputStream.writeBytes(params[1]);
+                Log.i("RE",params[1]);
+                result = getResponse(connection);
+                Log.i("RESPONSE",result);
+                return result;
+
+            }
+            catch (MalformedURLException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String response)
+        {
+            super.onPostExecute(response);
+            //Log.i("RESPONSE",response);
+        }
+    }
+
+    public String getResponse(HttpURLConnection httpURLConnection)
+    {
+        String result = "";
+        try {
+            InputStream inputStream = httpURLConnection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            int data = inputStreamReader.read();
+            while(data!= -1 )
+            { result += (char)data;
+                data = inputStreamReader.read();
+            }
+            return result;
+        }
+        catch(Exception e)
+        { return e.getMessage();
+        }
+    }
+
 
 
 
