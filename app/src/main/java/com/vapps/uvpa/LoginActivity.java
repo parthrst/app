@@ -140,9 +140,11 @@ public class LoginActivity extends AppCompatActivity
                             String username = jsonUser.getString("name");
                             String email = jsonUser.getString("email");
                             String token = jsonUser.getString("auth_token");
+                            String phone = jsonUser.getString("mobile");
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("username",username);
                             editor.putString("email",email);
+                            editor.putString("phone",phone);
                             editor.putString("auth_token",token);
                             editor.apply();
                             startActivity(new Intent(LoginActivity.this,DeviceSelectionActivity.class));

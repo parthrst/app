@@ -29,7 +29,6 @@
             />
         <TextView
             android:layout_width="wrap_content"
-            android:text="Fectching Models ..."
             android:layout_gravity="center_vertical"
             android:id="@+id/loading_msg"
             android:fontFamily="@font/avenirlight"
