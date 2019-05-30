@@ -48,7 +48,7 @@ SharedPreferences sharedPreferences;
                         String token = sharedPreferences.getString("auth_token",null);
                         if (token != null)
                         {
-                            startActivity(new Intent(MainActivity.this, DeviceSelectionActivity.class));
+                            startActivity(new Intent(MainActivity.this, RepairOrder1.class));
 
                         }
                         else {
