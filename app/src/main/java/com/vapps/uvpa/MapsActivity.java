@@ -49,7 +49,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback
+{
 
     private GoogleMap mMap;
 
@@ -77,9 +78,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         switch (requestCode) {
 
-            case REQUEST_CODE: {
+            case REQUEST_CODE:
+                {
 
-                if (grantResults.length > 0) {
+                if (grantResults.length > 0)
+                {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     {
                         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -117,7 +120,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
 
-        } else {
+        } else
+            {
 
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -146,7 +150,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
       //  Location location = LocationServices.getFusedLocationProviderClient(fusedLocationProviderClient).getLastLocation();
-
         // Add a marker in Sydney and move the camera
         //latLng = new LatLng(location.getLatitude(), location.getLongitude());
         buildLocationRequest();
@@ -208,13 +211,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                         mMap.setMinZoomPreference(5);
                     }
-
-                }
-
-            }
+     }
+         }
         };
-
-    }
+  }
     Order order = new Order();
 
     public void nextActivity(View view)
@@ -319,11 +319,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         { return e.getMessage();
         }
     }
-
-
-
-
-
 
 }
 /*

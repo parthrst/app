@@ -13,7 +13,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class  DownloadData extends AppCompatActivity {
+public class  DownloadData extends AppCompatActivity
+{
 
     ArrayList<String> phoneURLs = new ArrayList<String>();
 
@@ -84,12 +85,12 @@ public void newlist(int i) {
                 return result;
 
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
 
                 e.printStackTrace();
 
             }
-
             return null;
         }
     }}
