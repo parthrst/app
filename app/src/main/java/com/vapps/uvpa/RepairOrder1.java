@@ -52,7 +52,7 @@ import java.util.List;
 public class RepairOrder1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private Spinner device;
     private Spinner spinner;
     private Spinner seriesSearch;
     private Button OderRepairButton;
@@ -127,7 +127,7 @@ public class RepairOrder1 extends AppCompatActivity
         progressBar=findViewById(R.id.progBar);
         linearLayout=findViewById(R.id.progressbar_layout);
         loadingMsg = findViewById(R.id.loading_msg);
-
+        device=findViewById(R.id.device);
 
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
 
@@ -140,23 +140,66 @@ public class RepairOrder1 extends AppCompatActivity
          textViewEmail.setText(sharedPreferences.getString("email",null));
          textViewUsername.setText(sharedPreferences.getString("username",null));
 //       uname.setText("Hi! "+user.getDisplayName());
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-       {
-           @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-           {
-                    ModelLoader modelLoader = new ModelLoader();
+        ArrayAdapter<CharSequence> deviceadapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
+        device.setAdapter(deviceadapter);
+       final ArrayAdapter<CharSequence> mobile = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
+       final ArrayAdapter<CharSequence> laptop = ArrayAdapter.createFromResource(this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
+        final ArrayAdapter<CharSequence> lnames = ArrayAdapter.createFromResource(this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
+
+        device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0){
+
+                    laptop.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinner.setAdapter(laptop);
+                    lnames.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    seriesSearch.setAdapter(lnames);
+                    /*spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                    {
+                      @Override
+                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                     {
+                         ModelLoader modelLoader = new ModelLoader();
                     modelLoader.execute("http://www.repairbuck.com/models/cmodel?name="+parent.getSelectedItem().toString());
-           }
-           @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-                //Another interface callback
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent)
+                        {
+                            //Another interface callback
+                        }
+                    });*/
+                }
+                else if(position==1){
+                    mobile.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinner.setAdapter(mobile);
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                    {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                        {
+                            ModelLoader modelLoader = new ModelLoader();
+                            modelLoader.execute("http://www.repairbuck.com/models/cmodel?name="+parent.getSelectedItem().toString());
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent)
+                        {
+                            //Another interface callback
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+               // Toast.makeText(RepairOrder1.this, "Please Select you device!!", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
+
         qrScan = new IntentIntegrator(this);
     }
       @Override

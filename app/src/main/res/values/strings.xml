@@ -44,12 +44,18 @@
         <item>HP</item>
     </string-array>
 
+<string-array name="device">
+    <item>Laptop</item>
+    <item>Mobile</item>
+</string-array>
+    <string-array name="laptop_names">
 
-    <string-array name="type_repair">
-
-
-
-
+        <item>Inspiron</item>
+        <item>Vaio</item>
+        <item>Ideapad</item>
+        <item>Predator</item>
+        <item>ZenBook</item>
+        <item>Pavallion</item>
     </string-array>
 
     <string name="title_activity_maps">Pick Up Address</string>

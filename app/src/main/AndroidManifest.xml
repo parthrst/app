@@ -23,10 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:screenOrientation="portrait"
-            android:name=".DeviceSelectionActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-        <activity
             android:name=".IssueActivity"
             android:label="Select Issues"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
