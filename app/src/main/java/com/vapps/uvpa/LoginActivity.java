@@ -106,7 +106,8 @@ public class LoginActivity extends AppCompatActivity
                  Log.i("RESPONSE CODE",String.valueOf(resp));
                  Log.i("RESPONSE",response);
                 if(resp!=200)
-                { Log.i("LOGIN RESPONSE CODE",String.valueOf(resp));
+                {
+                    Log.i("LOGIN RESPONSE CODE",String.valueOf(resp));
                     return String.valueOf(resp);
                 }
                 return response;
@@ -131,11 +132,13 @@ public class LoginActivity extends AppCompatActivity
                     Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    try {
+                    try
+                    {
                         JSONObject jsonResponse = new JSONObject(response);
                         String success = jsonResponse.getString("success");
                         if (success.equals("true"))
                         {
+                           Toast.makeText(getApplicationContext(),"Login successful!",Toast.LENGTH_SHORT);
                             JSONObject jsonUser = jsonResponse.getJSONObject("data");
                             String username = jsonUser.getString("name");
                             String email = jsonUser.getString("email");
@@ -177,7 +180,8 @@ public class LoginActivity extends AppCompatActivity
             return result;
                }
         catch(Exception e)
-        { return e.getMessage();
+        {
+            return e.getMessage();
         }
     }
 

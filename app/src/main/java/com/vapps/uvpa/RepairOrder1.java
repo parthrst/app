@@ -146,20 +146,14 @@ public class RepairOrder1 extends AppCompatActivity
         device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0){
-
-                    seriesSearch.setAdapter(null);
-                    spinner.setAdapter(null);
-                    ArrayAdapter<CharSequence> laptop = ArrayAdapter.createFromResource(getBaseContext(),R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
-
-                    ArrayAdapter<CharSequence> lnames = ArrayAdapter.createFromResource(getBaseContext(),R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
-                    laptop.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner.setAdapter(laptop);
-
-                    lnames.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    seriesSearch.setAdapter(lnames);
-                    seriesSearch.setSelection(-1);
-                    spinner.setSelection(-1);
+                if(position==0)
+                {
+                    ArrayAdapter<CharSequence> brandAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
+                    brandAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinner.setAdapter(brandAdapter);
+                    ArrayAdapter<CharSequence> seriesAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
+                    seriesAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    seriesSearch.setAdapter(seriesAdapter);
                     /*spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                     {
                       @Override
@@ -175,12 +169,11 @@ public class RepairOrder1 extends AppCompatActivity
                         }
                     });*/
                 }
-                else if(position==1){
-                    ArrayAdapter<CharSequence> mobile = ArrayAdapter.createFromResource(getBaseContext(),R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
-                    mobile.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner.setAdapter(mobile);
-                    spinner.setSelection(-1);
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                else if(position==1) {
+                            ArrayAdapter<CharSequence> brandAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
+                            brandAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                            spinner.setAdapter(brandAdapter);
+                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                     {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
