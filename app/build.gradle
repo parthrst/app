@@ -38,7 +38,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
 
     implementation 'com.parse:parse-android:1.13.0'
-    
+
     implementation 'ai.devsupport.instamojo:instamojolib:0.1.6'
 
     implementation 'ai.devsupport.instamojo:instamojolib:0.1.6'

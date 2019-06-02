@@ -20,6 +20,11 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_code"
             android:title="QR Gen" />
+        <item
+            android:id="@+id/bucket"
+            android:icon="@drawable/ic_bucket"
+            android:title="Your Orders"
+            />
     </group>
 
     <item android:title="Communicate">
