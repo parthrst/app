@@ -31,8 +31,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +58,7 @@ public class RepairOrder1 extends AppCompatActivity
     private TextView textViewEmail;
     private TextView textViewUsername;
     private TextView uname;
-    private IntentIntegrator qrScan;
+
     private ProgressBar progressBar;
      private ArrayList<String> list2=new ArrayList<>();
      SharedPreferences sharedPreferences;
@@ -140,8 +138,9 @@ public class RepairOrder1 extends AppCompatActivity
 //       uname.setText("Hi! "+user.getDisplayName());
         ArrayAdapter<CharSequence> deviceadapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceadapter);
-
-
+       final ArrayAdapter<CharSequence> mobile = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
+       final ArrayAdapter<CharSequence> laptop = ArrayAdapter.createFromResource(this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
+        final ArrayAdapter<CharSequence> lnames = ArrayAdapter.createFromResource(this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
 
         device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -200,7 +199,7 @@ public class RepairOrder1 extends AppCompatActivity
 
 
 
-        qrScan = new IntentIntegrator(this);
+
     }
       @Override
     public void onBackPressed()
@@ -242,26 +241,28 @@ public class RepairOrder1 extends AppCompatActivity
         // Handle navigation view item clicks here.
 
         int id = item.getItemId();
-        if (id == R.id.nav_qr)
-        { qrScan.initiateScan(); }
-        else if (id == R.id.nav_location)
+
+       if (id == R.id.nav_location)
         {
             startActivity(new Intent(RepairOrder1.this, MapsActivity.class));
         }
         else if (id == R.id.nav_payment)
         { startActivity(new Intent(RepairOrder1.this, Payment_details.class));
         }
-        else if (id == R.id.nav_manage)
+        else if (id == R.id.bucket)
         {
-            startActivity(new Intent(RepairOrder1.this,QrGen.class));
-        }
-        else if(id==R.id.bucket){
             startActivity(new Intent(RepairOrder1.this,Bucket.class));
+
         }
         else if (id == R.id.nav_share)
         {
 
         }
+       else if (id == R.id.about)
+       {
+           startActivity(new Intent(RepairOrder1.this,About.class));
+
+       }
         else if (id == R.id.nav_send)
         {
             SignOut();
@@ -283,33 +284,6 @@ public class RepairOrder1 extends AppCompatActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            //if qrcode has nothing in it
-            if (result.getContents() == null)
-            {
-                Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
-            }
-
-            else {
-               //if qr contains data
-               // try {
-                   //converting the data to json
-                //  JSONObject obj = new JSONObject(result.getContents());
-                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-             //   } catch (JSONException e) {
-             //       e.printStackTrace();
-              //  }
-            }
-        } else
-
-            {
-                super.onActivityResult(requestCode, resultCode, data);
-            }
     }
 
 

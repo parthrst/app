@@ -30,7 +30,7 @@ public class Payment_details extends AppCompatActivity {
         cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
             @Override
             public void onClick(Card card) {
-                startActivity(new Intent(Payment_details.this, QR.class));
+
             }
         });
     }

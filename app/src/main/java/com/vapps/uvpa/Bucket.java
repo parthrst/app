@@ -245,7 +245,7 @@ public class Bucket extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-          loadata(idList.get(1),addressList.get(0));
+          //loadata(idList.get(1),addressList.get(0));
        }
     }
     public String getResponse(HttpURLConnection httpURLConnection)

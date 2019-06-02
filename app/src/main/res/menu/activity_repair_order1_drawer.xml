@@ -5,10 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_qr"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="QR Scan" />
-        <item
             android:id="@+id/nav_location"
             android:icon="@drawable/ic_add_location_black_24dp"
             android:title="Set Location" />
@@ -16,15 +12,16 @@
             android:id="@+id/nav_payment"
             android:icon="@drawable/ic_payment"
             android:title="Payment" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_code"
-            android:title="QR Gen" />
+
         <item
             android:id="@+id/bucket"
             android:icon="@drawable/ic_bucket"
             android:title="Your Orders"
             />
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/ic_signout"
+            android:title="Log Out" />
     </group>
 
     <item android:title="Communicate">
@@ -34,9 +31,11 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Log Out" />
+                android:id="@+id/about"
+                android:icon="@drawable/ic_about"
+                android:title="About"
+                />
+
         </menu>
     </item>
 
