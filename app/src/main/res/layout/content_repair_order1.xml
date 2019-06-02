@@ -74,7 +74,7 @@
         android:id="@+id/progBar"
         />
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/spinner_seriesSearch"
+        android:id="@+id/mobile_spinner_seriesSearch"
         android:layout_width="match_parent"
         android:background="@drawable/spinnerbackground"
         android:layout_height="50dp"
@@ -87,7 +87,19 @@
         android:layout_marginTop="10dp"
         />
 
-
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/laptop_spinner_seriesSearch"
+        android:layout_width="match_parent"
+        android:background="@drawable/spinnerbackground"
+        android:layout_height="50dp"
+        android:textSize="21sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="6.867sp"
+        android:fontFamily="@font/avenirlight"
+        app:hintText="Model"
+        app:fontFamily="@font/avenirlight"
+        android:layout_marginTop="10dp"
+        />
 
 
 </LinearLayout>

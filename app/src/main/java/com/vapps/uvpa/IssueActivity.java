@@ -53,7 +53,6 @@ public class IssueActivity extends AppCompatActivity
     }
     class custom extends BaseAdapter
     {
-
         @Override
         public int getCount()
         {
