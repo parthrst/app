@@ -78,7 +78,8 @@ public class RepairOrder1 extends AppCompatActivity
         JSONObject repairDetails = new JSONObject();
         JSONObject repairHolder = new JSONObject();
 
-        try {
+        try
+        {
 
             repairDetails.put("id","13");
             repairDetails.put("company_id","61");
@@ -142,19 +143,20 @@ public class RepairOrder1 extends AppCompatActivity
 //       uname.setText("Hi! "+user.getDisplayName());
         ArrayAdapter<CharSequence> deviceadapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceadapter);
-       final ArrayAdapter<CharSequence> mobile = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
-       final ArrayAdapter<CharSequence> laptop = ArrayAdapter.createFromResource(this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
-        final ArrayAdapter<CharSequence> lnames = ArrayAdapter.createFromResource(this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
+
+
 
         device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0){
-
-                    laptop.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner.setAdapter(laptop);
-                    lnames.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    seriesSearch.setAdapter(lnames);
+                if(position==0)
+                {
+                    ArrayAdapter<CharSequence> brandAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
+                    brandAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinner.setAdapter(brandAdapter);
+                    ArrayAdapter<CharSequence> seriesAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
+                    seriesAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    seriesSearch.setAdapter(seriesAdapter);
                     /*spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                     {
                       @Override
@@ -170,10 +172,11 @@ public class RepairOrder1 extends AppCompatActivity
                         }
                     });*/
                 }
-                else if(position==1){
-                    mobile.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner.setAdapter(mobile);
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                else if(position==1) {
+                            ArrayAdapter<CharSequence> brandAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
+                            brandAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                            spinner.setAdapter(brandAdapter);
+                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                     {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -362,8 +365,8 @@ public class RepairOrder1 extends AppCompatActivity
             }
             seriesNames.removeAll(list2);
             list2.clear();
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(RepairOrder1.this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
-            seriesSearch.setAdapter(adapter);
+            ArrayAdapter<String> seriesAdapter = new ArrayAdapter<String>(RepairOrder1.this, R.layout.support_simple_spinner_dropdown_item, seriesNames);
+            seriesSearch.setAdapter(seriesAdapter);
 
         }
     }

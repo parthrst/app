@@ -18,8 +18,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IssueActivity extends AppCompatActivity {
+public class IssueActivity extends AppCompatActivity
+{
    ListView listView;
+   CheckBox checkBox0,checkBox1,checkBox2,checkBox3,checkBox4,checkBox5,checkBox6,checkBox7;
+
+
+
     String[] type_repair={"Battery Problem",
             "Button Problem",
             "Broken Screen",
@@ -42,6 +47,7 @@ public class IssueActivity extends AppCompatActivity {
         listView=findViewById(R.id.list);
         custom adapter=new custom();
         listView.setAdapter(adapter);
+        listView.getSelectedItemPosition();
 
 
     }
@@ -49,27 +55,33 @@ public class IssueActivity extends AppCompatActivity {
     {
 
         @Override
-        public int getCount() {
+        public int getCount()
+        {
             return  8;
         }
 
         @Override
-        public Object getItem(int position) {
+        public Object getItem(int position)
+        {
             return null;
         }
 
         @Override
-        public long getItemId(int position) {
+        public long getItemId(int position)
+        {
             return 0;
         }
 
         @Override
-        public View getView(int position, View view, ViewGroup parent) {
+        public View getView(int position, View view, ViewGroup parent)
+        {
             view=getLayoutInflater().inflate(R.layout.custom_listview,null);
             CheckBox cb=view.findViewById(R.id.issue);
             TextView es=view.findViewById(R.id.estimate);
             cb.setText(type_repair[position]);
             es.setText(est_price[position]);
+
+
             return view;
         }
     }
