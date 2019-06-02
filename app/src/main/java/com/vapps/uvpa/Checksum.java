@@ -135,41 +135,45 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
 
     @Override
     public void networkNotAvailable()
-    {
+    {      startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void clientAuthenticationFailed(String s)
     {
-
+        startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
+        Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void someUIErrorOccurred(String s)
     {
-        Log.e("checksum ", " ui fail respon  "+ s );
+        startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
+        Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void onErrorLoadingWebPage(int i, String s, String s1)
     {
-        Log.e("checksum ", " "+ s + "  s1 " + s1);
+        //Log.e("checksum ", " "+ s + "  s1 " + s1);
+        startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Error loading pagerespon true", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onBackPressedCancelTransaction()
     {
-
+        startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getApplicationContext(),"Back pressed. Transaction cancelled",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onTransactionCancel(String s, Bundle bundle)
     {
-        Log.e("checksum ", "  transaction cancel " );
+        startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Payment Transaction Failed ", Toast.LENGTH_LONG).show();
     }
 
