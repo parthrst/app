@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:-"
+            android:textSize="20sp"
+            android:fontFamily="@font/avenirheavy"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:id="@+id/id"
+            android:text="10"
+            android:fontFamily="@font/avenirlight"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/brand"
+
+            android:textSize="20sp"
+            android:text="test"
+            android:fontFamily="@font/avenirheavy"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/model"
+            android:text="A2"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/avenirheavy"
+            />
+    </LinearLayout>
+</LinearLayout>

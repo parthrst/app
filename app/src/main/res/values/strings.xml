@@ -44,10 +44,10 @@
         <item>HP</item>
     </string-array>
 
-<string-array name="device">
-    <item>Laptop</item>
-    <item>Mobile</item>
-</string-array>
+    <string-array name="device">
+        <item>Laptop</item>
+        <item>Mobile</item>
+    </string-array>
     <string-array name="laptop_names">
 
         <item>Inspiron</item>

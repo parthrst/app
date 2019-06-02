@@ -61,9 +61,7 @@ public class RepairOrder1 extends AppCompatActivity
     private TextView textViewUsername;
     private TextView uname;
     private IntentIntegrator qrScan;
-    // RecyclerView recyclerView;
-   // RecyclerView.LayoutManager layoutManager;
-     private ProgressBar progressBar;
+    private ProgressBar progressBar;
      private ArrayList<String> list2=new ArrayList<>();
      SharedPreferences sharedPreferences;
      List<String>  seriesNames = new ArrayList<>();
@@ -142,19 +140,26 @@ public class RepairOrder1 extends AppCompatActivity
 //       uname.setText("Hi! "+user.getDisplayName());
         ArrayAdapter<CharSequence> deviceadapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceadapter);
-       final ArrayAdapter<CharSequence> mobile = ArrayAdapter.createFromResource(this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
-       final ArrayAdapter<CharSequence> laptop = ArrayAdapter.createFromResource(this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
-        final ArrayAdapter<CharSequence> lnames = ArrayAdapter.createFromResource(this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
+
+
 
         device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
 
+                    seriesSearch.setAdapter(null);
+                    spinner.setAdapter(null);
+                    ArrayAdapter<CharSequence> laptop = ArrayAdapter.createFromResource(getBaseContext(),R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
+
+                    ArrayAdapter<CharSequence> lnames = ArrayAdapter.createFromResource(getBaseContext(),R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
                     laptop.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     spinner.setAdapter(laptop);
+
                     lnames.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     seriesSearch.setAdapter(lnames);
+                    seriesSearch.setSelection(-1);
+                    spinner.setSelection(-1);
                     /*spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                     {
                       @Override
@@ -171,8 +176,10 @@ public class RepairOrder1 extends AppCompatActivity
                     });*/
                 }
                 else if(position==1){
+                    ArrayAdapter<CharSequence> mobile = ArrayAdapter.createFromResource(getBaseContext(),R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
                     mobile.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     spinner.setAdapter(mobile);
+                    spinner.setSelection(-1);
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                     {
                         @Override
@@ -254,6 +261,9 @@ public class RepairOrder1 extends AppCompatActivity
         else if (id == R.id.nav_manage)
         {
             startActivity(new Intent(RepairOrder1.this,QrGen.class));
+        }
+        else if(id==R.id.bucket){
+            startActivity(new Intent(RepairOrder1.this,Bucket.class));
         }
         else if (id == R.id.nav_share)
         {
