@@ -2,11 +2,8 @@ package com.vapps.uvpa;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,11 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +44,7 @@ import java.util.List;
 public class RepairOrder1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    String d,b,m;
     private Spinner spinner;
     private Spinner laptopSeriesSearch;
     private Spinner device;
@@ -70,33 +64,31 @@ public class RepairOrder1 extends AppCompatActivity
     LinearLayout linearLayout;
     PostOrder postOrder = new PostOrder();
     TextView loadingMsg;
+    ArrayList<String> repair;
 
-    public void OrderRepair(View view)
-    {
-        JSONObject repairDetails = new JSONObject();
-        JSONObject repairHolder = new JSONObject();
+    public void OrderRepair(View view) {
 
-        try {
 
-            repairDetails.put("id","13");
-            repairDetails.put("company_id","61");
-            repairDetails.put("model_id","3T");
-            repairDetails.accumulate("problem_ids","");
-            repairDetails.accumulate("problem_ids","2");
-            repairDetails.accumulate("problem_ids","3");
-            repairDetails.put("other","");
-            repairDetails.put("phone","1");
-            repairHolder.put("repair",repairDetails);
+            repair = new ArrayList<>();
+            JSONObject repairDetails = new JSONObject();
+            JSONObject repairHolder = new JSONObject();
+
+            try {
+
+                repairDetails.put("id", "13");
+                repairDetails.put("company", b);
+                repairDetails.put("model_id", m);
+
+                repairHolder.put("repair", repairDetails);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            postOrder.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null), repairHolder.toString());
+
+            Intent i = new Intent(RepairOrder1.this, IssueActivity.class);
+            i.putExtra("repair", repairHolder.toString());
+            startActivity(i);
         }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        postOrder.execute("http://www.repairbuck.com/repairs.json?auth_token="+sharedPreferences.getString("auth_token",null),repairHolder.toString());
-
-        startActivity(new Intent(RepairOrder1.this,IssueActivity.class));
-
-    }
 
 
     @Override
@@ -153,7 +145,7 @@ public class RepairOrder1 extends AppCompatActivity
                 {
                     laptopSeriesSearch.setVisibility(View.VISIBLE);
                     mobileSeriesSearch.setVisibility(View.GONE);
-
+                    d=parent.getSelectedItem().toString();
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
                     adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     spinner.setAdapter(adapter);
@@ -165,6 +157,7 @@ public class RepairOrder1 extends AppCompatActivity
                             ArrayAdapter<CharSequence> laptopAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
                             laptopAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                             laptopSeriesSearch.setAdapter(laptopAdapter);
+                            b=parent.getSelectedItem().toString();
 
                         }
 
@@ -174,14 +167,24 @@ public class RepairOrder1 extends AppCompatActivity
 
                         }
                     });
+                    laptopSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            m=parent.getSelectedItem().toString();
+                        }
 
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
                 }
 
                 else if(position == 0)
                 {
                     laptopSeriesSearch.setVisibility(View.GONE);
                     mobileSeriesSearch.setVisibility(View.VISIBLE);
-
+                      d=parent.getSelectedItem().toString();
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
                     adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     spinner.setAdapter(adapter);
@@ -190,6 +193,7 @@ public class RepairOrder1 extends AppCompatActivity
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                         {
+                            b=parent.getSelectedItem().toString();
                             ModelLoader modelLoader = new ModelLoader();
                             modelLoader.execute("http://www.repairbuck.com/models/cmodel?name="+parent.getSelectedItem().toString());
                         }
@@ -199,7 +203,17 @@ public class RepairOrder1 extends AppCompatActivity
                             //Another interface callback
                         }
                     });
+                  mobileSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          m=parent.getSelectedItem().toString();
+                      }
 
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+
+                      }
+                  });
                 }
 
             }

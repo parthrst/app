@@ -32,7 +32,7 @@
                 android:title="Share" />
             <item
                 android:id="@+id/about"
-                android:icon="@drawable/ic_about"
+                android:icon="@drawable/iconsabout"
                 android:title="About"
                 />
 

@@ -239,7 +239,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         order.execute("http://www.repairbuck.com/orders.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
-        startActivity(new Intent(MapsActivity.this, BackupPhoneSelection.class));
+        startActivity(new Intent(MapsActivity.this, ConfirnmationActivity.class));
     }
 
 
