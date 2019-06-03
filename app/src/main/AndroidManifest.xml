@@ -82,7 +82,8 @@
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+           />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -134,6 +135,10 @@
             android:label="Choose Your Device"
             android:screenOrientation="portrait"
             android:theme="@style/MyWhiteColorTheme" />
+        <activity
+            android:name=".Checksum"
+            android:screenOrientation="portrait"
+           />
 
         <meta-data
             android:name="instamojo.orderauth.url"

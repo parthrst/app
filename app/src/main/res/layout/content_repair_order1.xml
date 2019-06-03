@@ -37,27 +37,71 @@
             />
     </LinearLayout>
 <LinearLayout
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_centerInParent="true"
     >
-<com.toptoche.searchablespinnerlibrary.SearchableSpinner
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/order_repair_background"
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:textColor="#0d0101"
+        android:lineSpacingExtra="8.24sp"
+        android:gravity="center_horizontal"
+        android:text="Select Gadget:"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="22.5dp"
+        android:layout_marginRight="22.5dp"
+        android:fontFamily="@font/averin"
+
+        />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:id="@+id/device"
-    android:background="@drawable/spinnerbackground"
     android:textSize="21sp"
     android:textColor="#0d0101"
     android:fontFamily="@font/avenirlight"
     app:fontFamily="@font/avenirlight"
     app:hintText="Device"
     />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/order_repair_background"
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="21sp"
+            android:textColor="#0d0101"
+            android:lineSpacingExtra="8.24sp"
+            android:gravity="center_horizontal"
+            android:text="Select Brand:"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22.5dp"
+            android:layout_marginRight="22.5dp"
+            android:fontFamily="@font/averin"
+
+            />
+
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinner_search"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/spinnerbackground"
          android:layout_marginTop="10dp"
         android:textSize="21sp"
         android:textColor="#0d0101"
@@ -66,6 +110,7 @@
         app:fontFamily="@font/avenirlight"
 
         />
+    </LinearLayout>
     <ProgressBar
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -73,10 +118,31 @@
         android:visibility="gone"
         android:id="@+id/progBar"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/order_repair_background"
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="21sp"
+            android:textColor="#0d0101"
+            android:lineSpacingExtra="8.24sp"
+            android:gravity="center_horizontal"
+            android:text="Select Model:"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22.5dp"
+            android:layout_marginRight="22.5dp"
+            android:fontFamily="@font/averin"
+
+            />
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/mobile_spinner_seriesSearch"
         android:layout_width="match_parent"
-        android:background="@drawable/spinnerbackground"
         android:layout_height="50dp"
         android:textSize="21sp"
         android:textColor="#0d0101"
@@ -90,7 +156,6 @@
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/laptop_spinner_seriesSearch"
         android:layout_width="match_parent"
-        android:background="@drawable/spinnerbackground"
         android:layout_height="50dp"
         android:textSize="21sp"
         android:textColor="#0d0101"
@@ -100,7 +165,7 @@
         app:fontFamily="@font/avenirlight"
         android:layout_marginTop="10dp"
         />
-
+    </LinearLayout>
 
 </LinearLayout>
     <Button
