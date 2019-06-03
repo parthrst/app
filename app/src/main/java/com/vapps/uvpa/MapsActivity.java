@@ -114,7 +114,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         linearLayout=findViewById(R.id.progressbar_layout);
         sharedPreference = getSharedPreferences("user_details",MODE_PRIVATE);
 
-        Log.i("VANIK",sharedPreference.getString("id",null));
+       // Log.i("VANIK",sharedPreference.getString("id",null));
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 

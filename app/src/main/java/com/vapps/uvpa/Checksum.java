@@ -2,6 +2,7 @@ package com.vapps.uvpa;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import java.util.Random;
 
 public class Checksum extends AppCompatActivity implements PaytmPaymentTransactionCallback
 {
+    SharedPreferences sharedPreferences;
+    String c;
     String custid="", orderId="", mid="";
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,7 +30,9 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         //initOrderId();
+        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        c=sharedPreferences.getString("counter","0");
         Intent intent = getIntent();
         orderId=initOrderId();
         custid = "vcrkhvehfrihveriaahaivhih";
@@ -121,7 +126,11 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         Log.e("checksum ", " respon true " + bundle.toString());
 
         if(bundle.getString("STATUS").equals("TXN_SUCCESS"))
-        {
+        {  int count=Integer.parseInt(c);
+            count++;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("counter",String.valueOf(count));
+            editor.apply();
             Toast.makeText(getApplicationContext(), "Payment Succesful", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Checksum.this,RepairOrder1.class));
         }

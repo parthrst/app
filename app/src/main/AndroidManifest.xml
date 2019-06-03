@@ -74,6 +74,10 @@
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Checksum"
+            android:screenOrientation="portrait"
+            />
+        <activity
             android:name=".AfterLogin"
             android:screenOrientation="portrait" />
         <activity
@@ -120,6 +124,7 @@
             android:name="com.facebook.CustomTabActivity"
             android:exported="true"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

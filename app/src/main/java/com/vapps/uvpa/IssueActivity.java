@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
@@ -40,25 +41,30 @@ public class IssueActivity extends AppCompatActivity
             "Water Damage",
             "Headphone Jack Issue","Software Issue"};
     String[] est_price={"1500","1000","2500","1500","2000","1750","700","1000"};
-    public void nextActivity(View view)
-    {
-        Intent k= new Intent(IssueActivity.this,BackupPhoneSelection.class);
+    public void nextActivity(View view) {
+        Intent k = new Intent(IssueActivity.this, BackupPhoneSelection.class);
+        if (problemids.size() == 0) {
+            Toast.makeText(this, "Select at least one issue!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
         try {
 
-            String str=i.getStringExtra("repair");
-            jsonObj = new JSONObject(str);
-            for(int j=0;j<problemids.size();j++){
-                jsonObj.accumulate("problems_ids",problemids.get(j));
+                String str = i.getStringExtra("repair");
+                jsonObj = new JSONObject(str);
+                for (int j = 0; j < problemids.size(); j++) {
+                    jsonObj.accumulate("problems_ids", problemids.get(j));
 
+                }
+
+                Log.i("Repair Details", jsonObj.toString());
+            } catch(JSONException e){
+                e.printStackTrace();
             }
+            k.putExtra("param", jsonObj.toString());
+            startActivity(k);
 
-            Log.i("Repair Details",jsonObj.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        k.putExtra("param",jsonObj.toString());
-        startActivity(k);
-
     }
     public void value(View view){
         boolean checked=((CheckBox)view).isChecked();
@@ -170,38 +176,6 @@ public class IssueActivity extends AppCompatActivity
         repairDetails.put("phone","1");*/
 
     }
-    class custom extends BaseAdapter
-    {
-        @Override
-        public int getCount()
-        {
-            return  8;
-        }
 
-        @Override
-        public Object getItem(int position)
-        {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position)
-        {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View view, ViewGroup parent)
-        {
-            view=getLayoutInflater().inflate(R.layout.custom_listview,null);
-            CheckBox cb=view.findViewById(R.id.issue);
-            TextView es=view.findViewById(R.id.estimate);
-            cb.setText(type_repair[position]);
-            es.setText(est_price[position]);
-
-
-            return view;
-        }
-    }
 }
 

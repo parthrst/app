@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ public class BackupPhoneSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup_phone_selection);
         radioGroup=findViewById(R.id.rg);
+        ph="";
 
 
     }
@@ -40,14 +42,21 @@ public class BackupPhoneSelection extends AppCompatActivity {
                 ph="1";
             else if(rb==2131361838)
                 ph="0";
-            jsonObj.put("phone",ph);
-            Log.i("Final",jsonObj.toString());
+            if(ph.equals(""))
+            {
+                Toast.makeText(this,"Please Select one of the options",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                jsonObj.put("phone", ph);
+                Log.i("Final", jsonObj.toString());
+                startActivity(j);
+            }
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
 
-        startActivity(j);
+
     }
 
 
