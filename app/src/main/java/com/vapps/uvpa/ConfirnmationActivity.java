@@ -44,7 +44,7 @@ import android.support.v7.app.AppCompatActivity;
  public void nextActivity(View view)
  {
      startActivity(new Intent(ConfirnmationActivity.this,Checksum.class));
-     finish();
+
  }
 
  }

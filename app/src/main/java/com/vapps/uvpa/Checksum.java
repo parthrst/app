@@ -21,6 +21,7 @@ import java.util.Random;
 public class Checksum extends AppCompatActivity implements PaytmPaymentTransactionCallback
 {
     String custid="", orderId="", mid="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -28,6 +29,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
 //        setContentView(R.layout.activity_main);
         //initOrderId();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         Intent intent = getIntent();
         orderId=initOrderId();
         custid = "vcrkhvehfrihveriaahaivhih";
@@ -60,7 +62,8 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             this.dialog.setMessage("Please wait");
             this.dialog.show();
         }
-        protected String doInBackground(ArrayList<String>... alldata) {
+        protected String doInBackground(ArrayList<String>... alldata)
+        {
             JSONParser jsonParser = new JSONParser(Checksum.this);
             String param=
                     "MID="+mid+
@@ -102,8 +105,8 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             paramMap.put("TXN_AMOUNT", "100");
             paramMap.put("WEBSITE", "WEBSTAGING");
             paramMap.put("CALLBACK_URL" ,varifyurl);
-            //paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
-            // paramMap.put( "MOBILE_NO" , "9144040888");  // no need
+            paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
+            paramMap.put( "MOBILE_NO" , "9410419310");  // no need
             paramMap.put("CHECKSUMHASH" ,CHECKSUMHASH);
             //paramMap.put("PAYMENT_TYPE_ID" ,"CC");    // no need
             paramMap.put("INDUSTRY_TYPE_ID", "Retail");
@@ -111,8 +114,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             Log.e("checksum ", "param "+ paramMap.toString());
             Service.initialize(Order,null);
             // start payment service call here
-            Service.startPaymentTransaction(Checksum.this, true, true,
-                    Checksum.this  );
+            Service.startPaymentTransaction( Checksum.this, true, true, Checksum.this);
         }
     }
 
@@ -124,12 +126,14 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         {
             Toast.makeText(getApplicationContext(), "Payment Succesful", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Checksum.this,RepairOrder1.class));
+            finish();
         }
 
         else
         {
             Toast.makeText(getApplicationContext(), "Payment Failed Try Again! " , Toast.LENGTH_LONG).show();
             startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
+            finish();
         }
     }
 
@@ -137,7 +141,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
     public void networkNotAvailable()
     {      startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
-
+        finish();
     }
 
     @Override
@@ -145,6 +149,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -152,7 +157,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
-
+        finish();
     }
 
     @Override
@@ -161,6 +166,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         //Log.e("checksum ", " "+ s + "  s1 " + s1);
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Error loading pagerespon true", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -168,6 +174,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getApplicationContext(),"Back pressed. Transaction cancelled",Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -175,6 +182,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getBaseContext(), "Payment Transaction Failed ", Toast.LENGTH_LONG).show();
+        finish();
     }
 
 }
