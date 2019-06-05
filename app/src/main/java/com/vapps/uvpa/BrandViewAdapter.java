@@ -38,7 +38,7 @@ public class BrandViewAdapter extends RecyclerView.Adapter<BrandViewHolder>
     public void onBindViewHolder(BrandViewHolder holder, int position)
     {
        holder.textViewBrandName.setText(brandlist.get(position).brandName);
-       holder.imageView.setImageResource(R.drawable.rb1);
+       holder.imageView.setImageResource(R.mipmap.rb1);
 
     }
 

@@ -53,7 +53,6 @@ public class ConfirnmationActivity extends AppCompatActivity
      TextView total;
 
 
-
          @Override
          protected void onCreate(Bundle savedInstanceState) {
              super.onCreate(savedInstanceState);
@@ -77,11 +76,11 @@ public class ConfirnmationActivity extends AppCompatActivity
 
              Log.i("gadget", intentget.getStringExtra("gadget"));
              if (gadget.equals("Mobile")) {
-                 repairUrl = "http://www.repairbuck.com/repairs.json?auth_token=";
-                 orderUrl = "http://www.repairbuck.com/orders.json?auth_token=";
+                 repairUrl = "https://www.repairbuck.com/repairs.json?auth_token=";
+                 orderUrl = "https://www.repairbuck.com/orders.json?auth_token=";
              } else {
-                 repairUrl = "http://www.repairbuck.com/laprepairs.json?auth_token=";
-                 orderUrl = "http://www.repairbuck.com/laporders.json?auth_token=";
+                 repairUrl = "https://www.repairbuck.com/laprepairs.json?auth_token=";
+                 orderUrl = "https://www.repairbuck.com/laporders.json?auth_token=";
              }
 
              getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

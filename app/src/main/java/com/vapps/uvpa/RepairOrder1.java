@@ -239,7 +239,8 @@ public class RepairOrder1 extends AppCompatActivity
         order();
 
     }
-    public void viewOrder(View view){
+    public void viewOrder(View view)
+    {
         startActivity( new Intent(RepairOrder1.this,Bucket.class));
     }
     public void order()
@@ -296,7 +297,7 @@ public class RepairOrder1 extends AppCompatActivity
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             brand =Integer.toString(position+51);
                             ModelLoader modelLoader = new ModelLoader();
-                            modelLoader.execute("http://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
+                            modelLoader.execute("https://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
                         }
 
                         @Override
