@@ -1,17 +1,18 @@
 package com.vapps.uvpa;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,10 +39,16 @@ public class Bucket extends AppCompatActivity {
     ArrayList<String> backupList;
     ArrayList<String> modelList;
     ArrayList<String> brandList;
+    ArrayList<String> totalList;
+    ArrayList<String> addressList;
+    ArrayList<String> mobileList;
+    ArrayList<String> txnStatusList;
     LinearLayout linearLayout;
     TextView loadingMsg;
-    DisplayMetrics metrics;
- int width;
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Bucket.this,RepairOrder1.class));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +59,16 @@ public class Bucket extends AppCompatActivity {
         backupList=new ArrayList<>();
         modelList=new ArrayList<>();
         brandList=new ArrayList<>();
+        txnStatusList=new ArrayList<>();
+        addressList=new ArrayList<>();
+        totalList=new ArrayList<>();
+        mobileList=new ArrayList<>();
         loadingMsg = findViewById(R.id.loading);
         linearLayout=findViewById(R.id.progressbar);
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         String auth=sharedPreferences.getString("auth_token",null);
         Model modelLoader = new Model();
-        modelLoader.execute("http://www.repairbuck.com/repairs.json?auth_token="+auth);
+        modelLoader.execute("http://www.repairbuck.com/mobpayments.json?auth_token="+auth);
 
        /* listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -79,7 +90,7 @@ public class Bucket extends AppCompatActivity {
             }
         });*/
     }
-    public int add(String id,String brand,String model,String problem,String backup ) {
+    public int add(String id,String brand,String model,String problem,String backup,String address,String total,String txnid,String txnstatus ) {
         int groupPosition = 0;
         ArrayList<Header> arrayList;
         Header info = headerList.get(id);
@@ -105,6 +116,10 @@ public class Bucket extends AppCompatActivity {
         {
             detail.setBackupPhone("No");
         }
+        detail.setAddress(address);
+        detail.setTotal(total);
+        detail.setPhoneNo(txnid);
+        detail.setTxnStatus(txnstatus);
         prod.add(detail);
         info.setList(prod);
         groupPosition = details.indexOf(info);
@@ -145,12 +160,17 @@ public class Bucket extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response);
                 for (int i = 0; i < jsonArray.length(); ++i) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String id = jsonObject.getString("id");
-                    String company_id=jsonObject.getString("company_id");
-                    String model_id=jsonObject.getString("model_id");
-                    JSONArray problem =jsonObject.getJSONArray("problem_ids");
+                    String id = jsonObject.getString("repair_id");
+                    String company_id=jsonObject.getString("company_name");
+                    String model_id=jsonObject.getString("model_name");
+                    JSONArray problem =jsonObject.getJSONArray("problem_id");
                     String backup_phone=jsonObject.getString("phone");
+                    String address=jsonObject.getString("room")+","+jsonObject.getString("street")+","+jsonObject.getString("area")+","+jsonObject.getString("city");
+                    String txnstatus=jsonObject.getString("status");
+                    String phoneNo=jsonObject.getString("mobile");
+                    String total=jsonObject.getString("amount");
                     String str="";
+                   Log.i("Repsonse",jsonObject.toString());
                     for(int j=0;j<problem.length();j++) {
                       String code=problem.getString(j);
                       Log.i("problem",code);
@@ -173,39 +193,13 @@ public class Bucket extends AppCompatActivity {
                               break;
                       }
                     }
-                    String company="";
-                    switch (company_id){
-                        case"51":company=company+"SAMSUNG";
-                                 break;
-                        case "52":company=company+"XIAOMI";
-                        break;
-                        case "53":company=company+"MOTOROLA";
-                            break;
-                        case "54":company=company+"OPPO";
-                            break;
-                        case "55":company=company+"VIVO";
-                            break;
-                        case "56":company=company+"MICROMAX";
-                            break;
-                        case "57":company=company+"BLACKBERRY";
-                            break;
-                        case "58":company=company+"HTC";
-                            break;
-                        case "59":company=company+"LG";
-                            break;
-                        case "60":company=company+"SONY";
-                            break;
-                        case "61":company=company+"ONEPLUS";
-                            break;
-                        case "62":company=company+"NOKIA";
-                            break;
-                        case "63":company=company+"GIONEE";
-                            break;
-
-                    }
+                    totalList.add(total);
+                    txnStatusList.add(txnstatus);
+                    addressList.add(address);
+                    mobileList.add(phoneNo);
                     idList.add(id);
                     modelList.add(model_id);
-                    brandList.add(company);
+                    brandList.add(company_id);
                     problemidList.add(str);
                     backupList.add(backup_phone);
                 }
@@ -215,24 +209,16 @@ public class Bucket extends AppCompatActivity {
             }
             for(int i=0;i<idList.size();i++)
             {
-                add(idList.get(i),brandList.get(i),modelList.get(i),problemidList.get(i),backupList.get(i));
+                add(idList.get(i),brandList.get(i),modelList.get(i),problemidList.get(i),backupList.get(i),addressList.get(i),totalList.get(i),mobileList.get(i),txnStatusList.get(i));
             }
 
            adapter = new Dataadapter(Bucket.this, details);
            listView.setAdapter(adapter);
            listView.setVisibility(View.VISIBLE);
-            metrics = new DisplayMetrics();
-            width = metrics.widthPixels;
-           listView.setIndicatorBounds(width-GetDipsFromPixel(3), width-GetDipsFromPixel(5));
+
        }
     }
-    public int GetDipsFromPixel(float pixels)
-    {
-        // Get the screen's density scale
-        final float scale = getResources().getDisplayMetrics().density;
-        // Convert the dps to pixels, based on density scale
-        return (int) (pixels * scale + 0.5f);
-    }
+
     public String getResponse(HttpURLConnection httpURLConnection)
     {
         String result = "";

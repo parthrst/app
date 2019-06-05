@@ -32,25 +32,30 @@ public class BackupPhoneSelection extends AppCompatActivity {
         ph="";
 
     }
-
-
-
+    public void check(View view){
+        int rb=radioGroup.getCheckedRadioButtonId();
+        radioButton=findViewById(rb);
+        if(radioButton.getTag().toString().equals("yes"))
+            ph="1";
+        else if(radioButton.getTag().toString().equals("no"))
+            ph="0";
+    }
     public void nextActivity(View view)
     {
         i=getIntent();
         Intent j=new Intent(BackupPhoneSelection.this,MapsActivity.class);
         JSONObject repairHolder = new JSONObject();
 
-
+        int rb=radioGroup.getCheckedRadioButtonId();
+        radioButton=findViewById(rb);
+        if(radioButton.getTag().toString().equals("yes"))
+            ph="1";
+        else if(radioButton.getTag().toString().equals("no"))
+            ph="0";
         try
         { String str=i.getStringExtra("param");
             jsonObj=new JSONObject(str);
-            int rb=radioGroup.getCheckedRadioButtonId();
-            radioButton=findViewById(rb);
-            if(rb==2131361839)
-                ph="1";
-            else if(rb==2131361838)
-                ph="0";
+
             if(ph.equals(""))
             {
                 Toast.makeText(this,"Please Select one of the options",Toast.LENGTH_SHORT).show();

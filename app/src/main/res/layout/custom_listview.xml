@@ -15,14 +15,6 @@
         android:textSize="22sp"
         android:id="@+id/issue"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="30dp"
-        android:fontFamily="@font/avenirlight"
-        android:textSize="18sp"
-        android:id="@+id/estimate"
-        />
+
 
 </LinearLayout>

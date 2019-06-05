@@ -88,10 +88,18 @@ public class Dataadapter extends BaseExpandableListAdapter {
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.body_layout ,null);
         }
+        TextView total=convertView.findViewById(R.id.total);
+        TextView txnId=convertView.findViewById(R.id.txnid);
+        TextView address=convertView.findViewById(R.id.address);
+        TextView txnStatus=convertView.findViewById(R.id.txnstatus);
         TextView problem=convertView.findViewById(R.id.problem);
         TextView backup=convertView.findViewById(R.id.backup);
+        total.setText(details.getTotal().trim());
+        txnId.setText(details.getPhoneNo().trim());
+        txnStatus.setText(details.getTxnStatus().trim());
         problem.setText(details.getProblemids().trim());
         backup.setText(details.getBackupPhone().trim());
+        address.setText(details.getAddress().trim());
 
         return convertView;
     }

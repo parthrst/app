@@ -84,6 +84,8 @@
                android:layout_marginLeft="22.5dp"
                android:layout_marginRight="22.5dp"
                android:fontFamily="@font/averin"
+               android:onClick="check"
+               android:tag="yes"
                 />
             <RadioButton android:id="@+id/backup_no"
                 android:layout_width="wrap_content"
@@ -95,6 +97,8 @@
                 android:layout_marginLeft="22.5dp"
                 android:layout_marginRight="22.5dp"
                 android:fontFamily="@font/averin"
+                android:onClick="check"
+                android:tag="no"
                 />
         </RadioGroup>
 

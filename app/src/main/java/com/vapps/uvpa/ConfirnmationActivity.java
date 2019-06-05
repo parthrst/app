@@ -38,15 +38,38 @@ public class ConfirnmationActivity extends AppCompatActivity
      JSONObject orderHolder;
      String repairUrl;
      String orderUrl;
+     String baseprice;
+     TextView  address;
+     TextView baseamount;
+     TextView backup;
+     TextView issue;
+     TextView brand;
+     TextView model;
+     TextView total;
+
+
 
          @Override
          protected void onCreate(Bundle savedInstanceState) {
              super.onCreate(savedInstanceState);
              setContentView(R.layout.activity_confirnmation);
              intentget = getIntent();
+             brand=findViewById(R.id.brand_disp);
+             model=findViewById(R.id.model_disp);
+             issue=findViewById(R.id.issue_disp);
+             baseamount=findViewById(R.id.basic_charge);
+             backup=findViewById(R.id.backup_price);
+             total=findViewById(R.id.total_disp);
+             address=findViewById(R.id.address_disp);
+
              String str = intentget.getStringExtra("confirm");
              String location = intentget.getStringExtra("location");
              String gadget = intentget.getStringExtra("gadget");
+             if(gadget.equals("Mobile"))
+                 baseprice="150";
+             else
+                 baseprice="250";
+
              Log.i("gadget", intentget.getStringExtra("gadget"));
              if (gadget.equals("Mobile")) {
                  repairUrl = "http://www.repairbuck.com/repairs.json?auth_token=";

@@ -34,10 +34,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".About"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-
-        </activity>
+        <activity android:name=".Forgotpassword"></activity>
+        <activity
+            android:name=".About"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
         <activity
             android:name=".Bucket"
             android:label="Your Orders"
@@ -75,8 +75,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Checksum"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AfterLogin"
             android:screenOrientation="portrait" />
@@ -86,8 +85,7 @@
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"
-            android:screenOrientation="portrait"
-           />
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -112,6 +110,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:windowSoftInputMode="stateHidden" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -125,7 +124,6 @@
             android:name="com.facebook.CustomTabActivity"
             android:exported="true"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -139,8 +137,7 @@
             android:name=".RepairOrder1"
             android:label="Choose Your Device"
             android:screenOrientation="portrait"
-            android:theme="@style/MyWhiteColorTheme"
-            />
+            android:theme="@style/MyWhiteColorTheme" />
 
         <meta-data
             android:name="instamojo.orderauth.url"
