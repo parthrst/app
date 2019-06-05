@@ -241,6 +241,12 @@ public class ConfirnmationActivity extends AppCompatActivity
              try {
                  JSONObject jsonResponse = new JSONObject(response);
                  Log.i("VANIK",jsonResponse.toString());
+                 SharedPreferences.Editor editor = sharedPreferences.edit();
+                 JSONObject jsonObject = new JSONObject(response);
+                 String orderid = "";
+                 orderid = jsonObject.getString("id");
+                 editor.putString("order_id",orderid);
+                 editor.apply();
 
              } catch (JSONException e) {
                  e.printStackTrace();

@@ -2,6 +2,7 @@ package com.vapps.uvpa;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,7 @@ import java.util.Random;
 public class Checksum extends AppCompatActivity implements PaytmPaymentTransactionCallback
 {
     String custid="", orderId="", mid="";
-
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,6 +46,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         mid = "OiEieg61305100527529";  /// your marchant key
         sendUserDetailTOServerdd dl = new sendUserDetailTOServerdd();
         dl.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
 // vollye , retrofit, asynch
     }
 
@@ -148,23 +150,21 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         JSONObject orderDetails = new JSONObject();
         JSONObject orderHolder = new JSONObject();
 
-      ///  try {
-///
-      ///       orderDetails.put("id","13");
-///
-      ///      orderDetails.put("user_id",sharedPreferences.getString("id",null));
-      ///      orderDetails.put("r",hno.getText().toString());
-      ///      orderDetails.put("street",landmark.getText().toString());
-      ///      orderDetails.put("area","Urrapakkam");
-      ///      orderDetails.put("city",city);
-      ///      orderHolder.put("order",orderDetails);
-      ///  }
-      ///  catch (JSONException e)
-      ///  {
-      ///      e.printStackTrace();
-      ///  }
-///
-      /// payment.execute("http://www.repairbuck.com/orders.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
+       try {
+           // orderDetails.put("user_id","13");
+           orderDetails.put("user_id",sharedPreferences.getString("user_id",null));
+          // orderDetails.put("r",hno.getText().toString());
+          // orderDetails.put("street",landmark.getText().toString());
+          // orderDetails.put("area","Urrapakkam");
+           //orderDetails.put("city",city);
+          // orderHolder.put("order",orderDetails);
+       }
+       catch (JSONException e)
+       {
+           e.printStackTrace();
+       }
+
+       payment.execute("http://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
     }
 
     @Override
@@ -230,10 +230,10 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
                 String result;
                 URL url = new URL(params[0]);
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-                connection.addRequestProperty("Accept","application/json");
+                //connection.addRequestProperty("Accept","application/json");
                 connection.addRequestProperty("Content-Type","application/json");
                 connection.setRequestMethod("POST");
-                connection.setDoOutput(true);
+               // connection.setDoOutput(true);
                 connection.connect();
                 DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
                 outputStream.writeBytes(params[1]);

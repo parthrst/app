@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity
                         {
                            Toast.makeText(getApplicationContext(),"Login successful!",Toast.LENGTH_SHORT);
                             JSONObject jsonUser = jsonResponse.getJSONObject("data");
+                            String userid = jsonUser.getString("id");
                             String username = jsonUser.getString("name");
                             String email = jsonUser.getString("email");
                             String token = jsonUser.getString("auth_token");
@@ -149,6 +150,7 @@ public class LoginActivity extends AppCompatActivity
                             editor.putString("email",email);
                             editor.putString("phone",phone);
                             editor.putString("auth_token",token);
+                            editor.putString("user_id",userid);
                             editor.apply();
                             startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
                             finish();
