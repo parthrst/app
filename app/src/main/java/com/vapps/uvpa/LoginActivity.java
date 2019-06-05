@@ -127,9 +127,9 @@ public class LoginActivity extends AppCompatActivity
             linearLayout.setVisibility(View.INVISIBLE);
             if (response != null)
             {
-                if(response == "401")
+                if(response.equals("401"))
                 {
-                    Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please verify your email first! " , Toast.LENGTH_SHORT).show();
                 }
                 else {
                     try

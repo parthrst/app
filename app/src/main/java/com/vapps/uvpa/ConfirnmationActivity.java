@@ -40,45 +40,35 @@ public class ConfirnmationActivity extends AppCompatActivity
      String orderUrl;
 
          @Override
-         protected void onCreate(Bundle savedInstanceState)
-         {
-         super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_confirnmation);
-             intentget=getIntent();
-             String str=intentget.getStringExtra("confirm");
+         protected void onCreate(Bundle savedInstanceState) {
+             super.onCreate(savedInstanceState);
+             setContentView(R.layout.activity_confirnmation);
+             intentget = getIntent();
+             String str = intentget.getStringExtra("confirm");
              String location = intentget.getStringExtra("location");
-            String gadget = intentget.getStringExtra("gadget");
-             Log.i("gadget",intentget.getStringExtra("gadget"));
-            if (gadget.equals("Mobile"))
-            {
-                repairUrl="http://www.repairbuck.com/repairs.json?auth_token=";
-                orderUrl="http://www.repairbuck.com/orders.json?auth_token=";
-            }
-            else
-            {
-                repairUrl="http://www.repairbuck.com/laprepairs.json?auth_token=";
-                orderUrl="http://www.repairbuck.com/laporders.json?auth_token=";
-            }
-             Log.i("orderc",str);
+             String gadget = intentget.getStringExtra("gadget");
+             Log.i("gadget", intentget.getStringExtra("gadget"));
+             if (gadget.equals("Mobile")) {
+                 repairUrl = "http://www.repairbuck.com/repairs.json?auth_token=";
+                 orderUrl = "http://www.repairbuck.com/orders.json?auth_token=";
+             } else {
+                 repairUrl = "http://www.repairbuck.com/laprepairs.json?auth_token=";
+                 orderUrl = "http://www.repairbuck.com/laporders.json?auth_token=";
+             }
+             Log.i("orderc", str);
              getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-             sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
-             postOrder = new  PostOrder();
-             linearLayout=findViewById(R.id.progressbar_layout);
+             sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
+             postOrder = new PostOrder();
+             linearLayout = findViewById(R.id.progressbar_layout);
              loadingMsg = findViewById(R.id.loading_msg);
              try {
-                 jsonObj=new JSONObject(str);
+                 jsonObj = new JSONObject(str);
                  orderHolder = new JSONObject(location);
-                 Log.i("orderc",jsonObj.toString());
-             } catch (JSONException e)
-             {
+                 Log.i("orderc", jsonObj.toString());
+             } catch (JSONException e) {
                  e.printStackTrace();
              }
-             if (ContextCompat.checkSelfPermission(ConfirnmationActivity.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)
-         {
-             ActivityCompat.requestPermissions(ConfirnmationActivity.this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, 101);
-
          }
-     }
 
 PostOrder postLocation = new PostOrder();
 

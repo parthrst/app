@@ -166,8 +166,13 @@ public class SignUp extends AppCompatActivity {
                         String success = jsonResponse.getString("success");
                         if (success.equals("true"))
                         {
+                            Toast.makeText(getApplicationContext(), "Sign Up Successful! Please verify your email to login ", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignUp.this,LoginActivity.class));
                             finish();
+                        }
+                        else
+                        {
+                            Toast.makeText(SignUp.this, "Check Your Credentials and Try Again", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

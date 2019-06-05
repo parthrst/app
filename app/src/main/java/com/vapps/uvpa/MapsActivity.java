@@ -161,8 +161,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
         sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
-        hno = findViewById(R.id.hno);
-        landmark = findViewById(R.id.lndmrk);
+
 
     }
 
@@ -241,8 +240,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         try {
 
             // orderDetails.put("id","13");
-
-            orderDetails.put("repair_id", sharedPreferences.getString("id", null));
+            hno = findViewById(R.id.hno);
+            landmark = findViewById(R.id.lndmrk);
+            orderDetails.put("repair_id", "230");
             orderDetails.put("room", hno.getText().toString());
             orderDetails.put("street", landmark.getText().toString());
             orderDetails.put("area", area);
