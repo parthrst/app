@@ -327,7 +327,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBlack"
-        android:text="CONTINUE"
+        android:text="Proceed to Pay"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/avenirheavy"
         android:textSize="22.8sp"

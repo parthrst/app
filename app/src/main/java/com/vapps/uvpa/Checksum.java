@@ -2,11 +2,11 @@ package com.vapps.uvpa;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -15,24 +15,30 @@ import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Checksum extends AppCompatActivity implements PaytmPaymentTransactionCallback
 {
-    SharedPreferences sharedPreferences;
-    String c;
     String custid="", orderId="", mid="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         //initOrderId();
-        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        c=sharedPreferences.getString("counter","0");
+
         Intent intent = getIntent();
         orderId=initOrderId();
         custid = "vcrkhvehfrihveriaahaivhih";
@@ -65,7 +71,8 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             this.dialog.setMessage("Please wait");
             this.dialog.show();
         }
-        protected String doInBackground(ArrayList<String>... alldata) {
+        protected String doInBackground(ArrayList<String>... alldata)
+        {
             JSONParser jsonParser = new JSONParser(Checksum.this);
             String param=
                     "MID="+mid+
@@ -107,8 +114,8 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             paramMap.put("TXN_AMOUNT", "100");
             paramMap.put("WEBSITE", "WEBSTAGING");
             paramMap.put("CALLBACK_URL" ,varifyurl);
-            //paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
-            // paramMap.put( "MOBILE_NO" , "9144040888");  // no need
+           // paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
+            //paramMap.put( "MOBILE_NO" , "9410419310");  // no need
             paramMap.put("CHECKSUMHASH" ,CHECKSUMHASH);
             //paramMap.put("PAYMENT_TYPE_ID" ,"CC");    // no need
             paramMap.put("INDUSTRY_TYPE_ID", "Retail");
@@ -116,52 +123,71 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             Log.e("checksum ", "param "+ paramMap.toString());
             Service.initialize(Order,null);
             // start payment service call here
-            Service.startPaymentTransaction(Checksum.this, true, true,
-                    Checksum.this  );
+            Service.startPaymentTransaction( Checksum.this, true, true, Checksum.this);
         }
     }
-
+    Payment payment = new Payment();
     @Override
-    public void onTransactionResponse(Bundle bundle) {
-        Log.e("checksum ", " respon true " + bundle.toString());
+    public void onTransactionResponse(Bundle bundle)
+    {
+        Log.e("checksum", " respon true " + bundle.toString());
 
         if(bundle.getString("STATUS").equals("TXN_SUCCESS"))
-        {  int count=Integer.parseInt(c);
-            count++;
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("counter",String.valueOf(count));
-            editor.apply();
+        {
             Toast.makeText(getApplicationContext(), "Payment Succesful", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Checksum.this,RepairOrder1.class));
+            finish();
         }
 
         else
         {
             Toast.makeText(getApplicationContext(), "Payment Failed Try Again! " , Toast.LENGTH_LONG).show();
             startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
+            finish();
         }
+        JSONObject orderDetails = new JSONObject();
+        JSONObject orderHolder = new JSONObject();
+
+      ///  try {
+///
+      ///       orderDetails.put("id","13");
+///
+      ///      orderDetails.put("user_id",sharedPreferences.getString("id",null));
+      ///      orderDetails.put("r",hno.getText().toString());
+      ///      orderDetails.put("street",landmark.getText().toString());
+      ///      orderDetails.put("area","Urrapakkam");
+      ///      orderDetails.put("city",city);
+      ///      orderHolder.put("order",orderDetails);
+      ///  }
+      ///  catch (JSONException e)
+      ///  {
+      ///      e.printStackTrace();
+      ///  }
+///
+      /// payment.execute("http://www.repairbuck.com/orders.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
     }
 
     @Override
     public void networkNotAvailable()
     {      startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
-        Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getApplicationContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
     public void clientAuthenticationFailed(String s)
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
-        Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
     public void someUIErrorOccurred(String s)
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
-        Toast.makeText(getBaseContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getApplicationContext(), "Check your Internet Connection and Try Again!", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -169,7 +195,8 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
     {
         //Log.e("checksum ", " "+ s + "  s1 " + s1);
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
-        Toast.makeText(getBaseContext(), "Error loading pagerespon true", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Error loading pagerespon true", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -177,13 +204,93 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
         Toast.makeText(getApplicationContext(),"Back pressed. Transaction cancelled",Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
     public void onTransactionCancel(String s, Bundle bundle)
     {
         startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
-        Toast.makeText(getBaseContext(), "Payment Transaction Failed ", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Payment Transaction Failed ", Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    class Payment extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // loadingMsg.setText("Loading");
+            //linearLayout.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String result;
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+                connection.addRequestProperty("Accept","application/json");
+                connection.addRequestProperty("Content-Type","application/json");
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                connection.connect();
+                DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
+                outputStream.writeBytes(params[1]);
+                Log.i("VANIK",params[1]);
+                result = getResponse(connection);
+                Log.i("VANIK",result);
+                return result;
+
+            }
+            catch (MalformedURLException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String response)
+        {
+
+           // linearLayout.setVisibility(View.INVISIBLE);
+            super.onPostExecute(response);
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                Log.i("VANIK",jsonResponse.toString());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //Log.i("RESPONSE",response);
+        }
+    }
+
+    public String getResponse(HttpURLConnection httpURLConnection)
+    {
+        String result = "";
+        try {
+            InputStream inputStream = httpURLConnection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            int data = inputStreamReader.read();
+            while(data!= -1 )
+            { result += (char)data;
+                data = inputStreamReader.read();
+            }
+            return result;
+        }
+        catch(Exception e)
+        { return e.getMessage();
+        }
     }
 
 }
+
+

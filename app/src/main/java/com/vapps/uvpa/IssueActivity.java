@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -33,35 +34,40 @@ public class IssueActivity extends AppCompatActivity
    JSONObject jsonObj;
    ArrayList<String> problemids;
 
-    String[] type_repair={"Battery Problem",
+    String[] type_repair=
+            {"Battery Problem",
             "Button Problem",
             "Broken Screen",
             "Charging Problem",
             "Camera Problem",
             "Water Damage",
             "Headphone Jack Issue","Software Issue"};
+
     String[] est_price={"1500","1000","2500","1500","2000","1750","700","1000"};
     public void nextActivity(View view) {
         Intent k = new Intent(IssueActivity.this, BackupPhoneSelection.class);
-        if (problemids.size() == 0) {
+        if (problemids.size() == 0)
+        {
             Toast.makeText(this, "Select at least one issue!", Toast.LENGTH_SHORT).show();
         }
         else
         {
         try {
-
-                String str = i.getStringExtra("repair");
-                jsonObj = new JSONObject(str);
-                for (int j = 0; j < problemids.size(); j++) {
-                    jsonObj.accumulate("problems_ids", problemids.get(j));
-
-                }
-
+            String str = i.getStringExtra("repair");
+            jsonObj = new JSONObject(str);
+            for (int j = 0; j < problemids.size(); j++)
+            {
+                jsonObj.accumulate("problem_ids", problemids.get(j));
+              //  jsonObj.put("problem_ids", problemids);
                 Log.i("Repair Details", jsonObj.toString());
-            } catch(JSONException e){
+            }
+            } catch(JSONException e)
+        {
                 e.printStackTrace();
             }
             k.putExtra("param", jsonObj.toString());
+            k.putExtra("gadget",i.getStringExtra("gadget"));
+            Log.i("gadget",i.getStringExtra("gadget"));
             startActivity(k);
 
         }

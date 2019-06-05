@@ -62,8 +62,8 @@ public class RepairOrder1 extends AppCompatActivity
     List<String>  seriesNames = new ArrayList<>();
     private  FirebaseDatabase firebaseDatabase =  FirebaseDatabase.getInstance();
     private  DatabaseReference mDatabase = firebaseDatabase.getReference();
+
     LinearLayout linearLayout;
-    PostOrder postOrder = new PostOrder();
     TextView loadingMsg;
     ArrayList<String> repair;
     Button place;
@@ -76,24 +76,29 @@ public class RepairOrder1 extends AppCompatActivity
         } else {
             repair = new ArrayList<>();
             JSONObject repairDetails = new JSONObject();
-            JSONObject repairHolder = new JSONObject();
+           // JSONObject repairHolder = new JSONObject();
 
             try {
 
-                repairDetails.put("id", "13");
-                repairDetails.put("company", brand);
+              //  repairDetails.put("id", "13");
+                repairDetails.put("company_id", brand);
                 repairDetails.put("model_id", model);
 
-                repairHolder.put("repair", repairDetails);
+               // repairHolder.put("repairs", repairDetails);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             //postOrder.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null), repairHolder.toString());
 
-            Intent i = new Intent(RepairOrder1.this, IssueActivity.class);
-            i.putExtra("repair", repairHolder.toString());
-            //Log.i("test","Hello");
-            startActivity(i);
+
+            Intent intent = new Intent(RepairOrder1.this, IssueActivity.class);
+            intent.putExtra("repair", repairDetails.toString());
+            intent.putExtra("gadget",gadget);
+            Log.i("gadget",gadget);
+            startActivity(intent);
+
+
+
         }
     }
 
@@ -104,7 +109,7 @@ public class RepairOrder1 extends AppCompatActivity
         setContentView(R.layout.activity_repair_order1);
 
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
-        Repair rep=new Repair();
+        Repair repair=new Repair();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -145,7 +150,8 @@ public class RepairOrder1 extends AppCompatActivity
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
-        rep.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null));
+        repair.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null));
+
 
 
     }
@@ -255,7 +261,7 @@ public class RepairOrder1 extends AppCompatActivity
                             ArrayAdapter<CharSequence> laptopAdapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.laptop_names, R.layout.support_simple_spinner_dropdown_item);
                             laptopAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                             laptopSeriesSearch.setAdapter(laptopAdapter);
-                            brand = parent.getSelectedItem().toString();
+                            brand =Integer.toString(position);
 
                         }
 
@@ -285,7 +291,7 @@ public class RepairOrder1 extends AppCompatActivity
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            brand = parent.getSelectedItem().toString();
+                            brand =Integer.toString(position+51);
                             ModelLoader modelLoader = new ModelLoader();
                             modelLoader.execute("http://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
                         }
@@ -364,7 +370,8 @@ public class RepairOrder1 extends AppCompatActivity
                     String series = jsonObject.getString("name");
                     seriesNames.add(series);
                 }
-            } catch (JSONException e) {
+            } catch (JSONException e)
+            {
                 e.printStackTrace();
             }
             seriesNames.removeAll(list2);
@@ -442,68 +449,7 @@ public class RepairOrder1 extends AppCompatActivity
         }
     }
 
-    class PostOrder extends AsyncTask<String, Void, String>
-    {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loadingMsg.setText("Loading");
-            linearLayout.setVisibility(View.VISIBLE);
-        }
 
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                String result;
-                URL url = new URL(params[0]);
-                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-                //connection.addRequestProperty("Accept","application/json");
-                connection.addRequestProperty("Content-Type","application/json");
-                connection.setRequestMethod("POST");
-                //  connection.setDoOutput(true);
-                connection.connect();
-                DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
-                outputStream.writeBytes(params[1]);
-                Log.i("VANIK",params[1]);
-                result = getResponse(connection);
-                Log.i("VANIK",result);
-                return result;
-
-            }
-            catch (MalformedURLException e)
-            {
-                e.printStackTrace();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String response)
-        {
-
-            linearLayout.setVisibility(View.INVISIBLE);
-            super.onPostExecute(response);
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
-
-                String id = jsonResponse.getString("id");
-                Log.i("VANIK",id);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("id",id);
-                editor.apply();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            //Log.i("RESPONSE",response);
-        }
-    }
 
     public String getResponse(HttpURLConnection httpURLConnection)
     {
@@ -519,7 +465,8 @@ public class RepairOrder1 extends AppCompatActivity
             return result;
         }
         catch(Exception e)
-        { return e.getMessage();
+        {
+            return e.getMessage();
         }
     }
 }
