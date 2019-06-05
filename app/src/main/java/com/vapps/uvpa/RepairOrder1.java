@@ -239,7 +239,8 @@ public class RepairOrder1 extends AppCompatActivity
         order();
 
     }
-    public void viewOrder(View view){
+    public void viewOrder(View view)
+    {
         startActivity( new Intent(RepairOrder1.this,Bucket.class));
     }
     public void order()

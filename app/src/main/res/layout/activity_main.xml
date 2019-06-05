@@ -14,9 +14,10 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="30dp"
         android:id="@+id/logo"
         android:layout_centerInParent="true"
-        android:src="@drawable/rb1"
+        android:src="@mipmap/rb1"
 
        />
 
