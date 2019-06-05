@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.gson.JsonObject;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,17 +37,19 @@ public class ConfirnmationActivity extends AppCompatActivity
      SharedPreferences sharedPreferences;
      Intent intentget;
      JSONObject jsonObj;
+
      JSONObject orderHolder;
      String repairUrl;
      String orderUrl;
+     String location;
 
-         @Override
+     @Override
          protected void onCreate(Bundle savedInstanceState) {
              super.onCreate(savedInstanceState);
              setContentView(R.layout.activity_confirnmation);
              intentget = getIntent();
              String str = intentget.getStringExtra("confirm");
-             String location = intentget.getStringExtra("location");
+              location = intentget.getStringExtra("location");
              String gadget = intentget.getStringExtra("gadget");
              Log.i("gadget", intentget.getStringExtra("gadget"));
              if (gadget.equals("Mobile")) {
@@ -55,28 +59,28 @@ public class ConfirnmationActivity extends AppCompatActivity
                  repairUrl = "http://www.repairbuck.com/laprepairs.json?auth_token=";
                  orderUrl = "http://www.repairbuck.com/laporders.json?auth_token=";
              }
-             Log.i("orderc", str);
+
              getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
              sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
              postOrder = new PostOrder();
              linearLayout = findViewById(R.id.progressbar_layout);
              loadingMsg = findViewById(R.id.loading_msg);
+
              try {
                  jsonObj = new JSONObject(str);
-                 orderHolder = new JSONObject(location);
-                 Log.i("orderc", jsonObj.toString());
              } catch (JSONException e) {
                  e.printStackTrace();
              }
+
          }
 
-PostOrder postLocation = new PostOrder();
+  Order postLocation = new Order();
 
 
  public void nextActivity(View view)
  {
      postOrder.execute(repairUrl + sharedPreferences.getString("auth_token", null), jsonObj.toString());
-     postLocation.execute(orderUrl+sharedPreferences.getString("auth_token",null),orderHolder.toString());
+
      startActivity(new Intent(ConfirnmationActivity.this,Checksum.class));
 
  }
@@ -84,7 +88,7 @@ PostOrder postLocation = new PostOrder();
 
 
      class PostOrder extends AsyncTask<String, Void, String>
-     {
+     {URL url;
          @Override
          protected void onPreExecute() {
              super.onPreExecute();
@@ -96,7 +100,7 @@ PostOrder postLocation = new PostOrder();
          protected String doInBackground(String... params) {
              try {
                  String result;
-                 URL url = new URL(params[0]);
+                 url = new URL(params[0]);
                  HttpURLConnection connection = (HttpURLConnection)url.openConnection();
                //  connection.addRequestProperty("Accept","application/json");
                  connection.addRequestProperty("Content-Type","application/json");
@@ -108,6 +112,7 @@ PostOrder postLocation = new PostOrder();
                  Log.i("VANIK",params[1]);
                  result = getResponse(connection);
                  Log.i("VANIK",result);
+
                  return result;
 
              }
@@ -129,16 +134,33 @@ PostOrder postLocation = new PostOrder();
 
         //     linearLayout.setVisibility(View.INVISIBLE);
              super.onPostExecute(response);
-             try {
-                 JSONObject jsonResponse = new JSONObject(response);
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
 
-                 String id = jsonResponse.getString("id");
-                 Log.i("VANIK",id);
-                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                 editor.putString("id",id);
-                 editor.apply();
+                String id = jsonResponse.getString("id");
+                Log.i("VANIK", id);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("id", id);
+                editor.apply();
 
-             }
+
+                JSONObject dets = new JSONObject(location);
+                Log.i("VANIK",dets.toString());
+                JSONObject orderDetails = new JSONObject();
+                orderDetails.put("repair_id", sharedPreferences.getString("id", null));
+                orderDetails.put("room", dets.getString("room"));
+                orderDetails.put("street", dets.getString("street"));
+                orderDetails.put("area", dets.getString("area"));
+                orderDetails.put("city", dets.getString("city"));
+                Log.i("VANIK1", orderDetails.toString());
+                orderHolder = new JSONObject();
+                orderHolder.put("order", orderDetails);
+                Log.i("VANIK1", orderHolder.toString());
+                postLocation.execute(orderUrl + sharedPreferences.getString("auth_token", null), orderHolder.toString());
+
+
+            }
+
              catch (JSONException e)
              {
                  e.printStackTrace();
@@ -168,6 +190,65 @@ PostOrder postLocation = new PostOrder();
      }
 
 
+
+
+     class Order extends AsyncTask<String, Void, String>
+     {
+         @Override
+         protected void onPreExecute() {
+             super.onPreExecute();
+             // loadingMsg.setText("Loading");
+             //linearLayout.setVisibility(View.VISIBLE);
+         }
+
+         @Override
+         protected String doInBackground(String... params) {
+             try {
+                 String result;
+                 URL url = new URL(params[0]);
+                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+                 //connection.addRequestProperty("Accept","application/json");
+                 connection.addRequestProperty("Content-Type","application/json");
+                 connection.setRequestMethod("POST");
+                 //  connection.setDoOutput(true);
+                 connection.connect();
+                 DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
+                 outputStream.writeBytes(params[1]);
+                 Log.i("VANIK",params[1]);
+                 result = getResponse(connection);
+                 Log.i("VANIK",result);
+                 return result;
+
+             }
+             catch (MalformedURLException e)
+             {
+                 e.printStackTrace();
+             }
+             catch (IOException e)
+             {
+                 e.printStackTrace();
+             }
+
+             return null;
+         }
+
+         @Override
+         protected void onPostExecute(String response)
+         {
+
+             //linearLayout.setVisibility(View.INVISIBLE);
+             super.onPostExecute(response);
+             try {
+                 JSONObject jsonResponse = new JSONObject(response);
+                 Log.i("VANIK",jsonResponse.toString());
+
+             } catch (JSONException e) {
+                 e.printStackTrace();
+             }
+
+             //Log.i("RESPONSE",response);
+         }
+     }
 
 
 

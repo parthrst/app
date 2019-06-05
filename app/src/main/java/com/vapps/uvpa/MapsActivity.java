@@ -235,26 +235,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void nextActivity(View view) {
         JSONObject orderDetails = new JSONObject();
-        JSONObject orderHolder = new JSONObject();
+
 
         try {
 
             // orderDetails.put("id","13");
             hno = findViewById(R.id.hno);
             landmark = findViewById(R.id.lndmrk);
-            orderDetails.put("repair_id", "230");
+            //orderDetails.put("repair_id", "230");
             orderDetails.put("room", hno.getText().toString());
             orderDetails.put("street", landmark.getText().toString());
             orderDetails.put("area", area);
             orderDetails.put("city", city);
-            orderHolder.put("order", orderDetails);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         // order.execute("http://www.repairbuck.com/orders.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
         //startActivity(new Intent(MapsActivity.this, ConfirnmationActivity.class));
-        j.putExtra("location", orderHolder.toString());
+        j.putExtra("location", orderDetails.toString());
         j.putExtra("gadget",intentget.getStringExtra("gadget"));
        // Log.i("order",  intentget.getStringExtra("gadget").toS);
         Log.i("gadget",intentget.getStringExtra("gadget"));
