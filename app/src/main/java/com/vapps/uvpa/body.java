@@ -1,23 +1,23 @@
 package com.vapps.uvpa;
 
 public class body {
-    public String address;
-    public String status;
+    public String problemids;
+    public String backupPhone;
 //    public String total;
-public String getStatus() {
-    return status;
+public String getBackupPhone() {
+    return backupPhone;
 }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setBackupPhone(String status) {
+        this.backupPhone = status;
     }
 
-    public String getAddress() {
-        return address;
+    public String getProblemids() {
+        return problemids;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setProblemids(String address) {
+        this.problemids = address;
     }
 /*
 

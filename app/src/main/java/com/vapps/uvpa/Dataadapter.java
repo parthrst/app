@@ -69,12 +69,13 @@ public class Dataadapter extends BaseExpandableListAdapter {
             convertView=inflater.inflate(R.layout.header_layout,null);
 
         }
+
         TextView model=convertView.findViewById(R.id.model);
         TextView brand=convertView.findViewById(R.id.brand);
         TextView id=convertView.findViewById(R.id.id);
-        //model.setText(headerinfo.getModel().trim());
+        model.setText(headerinfo.getModel().trim());
         id.setText(headerinfo.getId().trim());
-        //brand.setText(headerinfo.getBrand().trim());
+        brand.setText(headerinfo.getBrand().trim());
         return convertView;
     }
 
@@ -87,12 +88,10 @@ public class Dataadapter extends BaseExpandableListAdapter {
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.body_layout ,null);
         }
-        TextView address=convertView.findViewById(R.id.address);
-        TextView status=convertView.findViewById(R.id.status);
-        TextView total=convertView.findViewById(R.id.total);
-      // address.setText(details.getAddress().trim());
-       status.setText(details.getStatus().trim());
-        //total.setText(details.getTotal().trim());
+        TextView problem=convertView.findViewById(R.id.problem);
+        TextView backup=convertView.findViewById(R.id.backup);
+        problem.setText(details.getProblemids().trim());
+        backup.setText(details.getBackupPhone().trim());
 
         return convertView;
     }
