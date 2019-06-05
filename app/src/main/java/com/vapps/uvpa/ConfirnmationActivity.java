@@ -42,7 +42,7 @@ public class ConfirnmationActivity extends AppCompatActivity
      String repairUrl;
      String orderUrl;
      String location;
-
+     String gadget;
      @Override
          protected void onCreate(Bundle savedInstanceState) {
              super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class ConfirnmationActivity extends AppCompatActivity
              intentget = getIntent();
              String str = intentget.getStringExtra("confirm");
               location = intentget.getStringExtra("location");
-             String gadget = intentget.getStringExtra("gadget");
+              gadget = intentget.getStringExtra("gadget");
              Log.i("gadget", intentget.getStringExtra("gadget"));
              if (gadget.equals("Mobile")) {
                  repairUrl = "http://www.repairbuck.com/repairs.json?auth_token=";
@@ -81,7 +81,9 @@ public class ConfirnmationActivity extends AppCompatActivity
  {
      postOrder.execute(repairUrl + sharedPreferences.getString("auth_token", null), jsonObj.toString());
 
-     startActivity(new Intent(ConfirnmationActivity.this,Checksum.class));
+     Intent intent = new Intent(ConfirnmationActivity.this,Checksum.class);
+     intent.putExtra("gadget",gadget);
+     startActivity(intent);
 
  }
 
@@ -97,7 +99,8 @@ public class ConfirnmationActivity extends AppCompatActivity
          }
 
          @Override
-         protected String doInBackground(String... params) {
+         protected String doInBackground(String... params)
+         {
              try {
                  String result;
                  url = new URL(params[0]);

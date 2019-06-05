@@ -32,6 +32,12 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
 {
     String custid="", orderId="", mid="";
     SharedPreferences sharedPreferences;
+    JSONObject orderDetail;
+    JSONObject orderDetails;
+    String userid;
+    Intent intent;
+    String amount;
+    String gadget;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -44,10 +50,41 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         orderId=initOrderId();
         custid = "vcrkhvehfrihveriaahaivhih";
         mid = "OiEieg61305100527529";  /// your marchant key
+        gadget = intent.getStringExtra("gadget");
+       // Log.i("gadget", intentget.getStringExtra("gadget"));
+        if (gadget.equals("Mobile"))
+        {
+            amount="150";
+        } else {
+             amount="250";
+        }
         sendUserDetailTOServerdd dl = new sendUserDetailTOServerdd();
         dl.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
+        userid=sharedPreferences.getString("user_id",null);
+          orderDetail = new JSONObject();
+        JSONObject orderHolder = new JSONObject();
+
+
+        try {
+            // orderDetails.put("user_id","13");
+            orderDetail.put("user_id",userid);
+            orderDetail.put("order_id",sharedPreferences.getString("order_id",null));
+
+            // orderDetails.put("street",landmark.getText().toString());
+            // orderDetails.put("area","Urrapakkam");
+            //orderDetails.put("city",city);
+            orderHolder.put("mobbucket",orderDetail);
+            Log.i("VANIK",orderHolder.toString());
+        }
+
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        payment.execute("http://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
 // vollye , retrofit, asynch
+
     }
 
     private String initOrderId()
@@ -80,7 +117,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
                     "MID="+mid+
                             "&ORDER_ID=" + orderId+
                             "&CUST_ID="+custid+
-                            "&CHANNEL_ID=WAP&TXN_AMOUNT=100&WEBSITE=WEBSTAGING"+
+                            "&CHANNEL_ID=WAP&TXN_AMOUNT="+amount+"&WEBSITE=WEBSTAGING"+
                             "&CALLBACK_URL="+ varifyurl+"&INDUSTRY_TYPE_ID=Retail";
             JSONObject jsonObject = jsonParser.makeHttpRequest(url,"POST",param);
             // yaha per checksum ke saht order id or status receive hoga..
@@ -113,7 +150,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             paramMap.put("ORDER_ID", orderId);
             paramMap.put("CUST_ID", custid);
             paramMap.put("CHANNEL_ID", "WAP");
-            paramMap.put("TXN_AMOUNT", "100");
+            paramMap.put("TXN_AMOUNT", amount);
             paramMap.put("WEBSITE", "WEBSTAGING");
             paramMap.put("CALLBACK_URL" ,varifyurl);
            // paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
@@ -147,24 +184,17 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             startActivity(new Intent(Checksum.this,ConfirnmationActivity.class));
             finish();
         }
-        JSONObject orderDetails = new JSONObject();
-        JSONObject orderHolder = new JSONObject();
-
-       try {
-           // orderDetails.put("user_id","13");
-           orderDetails.put("user_id",sharedPreferences.getString("user_id",null));
-          // orderDetails.put("r",hno.getText().toString());
-          // orderDetails.put("street",landmark.getText().toString());
-          // orderDetails.put("area","Urrapakkam");
-           //orderDetails.put("city",city);
-          // orderHolder.put("order",orderDetails);
-       }
-       catch (JSONException e)
-       {
-           e.printStackTrace();
-       }
-
-       payment.execute("http://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
+        try {MobPayment mobPayment = new MobPayment();
+            JSONObject orderHold = new JSONObject();
+            orderDetails.put("amount",bundle.getString("TXN_AMOUNT"));
+            orderDetails.put("status",bundle.getString("STATUS"));
+            orderHold.put("mobpayment", orderDetails);
+            Log.i("VANIK1", orderHold.toString());
+            mobPayment.execute("http://www.repairbuck.com/mobpayments.json?auth_token=" + sharedPreferences.getString("auth_token", null), orderHold.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //payment.execute("http://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
     }
 
     @Override
@@ -264,8 +294,21 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             try {
                 JSONObject jsonResponse = new JSONObject(response);
                 Log.i("VANIK",jsonResponse.toString());
+               // JSONObject dets = new JSONObject(location);
+             //   Log.i("VANIK",dets.toString());
+                orderDetails = new JSONObject();
+                orderDetails.put("user_id",sharedPreferences.getString("user_id", null));
+                orderDetails.put("mobbucket_id", jsonResponse.getString("id"));
+                orderDetails.put("name",sharedPreferences.getString("username", null));
+                orderDetails.put("email",sharedPreferences.getString("email", null));
+                orderDetails.put("mobile", sharedPreferences.getString("phone", null));
+              //  orderDetails.put("city", dets.getString("city"));
+                Log.i("VANIK1", orderDetails.toString());
 
-            } catch (JSONException e) {
+
+            }
+
+            catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -288,6 +331,72 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         }
         catch(Exception e)
         { return e.getMessage();
+        }
+    }
+
+
+
+    class MobPayment extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // loadingMsg.setText("Loading");
+            //linearLayout.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String result;
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+                //connection.addRequestProperty("Accept","application/json");
+                connection.addRequestProperty("Content-Type","application/json");
+                connection.setRequestMethod("POST");
+                //  connection.setDoOutput(true);
+                connection.connect();
+                DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
+                outputStream.writeBytes(params[1]);
+                Log.i("VANIK",params[1]);
+                result = getResponse(connection);
+                Log.i("VANIK",result);
+                return result;
+
+            }
+            catch (MalformedURLException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String response)
+        {
+
+            //linearLayout.setVisibility(View.INVISIBLE);
+            super.onPostExecute(response);
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                Log.i("VANIK",jsonResponse.toString());
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                JSONObject jsonObject = new JSONObject(response);
+                String orderid = "";
+                orderid = jsonObject.getString("id");
+                editor.putString("order_id",orderid);
+                editor.apply();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //Log.i("RESPONSE",response);
         }
     }
 
