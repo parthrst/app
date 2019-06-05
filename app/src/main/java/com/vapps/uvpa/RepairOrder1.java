@@ -54,42 +54,53 @@ public class RepairOrder1 extends AppCompatActivity
     private TextView textViewEmail;
     private TextView textViewUsername;
     private TextView uname;
-
+    LinearLayout buttons;
+    LinearLayout spinners;
     private ProgressBar progressBar;
     private ArrayList<String> list2=new ArrayList<>();
     SharedPreferences sharedPreferences;
     List<String>  seriesNames = new ArrayList<>();
     private  FirebaseDatabase firebaseDatabase =  FirebaseDatabase.getInstance();
     private  DatabaseReference mDatabase = firebaseDatabase.getReference();
+
     LinearLayout linearLayout;
-    PostOrder postOrder = new PostOrder();
     TextView loadingMsg;
     ArrayList<String> repair;
+    Button place;
+    Button orderView;
 
     public void OrderRepair(View view) {
 
-
+        if (gadget.equals("") || brand.equals("") || model.equals("")) {
+            Toast.makeText(this, "Please select all the options!", Toast.LENGTH_SHORT).show();
+        } else {
             repair = new ArrayList<>();
             JSONObject repairDetails = new JSONObject();
-            JSONObject repairHolder = new JSONObject();
+           // JSONObject repairHolder = new JSONObject();
 
             try {
 
               //  repairDetails.put("id", "13");
-                repairDetails.put("company", brand);
+                repairDetails.put("company_id", brand);
                 repairDetails.put("model_id", model);
 
-                repairHolder.put("repair", repairDetails);
+               // repairHolder.put("repairs", repairDetails);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            postOrder.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null), repairHolder.toString());
+            //postOrder.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null), repairHolder.toString());
+
 
             Intent intent = new Intent(RepairOrder1.this, IssueActivity.class);
-            intent.putExtra("repair", repairHolder.toString());
+            intent.putExtra("repair", repairDetails.toString());
+            intent.putExtra("gadget",gadget);
+            Log.i("gadget",gadget);
             startActivity(intent);
-        }
 
+
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -97,12 +108,16 @@ public class RepairOrder1 extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_order1);
 
+        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
+        Repair repair=new Repair();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Choose your device");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-
+        buttons=findViewById(R.id.start);
+        spinners=findViewById(R.id.next);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -120,8 +135,9 @@ public class RepairOrder1 extends AppCompatActivity
         linearLayout=findViewById(R.id.progressbar_layout);
         loadingMsg = findViewById(R.id.loading_msg);
         mobileSeriesSearch.setVisibility(View.GONE);
+        place=findViewById(R.id.place);
+        orderView=findViewById(R.id.view);
 
-        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
 
         View headerView = navigationView.getHeaderView(0);
 
@@ -132,98 +148,10 @@ public class RepairOrder1 extends AppCompatActivity
         textViewEmail.setText(sharedPreferences.getString("email",null));
         textViewUsername.setText(sharedPreferences.getString("username",null));
 //       uname.setText("Hi! "+user.getDisplayName());
-
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
-        device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                if(position == 1)
-                {
-                    laptopSeriesSearch.setVisibility(View.VISIBLE);
-                    mobileSeriesSearch.setVisibility(View.GONE);
-                    gadget=parent.getSelectedItem().toString();
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.lap_brand,R.layout.support_simple_spinner_dropdown_item);
-                    adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-                    {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                        {
-                            ArrayAdapter<CharSequence> laptopAdapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.laptop_names,R.layout.support_simple_spinner_dropdown_item);
-                            laptopAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                            laptopSeriesSearch.setAdapter(laptopAdapter);
-                            brand=parent.getSelectedItem().toString();
-
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent)
-                        {
-
-                        }
-                    });
-                    laptopSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            model=parent.getSelectedItem().toString();
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                }
-
-                else if(position == 0)
-                {
-                    laptopSeriesSearch.setVisibility(View.GONE);
-                    mobileSeriesSearch.setVisibility(View.VISIBLE);
-                      gadget=parent.getSelectedItem().toString();
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this,R.array.brand_names,R.layout.support_simple_spinner_dropdown_item);
-                    adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-                    {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                        {
-                            brand=Integer.toString(position+50);
-                            ModelLoader modelLoader = new ModelLoader();
-                            modelLoader.execute("http://www.repairbuck.com/models/cmodel?name="+parent.getSelectedItem().toString());
-                        }
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent)
-                        {
-                            //Another interface callback
-                        }
-                    });
-                  mobileSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                      @Override
-                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                          model=parent.getSelectedItem().toString();
-                      }
-
-                      @Override
-                      public void onNothingSelected(AdapterView<?> parent)
-                      {
-
-                      }
-                  });
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        repair.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null));
 
 
 
@@ -312,8 +240,98 @@ public class RepairOrder1 extends AppCompatActivity
         editor.clear();
         editor.apply();
     }
+    public void placeOrder(View view){
+        getSupportActionBar().setTitle("Choose your device");
+        order();
 
+    }
+    public void viewOrder(View view){
+        startActivity( new Intent(RepairOrder1.this,Bucket.class));
+    }
+    public void order()
+    {
+        gadget="";model="";brand="";
+        buttons.setVisibility(View.GONE);
+        spinners.setVisibility(View.VISIBLE);
+        OderRepairButton.setVisibility(View.VISIBLE);
+        device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1) {
+                    laptopSeriesSearch.setVisibility(View.VISIBLE);
+                    mobileSeriesSearch.setVisibility(View.GONE);
+                    gadget = parent.getSelectedItem().toString();
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.lap_brand, R.layout.support_simple_spinner_dropdown_item);
+                    adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            ArrayAdapter<CharSequence> laptopAdapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.laptop_names, R.layout.support_simple_spinner_dropdown_item);
+                            laptopAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                            laptopSeriesSearch.setAdapter(laptopAdapter);
+                            brand =Integer.toString(position);
 
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                    laptopSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            model = parent.getSelectedItem().toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                } else if (position == 0) {
+                    laptopSeriesSearch.setVisibility(View.GONE);
+                    mobileSeriesSearch.setVisibility(View.VISIBLE);
+                    gadget = parent.getSelectedItem().toString();
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.brand_names, R.layout.support_simple_spinner_dropdown_item);
+                    adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            brand =Integer.toString(position+51);
+                            ModelLoader modelLoader = new ModelLoader();
+                            modelLoader.execute("http://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            //Another interface callback
+                        }
+                    });
+                    mobileSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            model = parent.getSelectedItem().toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
     class ModelLoader extends AsyncTask<String, Void, String>
     {
         @Override
@@ -361,7 +379,8 @@ public class RepairOrder1 extends AppCompatActivity
                     String series = jsonObject.getString("name");
                     seriesNames.add(series);
                 }
-            } catch (JSONException e) {
+            } catch (JSONException e)
+            {
                 e.printStackTrace();
             }
             seriesNames.removeAll(list2);
@@ -372,34 +391,31 @@ public class RepairOrder1 extends AppCompatActivity
         }
     }
 
-
-    class PostOrder extends AsyncTask<String, Void, String>
+    class Repair extends AsyncTask<String, Void, String>
     {
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             super.onPreExecute();
-            loadingMsg.setText("Loading");
+            spinners.setVisibility(View.GONE);
+            OderRepairButton.setVisibility(View.GONE);
+            buttons.setVisibility(View.GONE);
+            getSupportActionBar().setTitle("Choose an option");
+            loadingMsg.setText("Initializing");
             linearLayout.setVisibility(View.VISIBLE);
+
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            try {
+        protected String doInBackground(String... urls) {
+            try
+            {
                 String result;
-                URL url = new URL(params[0]);
-                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-                //connection.addRequestProperty("Accept","application/json");
-                connection.addRequestProperty("Content-Type","application/json");
-                connection.setRequestMethod("POST");
-                //  connection.setDoOutput(true);
+                URL url = new URL(urls[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
-                DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
-                outputStream.writeBytes(params[1]);
-                Log.i("VANIK",params[1]);
                 result = getResponse(connection);
-                Log.i("VANIK",result);
                 return result;
-
             }
             catch (MalformedURLException e)
             {
@@ -416,25 +432,33 @@ public class RepairOrder1 extends AppCompatActivity
         @Override
         protected void onPostExecute(String response)
         {
-
-            linearLayout.setVisibility(View.INVISIBLE);
             super.onPostExecute(response);
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
+            linearLayout.setVisibility(View.INVISIBLE);
 
-                String id = jsonResponse.getString("id");
-                Log.i("VANIK",id);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("id",id);
-                editor.apply();
+            list2.addAll(seriesNames);
+            try {
+                JSONArray jsonArray = new JSONArray(response);
+                if(jsonArray.toString().equals("[]")){
+                    getSupportActionBar().setTitle("Choose your device");
+                    order();
+
+                }
+                else {
+                    buttons.setVisibility(View.VISIBLE);
+                    OderRepairButton.setVisibility(View.GONE);
+                    spinners.setVisibility(View.GONE);
+
+                }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            //Log.i("RESPONSE",response);
         }
     }
+
+
 
     public String getResponse(HttpURLConnection httpURLConnection)
     {
@@ -450,7 +474,8 @@ public class RepairOrder1 extends AppCompatActivity
             return result;
         }
         catch(Exception e)
-        { return e.getMessage();
+        {
+            return e.getMessage();
         }
     }
 }

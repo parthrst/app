@@ -21,8 +21,8 @@
 
 
     <string-array name="brand_names">
-        <item>XIAOMI</item>
         <item>SAMSUNG</item>
+        <item>XIAOMI</item>
         <item>MOTOROLA</item>
         <item>OPPO</item>
         <item>VIVO</item>

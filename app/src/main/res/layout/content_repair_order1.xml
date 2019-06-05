@@ -7,7 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".RepairOrder1"
     >
-
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_centerInParent="true"
+     android:gravity="center_horizontal"
+     android:orientation="vertical"
+     android:id="@+id/start"
+     >
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Place Order"
+         android:background="@color/colorBlack"
+         android:textColor="#FFFFFF"
+         android:fontFamily="@font/avenirheavy"
+         android:textSize="22.8sp"
+         android:id="@+id/place"
+         android:layout_marginLeft="20dp"
+         android:layout_marginRight="20dp"
+         android:onClick="placeOrder"
+         />
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="View Orders"
+         android:background="@color/colorBlack"
+         android:textColor="#FFFFFF"
+         android:layout_marginTop="15dp"
+         android:fontFamily="@font/avenirheavy"
+         android:textSize="22.8sp"
+         android:id="@+id/view"
+         android:layout_marginLeft="20dp"
+         android:layout_marginRight="20dp"
+         android:onClick="viewOrder"/>
+ </LinearLayout>
     <LinearLayout
 
         android:orientation="horizontal"
@@ -41,6 +75,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_centerInParent="true"
+    android:id="@+id/next"
+    android:visibility="invisible"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -182,7 +218,7 @@
         android:textSize="22.8sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-
+        android:visibility="invisible"
         />
     </RelativeLayout>
 

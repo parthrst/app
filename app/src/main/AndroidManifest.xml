@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vapps.uvpa">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -74,6 +74,10 @@
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Checksum"
+            android:screenOrientation="portrait"
+            />
+        <activity
             android:name=".AfterLogin"
             android:screenOrientation="portrait" />
         <activity
@@ -121,6 +125,7 @@
             android:name="com.facebook.CustomTabActivity"
             android:exported="true"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -134,11 +139,8 @@
             android:name=".RepairOrder1"
             android:label="Choose Your Device"
             android:screenOrientation="portrait"
-            android:theme="@style/MyWhiteColorTheme" />
-        <activity
-            android:name=".Checksum"
-            android:screenOrientation="portrait"
-           />
+            android:theme="@style/MyWhiteColorTheme"
+            />
 
         <meta-data
             android:name="instamojo.orderauth.url"
