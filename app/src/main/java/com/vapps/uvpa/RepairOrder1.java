@@ -147,6 +147,7 @@ public class RepairOrder1 extends AppCompatActivity
 
         textViewEmail.setText(sharedPreferences.getString("email",null));
         textViewUsername.setText(sharedPreferences.getString("username",null));
+//       uname.setText("Hi! "+user.getDisplayName());
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
@@ -195,6 +196,8 @@ public class RepairOrder1 extends AppCompatActivity
         // Handle navigation view item clicks here.
 
         int id = item.getItemId();
+
+
         if (id == R.id.bucket)
         {
             startActivity(new Intent(RepairOrder1.this,Bucket.class));
