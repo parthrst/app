@@ -17,17 +17,20 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 
  public class ConfirnmationActivity extends AppCompatActivity
  {
+     TextView address;
 
          @Override
          protected void onCreate(Bundle savedInstanceState)
          {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_confirnmation);
+         Intent intent=getIntent();
 
              getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 

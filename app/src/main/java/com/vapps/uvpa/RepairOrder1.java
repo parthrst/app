@@ -44,7 +44,7 @@ import java.util.List;
 public class RepairOrder1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    String d,b,m;
+    String gadget,brand,model;
     private Spinner spinner;
     private Spinner laptopSeriesSearch;
     private Spinner device;
@@ -71,7 +71,7 @@ public class RepairOrder1 extends AppCompatActivity
 
     public void OrderRepair(View view) {
 
-        if (d.equals("") || b.equals("") || m.equals("")) {
+        if (gadget.equals("") || brand.equals("") || model.equals("")) {
             Toast.makeText(this, "Please select all the options!", Toast.LENGTH_SHORT).show();
         } else {
             repair = new ArrayList<>();
@@ -81,8 +81,8 @@ public class RepairOrder1 extends AppCompatActivity
             try {
 
                 repairDetails.put("id", "13");
-                repairDetails.put("company", b);
-                repairDetails.put("model_id", m);
+                repairDetails.put("company", brand);
+                repairDetails.put("model_id", model);
 
                 repairHolder.put("repair", repairDetails);
             } catch (JSONException e) {
@@ -142,7 +142,6 @@ public class RepairOrder1 extends AppCompatActivity
 
         textViewEmail.setText(sharedPreferences.getString("email",null));
         textViewUsername.setText(sharedPreferences.getString("username",null));
-//       uname.setText("Hi! "+user.getDisplayName());
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
@@ -190,15 +189,7 @@ public class RepairOrder1 extends AppCompatActivity
         // Handle navigation view item clicks here.
 
         int id = item.getItemId();
-
-       if (id == R.id.nav_location)
-        {
-            startActivity(new Intent(RepairOrder1.this, MapsActivity.class));
-        }
-        else if (id == R.id.nav_payment)
-        { startActivity(new Intent(RepairOrder1.this, Payment_details.class));
-        }
-        else if (id == R.id.bucket)
+        if (id == R.id.bucket)
         {
             startActivity(new Intent(RepairOrder1.this,Bucket.class));
 
@@ -244,7 +235,7 @@ public class RepairOrder1 extends AppCompatActivity
     }
     public void order()
     {
-        d="";m="";b="";
+        gadget="";model="";brand="";
         buttons.setVisibility(View.GONE);
         spinners.setVisibility(View.VISIBLE);
         OderRepairButton.setVisibility(View.VISIBLE);
@@ -254,7 +245,7 @@ public class RepairOrder1 extends AppCompatActivity
                 if (position == 1) {
                     laptopSeriesSearch.setVisibility(View.VISIBLE);
                     mobileSeriesSearch.setVisibility(View.GONE);
-                    d = parent.getSelectedItem().toString();
+                    gadget = parent.getSelectedItem().toString();
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.lap_brand, R.layout.support_simple_spinner_dropdown_item);
                     adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     spinner.setAdapter(adapter);
@@ -264,7 +255,7 @@ public class RepairOrder1 extends AppCompatActivity
                             ArrayAdapter<CharSequence> laptopAdapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.laptop_names, R.layout.support_simple_spinner_dropdown_item);
                             laptopAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                             laptopSeriesSearch.setAdapter(laptopAdapter);
-                            b = parent.getSelectedItem().toString();
+                            brand = parent.getSelectedItem().toString();
 
                         }
 
@@ -276,7 +267,7 @@ public class RepairOrder1 extends AppCompatActivity
                     laptopSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            m = parent.getSelectedItem().toString();
+                            model = parent.getSelectedItem().toString();
                         }
 
                         @Override
@@ -287,14 +278,14 @@ public class RepairOrder1 extends AppCompatActivity
                 } else if (position == 0) {
                     laptopSeriesSearch.setVisibility(View.GONE);
                     mobileSeriesSearch.setVisibility(View.VISIBLE);
-                    d = parent.getSelectedItem().toString();
+                    gadget = parent.getSelectedItem().toString();
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.brand_names, R.layout.support_simple_spinner_dropdown_item);
                     adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     spinner.setAdapter(adapter);
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            b = parent.getSelectedItem().toString();
+                            brand = parent.getSelectedItem().toString();
                             ModelLoader modelLoader = new ModelLoader();
                             modelLoader.execute("http://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
                         }
@@ -307,7 +298,7 @@ public class RepairOrder1 extends AppCompatActivity
                     mobileSeriesSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            m = parent.getSelectedItem().toString();
+                            model = parent.getSelectedItem().toString();
                         }
 
                         @Override

@@ -41,6 +41,7 @@
         <activity
             android:name=".Bucket"
             android:label="Your Orders"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".IssueActivity"
@@ -140,10 +141,6 @@
             android:label="Choose Your Device"
             android:screenOrientation="portrait"
             android:theme="@style/MyWhiteColorTheme" />
-        <activity
-            android:name=".Checksum"
-            android:screenOrientation="portrait"
-           />
 
         <meta-data
             android:name="instamojo.orderauth.url"

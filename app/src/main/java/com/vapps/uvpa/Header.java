@@ -3,8 +3,8 @@ package com.vapps.uvpa;
 import java.util.ArrayList;
 
 public class Header {
-    //public String brand;
-    //public String model;
+    public String brand;
+    public String model;
     public String id;
 
     public String getId() {
@@ -25,7 +25,7 @@ public class Header {
     }
 
 
-    /*public String getBrand() {
+    public String getBrand() {
         return brand;
     }
 
@@ -40,7 +40,4 @@ public class Header {
     public void setModel(String model) {
         this.model = model;
     }
-
-   */
-
-}
+    }

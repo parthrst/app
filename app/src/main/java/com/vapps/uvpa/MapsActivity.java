@@ -93,7 +93,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     } else if (grantResults[0] == PackageManager.PERMISSION_DENIED)
                     {
                         Toast.makeText(getApplicationContext(), "Please allow permission", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MapsActivity.this,RepairOrder1.class));
+                        startActivity(new Intent(MapsActivity.this,BackupPhoneSelection.class));
                     }
           }
             }
