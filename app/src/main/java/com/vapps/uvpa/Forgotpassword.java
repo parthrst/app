@@ -51,7 +51,7 @@ public class Forgotpassword extends AppCompatActivity {
             jsonObject.put("email",regmail.getText().toString());
             Log.i("JSON",jsonObject.toString());
 
-            resetMial.execute("http://www.amxdp.club/api/user/password",jsonObject.toString());
+            resetMial.execute("https://www.amxdp.club/api/user/password",jsonObject.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -45,13 +45,6 @@ public class BackupPhoneSelection extends AppCompatActivity {
         i=getIntent();
         Intent j=new Intent(BackupPhoneSelection.this,MapsActivity.class);
         JSONObject repairHolder = new JSONObject();
-
-        int rb=radioGroup.getCheckedRadioButtonId();
-        radioButton=findViewById(rb);
-        if(radioButton.getTag().toString().equals("yes"))
-            ph="1";
-        else if(radioButton.getTag().toString().equals("no"))
-            ph="0";
         try
         { String str=i.getStringExtra("param");
             jsonObj=new JSONObject(str);
