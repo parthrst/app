@@ -229,7 +229,8 @@ public class ConfirnmationActivity extends AppCompatActivity
          }
 
          @Override
-         protected String doInBackground(String... params) {
+         protected String doInBackground(String... params)
+         {
              try {
                  String result;
                  URL url = new URL(params[0]);
