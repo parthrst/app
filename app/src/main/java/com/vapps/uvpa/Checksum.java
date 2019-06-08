@@ -49,7 +49,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         Intent intent = getIntent();
         orderId=initOrderId();
         custid = "vcrkhvehfrihveriaahaivhih";
-        mid = "OiEieg61305100527529";  /// your marchant key
+        mid = "mtmYkY23062295170999";  /// your marchant key
         gadget = intent.getStringExtra("gadget");
        // Log.i("gadget", intentget.getStringExtra("gadget"));
         if (gadget.equals("Mobile"))
@@ -117,7 +117,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
                     "MID="+mid+
                             "&ORDER_ID=" + orderId+
                             "&CUST_ID="+custid+
-                            "&CHANNEL_ID=WAP&TXN_AMOUNT="+amount+"&WEBSITE=WEBSTAGING"+
+                            "&CHANNEL_ID=WAP&TXN_AMOUNT="+amount+"&WEBSITE=DEFAULT"+
                             "&CALLBACK_URL="+ varifyurl+"&INDUSTRY_TYPE_ID=Retail";
             JSONObject jsonObject = jsonParser.makeHttpRequest(url,"POST",param);
             // yaha per checksum ke saht order id or status receive hoga..
@@ -139,9 +139,9 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }
-            PaytmPGService Service = PaytmPGService.getStagingService();
+            //PaytmPGService Service = PaytmPGService.getStagingService();
             // when app is ready to publish use production service
-            // PaytmPGService  Service = PaytmPGService.getProductionService();
+              PaytmPGService  Service = PaytmPGService.getProductionService();
             // now call paytm service here
             //below parameter map is required to construct PaytmOrder object, Merchant should replace below map values with his own values
             HashMap<String, String> paramMap = new HashMap<String, String>();
@@ -151,7 +151,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             paramMap.put("CUST_ID", custid);
             paramMap.put("CHANNEL_ID", "WAP");
             paramMap.put("TXN_AMOUNT", amount);
-            paramMap.put("WEBSITE", "WEBSTAGING");
+            paramMap.put("WEBSITE", "DEFAULT");
             paramMap.put("CALLBACK_URL" ,varifyurl);
            // paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
             //paramMap.put( "MOBILE_NO" , "9410419310");  // no need

@@ -4,14 +4,10 @@ package com.vapps.uvpa;
 import org.json.JSONObject;
 import org.json.JSONException;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -282,7 +278,5 @@ public class ConfirnmationActivity extends AppCompatActivity
              //Log.i("RESPONSE",response);
          }
      }
-
-
 
  }

@@ -13,7 +13,8 @@ public class About extends AppCompatActivity {
     TextView info1;TextView info2;TextView info3;TextView info4;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         about=findViewById(R.id.about);
@@ -29,19 +30,19 @@ public class About extends AppCompatActivity {
         info2=findViewById(R.id.info2);
         info3=findViewById(R.id.info3);
         info4=findViewById(R.id.info4);
-       about.setText("RepairBuck is a delivery based service which aims to provide a platform for consumers who have damaged phone.Pick-up, delivery and offer a back-up phone as well.Best local service providers under one roof along with warranty assurance");
+        about.setText("RepairBuck is a delivery based service which aims to provide a platform for consumers who have damaged phone.Pick-up, delivery and offer a back-up phone as well.Best local service providers under one roof along with warranty assurance");
         name1.setText(""+"Vanik Jain");
         name2.setText(""+"Parth Rastogi");
-       name3.setText("Ashutosh Singh");
+        name3.setText("Ashutosh Singh");
         name4.setText("Arpit Tiwari");
         pos1.setText("Android Developer");
-       pos2.setText("Android Developer");
-       pos3.setText("Full Stack Web Developer");
-       pos4.setText("Public Relation OfficerCU");
-       info1.setText("Department of Information Technology Engineering, SRM IST, Kattankulathur, Chennai- 603203. \nM: +9186196963046 \nE-mail: pro.nrai.med@gmail.com");
-       info2.setText("Department of Information Technology Engineering, SRM IST, Kattankulathur, Chennai- 603203. \nM: +9186196963046 \nE-mail: pro.nrai.med@gmail.com");
-       info3.setText("Department of Information Technology Engineering, SRM IST, Kattankulathur, Chennai- 603203. \nM: +9186196963046 \nE-mail: pro.nrai.med@gmail.com");
-       info4.setText("Department of Computer Science Engineering,Chandigarh University\nM: +9186196963046\nE-mail: pro.nrai.med@gmail.com");
+        pos2.setText("Android Developer");
+        pos3.setText("Full Stack Web Developer");
+        pos4.setText("Public Relation OfficerCU");
+        info1.setText("Department of Information Technology Engineering, SRM IST, Kattankulathur, Chennai- 603203. \nE-mail: jainvanik100@gmail.com");
+        info2.setText("Department of Information Technology Engineering, SRM IST, Kattankulathur, Chennai- 603203. \n E-mail: parthrst@gmail.com");
+        info3.setText("Department of Information Technology Engineering, SRM IST, Kattankulathur, Chennai- 603203. \nE-mail: ashutoshpith@gmail.com");
+        info4.setText("Department of Computer Science Engineering,Chandigarh University\nE-mail: arpittiwaricu@gmail.com");
 
     }
 }
