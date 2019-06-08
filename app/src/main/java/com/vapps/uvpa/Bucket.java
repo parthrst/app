@@ -68,28 +68,8 @@ public class Bucket extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         String auth=sharedPreferences.getString("auth_token",null);
         Model modelLoader = new Model();
-        modelLoader.execute("http://www.repairbuck.com/mobpayments.json?auth_token="+auth);
-
-       /* listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Header header = details.get(groupPosition);
-                body info = header.getList().get(childPosition);
-
-                Toast.makeText(getBaseContext(), "Clicked on" + header.getId() + "/" + info.getBackupPhone(), Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });
-
-        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Header header = details.get(groupPosition);
-                Toast.makeText(getBaseContext(), "HEader is:" + header.getId(), Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });*/
-    }
+        modelLoader.execute("https://www.repairbuck.com/mobpayments.json?auth_token="+auth);
+          }
     public int add(String id,String brand,String model,String problem,String backup,String address,String total,String txnid,String txnstatus ) {
         int groupPosition = 0;
         ArrayList<Header> arrayList;

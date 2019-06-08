@@ -194,7 +194,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //payment.execute("http://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
+        //payment.execute("https://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
     }
 
     @Override

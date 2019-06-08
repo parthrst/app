@@ -1,6 +1,7 @@
 package com.vapps.uvpa;
 
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
@@ -39,7 +40,7 @@ public class ConfirnmationActivity extends AppCompatActivity
      String orderUrl;
      String location;
      String gadget;
-     String baseprice;
+     String baseprice="";
      TextView  address;
      TextView baseamount;
      TextView backup;
@@ -47,6 +48,12 @@ public class ConfirnmationActivity extends AppCompatActivity
      TextView brand;
      TextView model;
      TextView total;
+     String addressString;
+     String modelString;
+     String totalString;
+
+     LinearLayout backupselection;
+
 
 
          @Override
@@ -61,22 +68,130 @@ public class ConfirnmationActivity extends AppCompatActivity
              backup=findViewById(R.id.backup_price);
              total=findViewById(R.id.total_disp);
              address=findViewById(R.id.address_disp);
-
+backupselection=findViewById(R.id.backup_layout);
              String str = intentget.getStringExtra("confirm");
               location = intentget.getStringExtra("location");
               gadget = intentget.getStringExtra("gadget");
-              if(gadget.equals("Mobile"))
-                 baseprice="150";
-             else
-                 baseprice="250";
 
-             Log.i("gadget", intentget.getStringExtra("gadget"));
+              if(gadget.equals("Mobile"))
+                 baseprice=baseprice+"150";
+             else
+                 baseprice=baseprice+"250";
+             Log.i("base",baseprice);
+baseamount.setText(baseprice);
+         try {
+             JSONObject detials = new JSONObject(str);
+             JSONObject det = new JSONObject(location);
+             addressString = det.getString("room") + "," + det.getString("street") + "," + det.getString("area") + "," + det.getString("city");
+             modelString = detials.getString("repair");
+             JSONObject inner = new JSONObject(modelString);
+             String model_id = inner.getString("model_id");
+             Log.i("model", modelString);
+             String brandString = inner.getString("company_id");
+
+             if (gadget.equals("Mobile")) {
+                 String brandFinal = "";
+                 switch (brandString) {
+                     case "51":
+                         brandFinal = brandFinal + "SAMSUNG";
+                         break;
+                     case "52":
+                         brandFinal = brandFinal + "XIAOMI";
+                         break;
+                     case "53":
+                         brandFinal = brandFinal + "MOTOROLA";
+                         break;
+                     case "54":
+                         brandFinal = brandFinal + "OPPO";
+                         break;
+                     case "55":
+                         brandFinal = brandFinal + "VIVO";
+                         break;
+                     case "56":
+                         brandFinal = brandFinal + "MICROMAX";
+                         break;
+                     case "57":
+                         brandFinal = brandFinal + "BLACKBERRY";
+                         break;
+                     case "58":
+                         brandFinal = brandFinal + "HTC";
+                         break;
+                     case "59":
+                         brandFinal = brandFinal + "LG";
+                         break;
+                     case "60":
+                         brandFinal = brandFinal + "SONY";
+                         break;
+                     case "61":
+                         brandFinal = brandFinal + "ONEPLUS";
+                         break;
+                     case "62":
+                         brandFinal = brandFinal + "NOKIA";
+                         break;
+                     case "63":
+                         brandFinal = brandFinal + "GIONEE";
+                         break;
+                 }
+                 brand.setText(brandFinal);
+             } else {
+                 brand.setText(brandString);
+             }
+             model.setText(model_id);
+             String problemString="";
+             JSONArray problem =inner.getJSONArray("problem_id");
+             for (int j = 0; j < problem.length(); j++) {
+                 String code = problem.getString(j);
+                 switch (code) {
+                     case "0":
+                         problemString = problemString + "Battery Problem";
+                         break;
+                     case "1":
+                         problemString = problemString + "Button Problem,";
+                         break;
+                     case "2":
+                         problemString = problemString + "Broken Screen,";
+                         break;
+                     case "3":
+                         problemString = problemString + "Charging Problem,";
+                         break;
+                     case "4":
+                         problemString = problemString + "Camera Problem,";
+                         break;
+                     case "5":
+                         problemString = problemString + "Water Damage,";
+                         break;
+                     case "6":
+                         problemString = problemString + "Headphone Jack Issue,";
+                         break;
+                     case "7":
+                         problemString = problemString + "Software Issue,";
+                         break;
+                 }
+                 issue.setText(problemString);
+                 String phone = inner.getString("phone");
+                 if (phone.equals("1"))
+                     backup.setText("30");
+                 else
+                     backup.setText("0");
+                 if (gadget.equals("Mobile")) {
+                     totalString = String.valueOf(Integer.parseInt(backup.getText().toString()) + Integer.parseInt(baseamount.getText().toString()));
+                 } else
+                     totalString = baseprice;
+                 total.setText(totalString);
+                 Log.i("Detials", detials.toString());
+             }
+         }catch (JSONException e) {
+             e.printStackTrace();
+         }
+         address.setText(addressString);
+         Log.i("gadget", intentget.getStringExtra("gadget"));
              if (gadget.equals("Mobile")) {
                  repairUrl = "https://www.repairbuck.com/repairs.json?auth_token=";
                  orderUrl = "https://www.repairbuck.com/orders.json?auth_token=";
              } else {
                  repairUrl = "https://www.repairbuck.com/laprepairs.json?auth_token=";
                  orderUrl = "https://www.repairbuck.com/laporders.json?auth_token=";
+                 backupselection.setVisibility(View.GONE);
              }
 
              getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -224,8 +339,7 @@ public class ConfirnmationActivity extends AppCompatActivity
          }
 
          @Override
-         protected String doInBackground(String... params)
-         {
+         protected String doInBackground(String... params) {
              try {
                  String result;
                  URL url = new URL(params[0]);

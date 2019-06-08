@@ -30,7 +30,6 @@ public class IssueActivity extends AppCompatActivity
 {
     Intent i;
    CheckBox checkBox0,checkBox1,checkBox2,checkBox3,checkBox4,checkBox5,checkBox6,checkBox7;
-   TextView textView0,textView1,textView2,textView3,textView4,textView5,textView6,textView7;
    JSONObject jsonObj;
    ArrayList<String> problemids;
 
@@ -144,42 +143,16 @@ public class IssueActivity extends AppCompatActivity
         checkBox2=findViewById(R.id.prob2);checkBox3=findViewById(R.id.prob3);
         checkBox4=findViewById(R.id.prob4);checkBox5=findViewById(R.id.prob5);
         checkBox6=findViewById(R.id.prob6);checkBox7=findViewById(R.id.prob7);
-       //textView0=findViewById(R.id.price);textView1=findViewById(R.id.price1);
-       //textView2=findViewById(R.id.price2);textView3=findViewById(R.id.price3);
-       //textView4=findViewById(R.id.price4);textView5=findViewById(R.id.price5);
-       //textView6=findViewById(R.id.price6);textView7=findViewById(R.id.price7);
         checkBox0.setText(type_repair[0]);checkBox1.setText(type_repair[1]);
         checkBox2.setText(type_repair[2]);checkBox3.setText(type_repair[3]);
         checkBox4.setText(type_repair[4]);checkBox5.setText(type_repair[5]);
         checkBox6.setText(type_repair[6]);checkBox7.setText(type_repair[7]);
-       //textView0.setText(est_price[0]);textView1.setText(est_price[1]);
-       //textView2.setText(est_price[2]);textView3.setText(est_price[3]);
-       //textView4.setText(est_price[4]);textView5.setText(est_price[5]);
-       //textView6.setText(est_price[6]);textView7.setText(est_price[7]);
+
 
         problemids=new ArrayList<>();
 
         i=getIntent();
 
-        /*try {
-            problem=new JSONObject();
-            String str=i.getStringExtra("repair");
-             jsonObj = new JSONObject(str);
-            jsonObj.accumulate("problems_ids","");
-             for(int j=0;j<problemids.size();j++){
-                 jsonObj.accumulate("problems_ids",problemids.get(j));
-
-             }
-
-            Log.i("Repair Details",jsonObj.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        /*repairDetails.accumulate("problem_ids","");
-        repairDetails.accumulate("problem_ids","2");
-        repairDetails.accumulate("problem_ids","3");
-        repairDetails.put("other","");
-        repairDetails.put("phone","1");*/
 
     }
 

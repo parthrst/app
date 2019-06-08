@@ -88,7 +88,7 @@ public class RepairOrder1 extends AppCompatActivity
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //postOrder.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null), repairHolder.toString());
+            //postOrder.execute("https://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null), repairHolder.toString());
 
 
             Intent intent = new Intent(RepairOrder1.this, IssueActivity.class);
@@ -151,7 +151,7 @@ public class RepairOrder1 extends AppCompatActivity
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
-        repair.execute("http://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null));
+        repair.execute("https://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null));
 
 
 
@@ -265,7 +265,7 @@ public class RepairOrder1 extends AppCompatActivity
                             ArrayAdapter<CharSequence> laptopAdapter = ArrayAdapter.createFromResource(RepairOrder1.this, R.array.laptop_names, R.layout.support_simple_spinner_dropdown_item);
                             laptopAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                             laptopSeriesSearch.setAdapter(laptopAdapter);
-                            brand =Integer.toString(position);
+                            brand =parent.getSelectedItem().toString();
 
                         }
 
