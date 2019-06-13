@@ -43,7 +43,7 @@ public class ConfirnmationActivity extends AppCompatActivity
      String repairUrl;
      String orderUrl;
      String location;
-     String gadget;
+     String gadget="";
      String baseprice="";
      TextView  address;
      TextView baseamount;
@@ -81,7 +81,7 @@ backupselection=findViewById(R.id.backup_layout);
                  baseprice=baseprice+"150";
              else
                  baseprice=baseprice+"250";
-             Log.i("base",baseprice);
+            // Log.i("base",baseprice);
 baseamount.setText(baseprice);
          try {
              JSONObject detials = new JSONObject(str);
@@ -90,7 +90,7 @@ baseamount.setText(baseprice);
              modelString = detials.getString("repair");
              JSONObject inner = new JSONObject(modelString);
              String model_id = inner.getString("model_id");
-             Log.i("model", modelString);
+             //Log.i("model", modelString);
              String brandString = inner.getString("company_id");
 
              if (gadget.equals("Mobile")) {
@@ -142,7 +142,7 @@ baseamount.setText(baseprice);
              }
              model.setText(model_id);
              String problemString="";
-             JSONArray problem =inner.getJSONArray("problem_id");
+             JSONArray problem =inner.getJSONArray("problem_ids");
              for (int j = 0; j < problem.length(); j++) {
                  String code = problem.getString(j);
                  switch (code) {
@@ -172,6 +172,7 @@ baseamount.setText(baseprice);
                          break;
                  }
                  issue.setText(problemString);
+                 Log.i("issue",problemString);
                  String phone = inner.getString("phone");
                  if (phone.equals("1"))
                      backup.setText("30");
@@ -181,6 +182,7 @@ baseamount.setText(baseprice);
                      totalString = String.valueOf(Integer.parseInt(backup.getText().toString()) + Integer.parseInt(baseamount.getText().toString()));
                  } else
                      totalString = baseprice;
+                 Log.i("total",totalString);
                  total.setText(totalString);
                  Log.i("Detials", detials.toString());
              }
