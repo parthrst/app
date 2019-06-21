@@ -54,6 +54,7 @@ public class SignUp extends AppCompatActivity {
         mobileNo = findViewById(R.id.mobile);
         linearLayout=findViewById(R.id.progressbar_layout);
 
+
        // getSupportActionBar().hide();
 
     }
@@ -71,21 +72,37 @@ public class SignUp extends AppCompatActivity {
 
         try {
 
-            if (!(email.getText().toString().equals("") || password.getText().toString().equals("")))
+            if (!(email.getText().toString().equals("") || password.getText().toString().equals("")||cpassword.getText().toString().equals("")||name.getText().toString().equals("")||mobileNo.getText().toString().equals("")))
+            {
+                if(password.getText().toString().length()<6 )
+               {
+               Toast.makeText(this,"Password should be atleast 6 characters!",Toast.LENGTH_SHORT).show();
+             }
+           if(!password.getText().toString().equals(cpassword.getText().toString()))
+           {
+               Toast.makeText(this,"Password and Confirm Password must be same!",Toast.LENGTH_SHORT).show();
 
-            {   regDetails.put("email", email.getText().toString());
-                regDetails.put("name",name.getText().toString());
-                regDetails.put("mob", mobileNo.getText().toString());
-                regDetails.put("password", password.getText().toString());
-                regDetails.put("password_confirmation", password.getText().toString());
-                holder.put("user",regDetails);
-                CredentialsReg task = new CredentialsReg();
-                task.execute("http://www.amxdp.fun/api/registrations", holder.toString());
+           }
+           if(mobileNo.getText().toString().length()!=10  )
+           {
+               Toast.makeText(this,"Enter a valid Mobile Number!",Toast.LENGTH_SHORT).show();
+           }
+           else
+               {
+                   regDetails.put("email", email.getText().toString());
+                   regDetails.put("name", name.getText().toString());
+                   regDetails.put("mob", mobileNo.getText().toString());
+                   regDetails.put("password", password.getText().toString());
+                   regDetails.put("password_confirmation", cpassword.getText().toString());
+                   holder.put("user", regDetails);
+                   CredentialsReg task = new CredentialsReg();
+                   task.execute("http://www.amxdp.fun/api/registrations", holder.toString());
 
-            }
+               }
+           }
             else
             {
-                Toast.makeText(SignUp.this, "Login or Password can't be blank!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUp.this, "All fields should be filled!", Toast.LENGTH_SHORT).show();
             }
         }
         catch (Exception e)
@@ -159,6 +176,9 @@ public class SignUp extends AppCompatActivity {
                 if(response == "401")
                 {
                     Toast.makeText(SignUp.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
+                }
+                else if(response.equals("409")){
+                    Toast.makeText(SignUp.this, "Email already registered!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     try {
