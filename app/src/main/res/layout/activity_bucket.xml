@@ -33,6 +33,29 @@
             android:layout_height="wrap_content"
             />
     </LinearLayout>
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:padding="13dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/orderplace"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/emptyText"
+            android:fontFamily="@font/avenirlight"
+            android:textSize="25.311sp"
+            android:layout_height="wrap_content"
+            android:text="You don't have any orders yet!!"
+            />
+
+    </LinearLayout>
     <ExpandableListView
         android:id="@+id/exp"
         android:layout_width="match_parent"
@@ -45,5 +68,21 @@
         android:indicatorRight="@dimen/fab_elevation_lollipop"
 
 
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:textColor="#FFFFFF"
+        android:text="Request Repair"
+        android:id="@+id/order_repair_but"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/avenirheavy"
+        android:textSize="22.8sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="invisible"
+        android:onClick="repairOrder"
         />
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,6 +46,10 @@ public class Bucket extends AppCompatActivity {
     ArrayList<String> txnStatusList;
     LinearLayout linearLayout;
     TextView loadingMsg;
+    ///////////////////////NICHE KE 3 VARIABLES PASTE///////////////////////////////////
+    LinearLayout text;
+    Button repair;
+    int flag=0;
     @Override
     public void onBackPressed() {
         startActivity(new Intent(Bucket.this,RepairOrder1.class));
@@ -63,6 +68,9 @@ public class Bucket extends AppCompatActivity {
         addressList=new ArrayList<>();
         totalList=new ArrayList<>();
         mobileList=new ArrayList<>();
+        /////////////TEXT  AND REPAIR PASTE KRNA/////////////////////
+        text=findViewById(R.id.orderplace);
+        repair=findViewById(R.id.order_repair_but);
         loadingMsg = findViewById(R.id.loading);
         linearLayout=findViewById(R.id.progressbar);
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
@@ -105,6 +113,12 @@ public class Bucket extends AppCompatActivity {
         groupPosition = details.indexOf(info);
         return groupPosition;
     }
+    //////////CODE TO BE PASTED////////////////////////////
+    public void repairOrder(View view){
+        startActivity(new Intent(Bucket.this,RepairOrder1.class));
+
+    }
+    ///////////////////////////BS YAHAN TK/////////////////////////////////
     class Model extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute() {
@@ -138,63 +152,84 @@ public class Bucket extends AppCompatActivity {
             linearLayout.setVisibility(View.GONE);
               try {
                 JSONArray jsonArray = new JSONArray(response);
-                for (int i = 0; i < jsonArray.length(); ++i) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String id = jsonObject.getString("repair_id");
-                    String company_id=jsonObject.getString("company_name");
-                    String model_id=jsonObject.getString("model_name");
-                    JSONArray problem =jsonObject.getJSONArray("problem_id");
-                    String backup_phone=jsonObject.getString("phone");
-                    String address=jsonObject.getString("room")+","+jsonObject.getString("street")+","+jsonObject.getString("area")+","+jsonObject.getString("city");
-                    String txnstatus=jsonObject.getString("status");
-                    String phoneNo=jsonObject.getString("mobile");
-                    String total=jsonObject.getString("amount");
-                    String str="";
-                   Log.i("Repsonse",jsonObject.toString());
-                    for(int j=0;j<problem.length();j++) {
-                      String code=problem.getString(j);
-                      Log.i("problem",code);
-                      switch(code){
-                          case "0": str=str+"Battery Problem";
-                                       break;
-                          case "1":  str=str+"Button Problem,";
-                              break;
-                          case "2":  str=str+"Broken Screen,";
-                              break;
-                          case "3":  str=str+"Charging Problem,";
-                              break;
-                          case "4":  str=str+"Camera Problem,";
-                              break;
-                          case "5":  str=str+"Water Damage,";
-                              break;
-                          case "6":  str=str+"Headphone Jack Issue,";
-                              break;
-                          case "7":  str=str+"Software Issue,";
-                              break;
+                 ///////////////////PASTE START/////////
+                  if(jsonArray.toString().equals("[]")){
+
+                      text.setVisibility(View.VISIBLE);
+                      repair.setVisibility(View.VISIBLE);
+                  }
+                  else {
+                      flag=1;
+                      ///////////////////////PASTE END//////////////
+                      for (int i = 0; i < jsonArray.length(); ++i) {
+                          JSONObject jsonObject = jsonArray.getJSONObject(i);
+                          String id = jsonObject.getString("repair_id");
+                          String company_id = jsonObject.getString("company_name");
+                          String model_id = jsonObject.getString("model_name");
+                          JSONArray problem = jsonObject.getJSONArray("problem_id");
+                          String backup_phone = jsonObject.getString("phone");
+                          String address = jsonObject.getString("room") + "," + jsonObject.getString("street") + "," + jsonObject.getString("area") + "," + jsonObject.getString("city");
+                          String txnstatus = jsonObject.getString("status");
+                          String phoneNo = jsonObject.getString("mobile");
+                          String total = jsonObject.getString("amount");
+                          String str = "";
+                          Log.i("Repsonse", jsonObject.toString());
+                          for (int j = 0; j < problem.length(); j++) {
+                              String code = problem.getString(j);
+                              Log.i("problem", code);
+                              switch (code) {
+                                  case "0":
+                                      str = str + "Battery Problem";
+                                      break;
+                                  case "1":
+                                      str = str + "Button Problem,";
+                                      break;
+                                  case "2":
+                                      str = str + "Broken Screen,";
+                                      break;
+                                  case "3":
+                                      str = str + "Charging Problem,";
+                                      break;
+                                  case "4":
+                                      str = str + "Camera Problem,";
+                                      break;
+                                  case "5":
+                                      str = str + "Water Damage,";
+                                      break;
+                                  case "6":
+                                      str = str + "Headphone Jack Issue,";
+                                      break;
+                                  case "7":
+                                      str = str + "Software Issue,";
+                                      break;
+                              }
+                          }
+                          totalList.add(total);
+                          txnStatusList.add(txnstatus);
+                          addressList.add(address);
+                          mobileList.add(phoneNo);
+                          idList.add(id);
+                          modelList.add(model_id);
+                          brandList.add(company_id);
+                          problemidList.add(str);
+                          backupList.add(backup_phone);
                       }
-                    }
-                    totalList.add(total);
-                    txnStatusList.add(txnstatus);
-                    addressList.add(address);
-                    mobileList.add(phoneNo);
-                    idList.add(id);
-                    modelList.add(model_id);
-                    brandList.add(company_id);
-                    problemidList.add(str);
-                    backupList.add(backup_phone);
-                }
+                      //////////////////EK BRACKET PASTE///////////////////
+                  }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            for(int i=0;i<idList.size();i++)
-            {
-                add(idList.get(i),brandList.get(i),modelList.get(i),problemidList.get(i),backupList.get(i),addressList.get(i),totalList.get(i),mobileList.get(i),txnStatusList.get(i));
-            }
+              ////////////////IF CONDITION DAAL DIYO BS JO CODE HAI USPAO////////////////////
+              if(flag!=0) {
+                  for (int i = 0; i < idList.size(); i++) {
+                      add(idList.get(i), brandList.get(i), modelList.get(i), problemidList.get(i), backupList.get(i), addressList.get(i), totalList.get(i), mobileList.get(i), txnStatusList.get(i));
+                  }
 
-           adapter = new Dataadapter(Bucket.this, details);
-           listView.setAdapter(adapter);
-           listView.setVisibility(View.VISIBLE);
+                  adapter = new Dataadapter(Bucket.this, details);
+                  listView.setAdapter(adapter);
+                  listView.setVisibility(View.VISIBLE);
+              }
 
        }
     }

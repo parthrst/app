@@ -433,7 +433,7 @@ public class RepairOrder1 extends AppCompatActivity
             list2.addAll(seriesNames);
             try {
                 JSONArray jsonArray = new JSONArray(response);
-                
+
                 if(jsonArray.toString().equals("[]")){
                     getSupportActionBar().setTitle("Choose your device");
                     order();

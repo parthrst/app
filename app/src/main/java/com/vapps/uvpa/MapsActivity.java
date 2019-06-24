@@ -73,6 +73,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     JSONObject jsonObj;
     SharedPreferences sharedPreference;
     Intent j;
+    /////////flag declaration paste///////////////////////
+    int flag=0;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -242,11 +244,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             // orderDetails.put("id","13");
             hno = findViewById(R.id.hno);
             landmark = findViewById(R.id.lndmrk);
+            /////////////////////if else paste krna hai aur toast bhi and flag vali line bhi/////////////////////////////
+            if(hno.getText().toString().trim().equals("")||landmark.getText().toString().trim().equals("")){
+                Toast.makeText(this,"House number/Landmark cannot be left blank",Toast.LENGTH_SHORT).show();
+            }
             //orderDetails.put("repair_id", "230");
-            orderDetails.put("room", hno.getText().toString());
+           else{
+               flag=1;
+               orderDetails.put("room", hno.getText().toString());
+
             orderDetails.put("street", landmark.getText().toString());
             orderDetails.put("area", area);
             orderDetails.put("city", city);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -254,11 +264,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // order.execute("http://www.repairbuck.com/orders.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
         //startActivity(new Intent(MapsActivity.this, ConfirnmationActivity.class));
-        j.putExtra("location", orderDetails.toString());
-        j.putExtra("gadget",intentget.getStringExtra("gadget"));
-       // Log.i("order",  intentget.getStringExtra("gadget").toS);
-        Log.i("gadget",intentget.getStringExtra("gadget"));
-        startActivity(j);
+      /////// if condiontion paste//////////////////////////////
+        if(flag!=0) {
+           j.putExtra("location", orderDetails.toString());
+           j.putExtra("gadget", intentget.getStringExtra("gadget"));
+           // Log.i("order",  intentget.getStringExtra("gadget").toS);
+           Log.i("gadget", intentget.getStringExtra("gadget"));
+           startActivity(j);
+       }
     }
 
 

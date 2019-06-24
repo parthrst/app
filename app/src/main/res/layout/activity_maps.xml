@@ -105,6 +105,8 @@ android:orientation="vertical">
         android:fontFamily="@font/avenirlight"
         android:id="@+id/hno"
         android:layout_marginRight="22.5dp"
+        android:maxLines="1"
+        android:singleLine="true"
 
         />
     <TextView
@@ -119,6 +121,7 @@ android:orientation="vertical">
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
         android:layout_marginRight="22.5dp"
+
         />
 
     <EditText
@@ -133,6 +136,8 @@ android:orientation="vertical">
         android:id="@+id/lndmrk"
         android:layout_marginRight="22.5dp"
         android:layout_marginLeft="22.5dp"
+        android:maxLines="1"
+        android:singleLine="true"
         />
 
 
