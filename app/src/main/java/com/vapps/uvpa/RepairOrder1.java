@@ -151,7 +151,7 @@ public class RepairOrder1 extends AppCompatActivity
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
-        repair.execute("https://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null));
+        repair.execute("https://www.repairbuck.com/mobpayments.json?auth_token=" + sharedPreferences.getString("auth_token", null));
 
 
 
@@ -433,6 +433,7 @@ public class RepairOrder1 extends AppCompatActivity
             list2.addAll(seriesNames);
             try {
                 JSONArray jsonArray = new JSONArray(response);
+                
                 if(jsonArray.toString().equals("[]")){
                     getSupportActionBar().setTitle("Choose your device");
                     order();

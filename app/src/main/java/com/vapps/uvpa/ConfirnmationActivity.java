@@ -142,35 +142,71 @@ baseamount.setText(baseprice);
              }
              model.setText(model_id);
              String problemString="";
-             JSONArray problem =inner.getJSONArray("problem_ids");
-             for (int j = 0; j < problem.length(); j++) {
-                 String code = problem.getString(j);
-                 switch (code) {
-                     case "0":
-                         problemString = problemString + "Battery Problem";
-                         break;
-                     case "1":
-                         problemString = problemString + "Button Problem,";
-                         break;
-                     case "2":
-                         problemString = problemString + "Broken Screen,";
-                         break;
-                     case "3":
-                         problemString = problemString + "Charging Problem,";
-                         break;
-                     case "4":
-                         problemString = problemString + "Camera Problem,";
-                         break;
-                     case "5":
-                         problemString = problemString + "Water Damage,";
-                         break;
-                     case "6":
-                         problemString = problemString + "Headphone Jack Issue,";
-                         break;
-                     case "7":
-                         problemString = problemString + "Software Issue,";
-                         break;
-                 }
+             String problem = inner.getString("problem_ids");
+//Log.i("len",String.valueOf(p.length()));
+
+         if(problem.length()==1) {
+           String code = inner.getString("problem_ids");
+              switch (code) {
+                  case "0":
+
+                               problemString = problemString + "Battery Problem";break;
+                               case "1":
+                     problemString = problemString + "Button Problem,";
+                      break;
+                 case "2":
+                      problemString = problemString + "Broken Screen,";
+                      break;
+                  case "3":
+                      problemString = problemString + "Charging Problem,";
+                      break;
+                  case "4":
+                      problemString = problemString + "Camera Problem,";
+                      break;
+                  case "5":
+                      problemString = problemString + "Water Damage,";
+                      break;
+                  case "6":
+                      problemString = problemString + "Headphone Jack Issue,";
+                      break;
+                  case "7":
+                     problemString = problemString + "Software Issue,";
+                      break;
+              }
+          }
+          else{
+             JSONArray problems=inner.getJSONArray("problem_ids");
+              for (int j = 0; j < problems.length(); j++) {
+                  String code = problems.getString(j);
+                  Log.i("code", code);
+                  switch (code) {
+                      case "0":
+                          problemString = problemString + "Battery Problem";
+                          break;
+                      case "1":
+                          problemString = problemString + "Button Problem,";
+                          break;
+                      case "2":
+                          problemString = problemString + "Broken Screen,";
+                          break;
+                      case "3":
+                          problemString = problemString + "Charging Problem,";
+                          break;
+                      case "4":
+                          problemString = problemString + "Camera Problem,";
+                          break;
+                      case "5":
+                          problemString = problemString + "Water Damage,";
+                          break;
+                      case "6":
+                          problemString = problemString + "Headphone Jack Issue,";
+                          break;
+                      case "7":
+                          problemString = problemString + "Software Issue,";
+                          break;
+                  }
+              }
+             }
                  issue.setText(problemString);
                  Log.i("issue",problemString);
                  String phone = inner.getString("phone");
@@ -185,7 +221,7 @@ baseamount.setText(baseprice);
                  Log.i("total",totalString);
                  total.setText(totalString);
                  Log.i("Detials", detials.toString());
-             }
+
          }catch (JSONException e) {
              e.printStackTrace();
          }
