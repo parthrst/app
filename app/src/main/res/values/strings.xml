@@ -46,7 +46,7 @@
 
     <string-array name="device">
         <item>Mobile</item>
-        <item>Laptop</item>
+
 
     </string-array>
     <string-array name="laptop_names">

@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ConfirnmationActivity extends AppCompatActivity
  {
@@ -39,8 +40,8 @@ public class ConfirnmationActivity extends AppCompatActivity
      String repairUrl;
      String orderUrl;
      String location;
-     String gadget;
-     String baseprice="";
+     String gadget="";
+     Integer baseprice=0;
      TextView  address;
      TextView baseamount;
      TextView backup;
@@ -49,7 +50,7 @@ public class ConfirnmationActivity extends AppCompatActivity
      TextView model;
      TextView total;
      String addressString;
-     String modelString;
+     //String modelString;
      String totalString;
 
      LinearLayout backupselection;
@@ -61,6 +62,9 @@ public class ConfirnmationActivity extends AppCompatActivity
              super.onCreate(savedInstanceState);
              setContentView(R.layout.activity_confirnmation);
              intentget = getIntent();
+
+             linearLayout = findViewById(R.id.progressbar_layout);
+            // loadingMsg = findViewById(R.id.loading_msg);
              brand=findViewById(R.id.brand_disp);
              model=findViewById(R.id.model_disp);
              issue=findViewById(R.id.issue_disp);
@@ -68,118 +72,150 @@ public class ConfirnmationActivity extends AppCompatActivity
              backup=findViewById(R.id.backup_price);
              total=findViewById(R.id.total_disp);
              address=findViewById(R.id.address_disp);
-backupselection=findViewById(R.id.backup_layout);
+             backupselection=findViewById(R.id.backup_layout);
+            // linearLayout = findViewById(R.id.progressbar_layout);
              String str = intentget.getStringExtra("confirm");
               location = intentget.getStringExtra("location");
               gadget = intentget.getStringExtra("gadget");
+              Log.i("META10",str);
+             Log.i("META10",location);
+             Log.i("META10",gadget);
 
-              if(gadget.equals("Mobile"))
-                 baseprice=baseprice+"150";
-             else
-                 baseprice=baseprice+"250";
-             Log.i("base",baseprice);
-baseamount.setText(baseprice);
+                 baseprice=150;
+
+            // Log.i("base",baseprice);
+             baseamount.setText(baseprice.toString());
          try {
              JSONObject detials = new JSONObject(str);
              JSONObject det = new JSONObject(location);
              addressString = det.getString("room") + "," + det.getString("street") + "," + det.getString("area") + "," + det.getString("city");
-             modelString = detials.getString("repair");
-             JSONObject inner = new JSONObject(modelString);
+
+             JSONObject inner = detials.getJSONObject("repair");
+            // modelString = detials.getString("repair");
+
              String model_id = inner.getString("model_id");
-             Log.i("model", modelString);
+          //   Log.i("META10model", modelString);
              String brandString = inner.getString("company_id");
 
-             if (gadget.equals("Mobile")) {
-                 String brandFinal = "";
-                 switch (brandString) {
-                     case "51":
-                         brandFinal = brandFinal + "SAMSUNG";
-                         break;
-                     case "52":
-                         brandFinal = brandFinal + "XIAOMI";
-                         break;
-                     case "53":
-                         brandFinal = brandFinal + "MOTOROLA";
-                         break;
-                     case "54":
-                         brandFinal = brandFinal + "OPPO";
-                         break;
-                     case "55":
-                         brandFinal = brandFinal + "VIVO";
-                         break;
-                     case "56":
-                         brandFinal = brandFinal + "MICROMAX";
-                         break;
-                     case "57":
-                         brandFinal = brandFinal + "BLACKBERRY";
-                         break;
-                     case "58":
-                         brandFinal = brandFinal + "HTC";
-                         break;
-                     case "59":
-                         brandFinal = brandFinal + "LG";
-                         break;
-                     case "60":
-                         brandFinal = brandFinal + "SONY";
-                         break;
-                     case "61":
-                         brandFinal = brandFinal + "ONEPLUS";
-                         break;
-                     case "62":
-                         brandFinal = brandFinal + "NOKIA";
-                         break;
-                     case "63":
-                         brandFinal = brandFinal + "GIONEE";
-                         break;
-                 }
-                 brand.setText(brandFinal);
-             } else {
-                 brand.setText(brandString);
-             }
+                                         if (gadget.equals("Mobile"))
+                                         {
+                                             String brandFinal = "";
+                                             switch (brandString)
+                                             {
+                                                 case "1":
+                                                 {brandFinal = brandFinal + "SAMSUNG";
+                                                     break;}
+                                                 case "2":
+                                                 {  brandFinal = brandFinal + "XIAOMI";
+                                                     break;}
+                                                 case "3":
+                                                 {  brandFinal = brandFinal + "MOTOROLA";
+                                                     break;}
+                                                 case "4":
+                                                 {  brandFinal = brandFinal + "OPPO";
+                                                     break;}
+                                                 case "5":
+                                                 {  brandFinal = brandFinal + "VIVO";
+                                                     break;}
+                                                 case "6":
+                                                 { brandFinal = brandFinal + "MICROMAX";
+                                                     break;}
+                                                 case "7":
+                                                 { brandFinal = brandFinal + "BLACKBERRY";
+                                                     break;}
+                                                 case "8":
+                                                 {brandFinal = brandFinal + "HTC";
+                                                     break;}
+                                                 case "9":
+                                                 {   brandFinal = brandFinal + "LG";
+                                                     break;}
+                                                 case "10":
+                                                 { brandFinal = brandFinal + "SONY";
+                                                     break;}
+                                                 case "11":
+                                                 { brandFinal = brandFinal + "ONEPLUS";
+                                                     break;}
+                                                 case "12":
+                                                 { brandFinal = brandFinal + "NOKIA";
+                                                     break;}
+                                                 case "13":
+                                                 {  brandFinal = brandFinal + "GIONEE";
+                                                     break;}
+                                             }
+                                             brand.setText(brandFinal);
+                                         }
+
+                                         else
+                                             {
+                                                brand.setText(brandString);
+                                              }
              model.setText(model_id);
-             String problemString="";
-             JSONArray problem =inner.getJSONArray("problem_id");
-             for (int j = 0; j < problem.length(); j++) {
-                 String code = problem.getString(j);
-                 switch (code) {
-                     case "0":
-                         problemString = problemString + "Battery Problem";
-                         break;
-                     case "1":
-                         problemString = problemString + "Button Problem,";
-                         break;
-                     case "2":
-                         problemString = problemString + "Broken Screen,";
-                         break;
-                     case "3":
-                         problemString = problemString + "Charging Problem,";
-                         break;
-                     case "4":
-                         problemString = problemString + "Camera Problem,";
-                         break;
-                     case "5":
-                         problemString = problemString + "Water Damage,";
-                         break;
-                     case "6":
-                         problemString = problemString + "Headphone Jack Issue,";
-                         break;
-                     case "7":
-                         problemString = problemString + "Software Issue,";
-                         break;
-                 }
-                 issue.setText(problemString);
-                 String phone = inner.getString("phone");
-                 if (phone.equals("1"))
-                     backup.setText("30");
-                 else
-                     backup.setText("0");
-                 if (gadget.equals("Mobile")) {
-                     totalString = String.valueOf(Integer.parseInt(backup.getText().toString()) + Integer.parseInt(baseamount.getText().toString()));
-                 } else
-                     totalString = baseprice;
-                 total.setText(totalString);
-                 Log.i("Detials", detials.toString());
+             String phone = inner.getString("phone");
+             Log.i("total",phone);
+             if (phone.equals("1"))
+             { backup.setText("100");
+                 baseprice = baseprice+100;
+                 totalString = baseprice.toString();
              }
+
+             else
+             {    backup.setText("0");
+                 totalString = baseprice.toString();
+             }
+
+             Log.i("total",totalString);
+             total.setText(totalString);
+             Log.i("Detials", detials.toString());
+             String problemString="";
+             String bprob = inner.getString("problem_ids");
+             JSONArray problem = new JSONArray();
+             if(bprob.length()== 1)
+             {
+                 problem.put(bprob);
+             }
+            else {
+                 problem = inner.getJSONArray("problem_ids");
+             }
+             //ArrayList<String> strings;
+            // strings= inner.get
+                        for (int j = 0; j < problem.length(); j++)
+                        {
+                            String code = problem.getString(j);
+                            switch (code)
+                            {
+                                case "0":
+                                {  problemString = problemString + "Battery Problem,";
+                                    break;}
+                                case "1":
+                                {problemString = problemString + "Button Problem,";
+                                    break;}
+                                case "2":
+                                {   problemString = problemString + "Broken Screen,";
+                                    break;}
+                                case "3": {
+                                    problemString = problemString + "Charging Problem,";
+                                    break;
+                                }
+                                case "4":
+                                {   problemString = problemString + "Camera Problem,";
+                                    break;}
+                                case "5":
+                                {  problemString = problemString + "Water Damage,";
+                                    break;}
+                                case "6":
+                                {  problemString = problemString + "Headphone Jack Issue,";
+                                    break;}
+                                case "7":
+                                {problemString = problemString + "Software Issue,";
+                                    break;}
+                            }
+                            issue.setText(problemString);
+                            Log.i("issue", problemString);
+                        }
+
+
+
+
          }catch (JSONException e) {
              e.printStackTrace();
          }
@@ -197,12 +233,14 @@ baseamount.setText(baseprice);
              getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
              sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
              postOrder = new PostOrder();
-             linearLayout = findViewById(R.id.progressbar_layout);
-             loadingMsg = findViewById(R.id.loading_msg);
 
-             try {
+
+             try
+             {
                  jsonObj = new JSONObject(str);
-             } catch (JSONException e) {
+             }
+             catch (JSONException e)
+             {
                  e.printStackTrace();
              }
 
@@ -217,7 +255,9 @@ baseamount.setText(baseprice);
 
      Intent intent = new Intent(ConfirnmationActivity.this,Checksum.class);
      intent.putExtra("gadget",gadget);
+     intent.putExtra("totalAmount",totalString);
      startActivity(intent);
+     finish();
 
  }
 
@@ -229,7 +269,7 @@ baseamount.setText(baseprice);
          protected void onPreExecute() {
              super.onPreExecute();
            //  loadingMsg.setText("Loading");
-             //linearLayout.setVisibility(View.VISIBLE);
+             linearLayout.setVisibility(View.VISIBLE);
          }
 
          @Override
@@ -269,7 +309,7 @@ baseamount.setText(baseprice);
          protected void onPostExecute(String response)
          {
 
-        //     linearLayout.setVisibility(View.INVISIBLE);
+          linearLayout.setVisibility(View.INVISIBLE);
              super.onPostExecute(response);
             try {
                 JSONObject jsonResponse = new JSONObject(response);
@@ -294,7 +334,6 @@ baseamount.setText(baseprice);
                 orderHolder.put("order", orderDetails);
                 Log.i("VANIK1", orderHolder.toString());
                 postLocation.execute(orderUrl + sharedPreferences.getString("auth_token", null), orderHolder.toString());
-
 
             }
 
@@ -335,7 +374,7 @@ baseamount.setText(baseprice);
          protected void onPreExecute() {
              super.onPreExecute();
              // loadingMsg.setText("Loading");
-             //linearLayout.setVisibility(View.VISIBLE);
+             linearLayout.setVisibility(View.VISIBLE);
          }
 
          @Override
@@ -373,7 +412,7 @@ baseamount.setText(baseprice);
          protected void onPostExecute(String response)
          {
 
-             //linearLayout.setVisibility(View.INVISIBLE);
+             linearLayout.setVisibility(View.INVISIBLE);
              super.onPostExecute(response);
              try {
                  JSONObject jsonResponse = new JSONObject(response);
@@ -382,6 +421,7 @@ baseamount.setText(baseprice);
                  JSONObject jsonObject = new JSONObject(response);
                  String orderid = "";
                  orderid = jsonObject.getString("id");
+                 Log.i("VANIK",orderid);
                  editor.putString("order_id",orderid);
                  editor.apply();
 

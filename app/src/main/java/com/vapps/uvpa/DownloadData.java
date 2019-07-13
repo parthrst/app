@@ -1,5 +1,6 @@
 package com.vapps.uvpa;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,32 +17,41 @@ import java.util.regex.Pattern;
 public class  DownloadData extends AppCompatActivity
 {
 
+    SharedPreferences sharedPreferences;
     ArrayList<String> phoneURLs = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_data);
-
-        for (int i = 1 ; i <2 ; ++i )
-
-        { newlist(i);}
+        sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
+        newlist();
  }
 
 
 
-public void newlist(int i) {
+public void newlist() {
 
     DownloadTask task = new DownloadTask();
     String result = null;
 
     try {
-        result = task.execute("https://www.gsmarena.com/xiaomi-phones-f-80-0-p"+i+".php").get();
-        String[] splitResult = result.split("<div class=\"review-nav pullNeg col pushT10 \">");
-        Pattern p = Pattern.compile("<strong><span>(.*?)</span></strong>");
-        Matcher m = p.matcher(splitResult[0]);
-        while (m.find()) {
+        result = task.execute("https://www.repairbuck.com/repairs?auth_token="+sharedPreferences.getString("auth_token", null)).get();
+        Log.i("METAres",result);
+        String[] splitResult = result.split("<div class=\"need-space\">");
+        Log.i("METAsplit",splitResult[1]);
+
+        Pattern p = Pattern.compile("<span class=\"badge badge-success\">(.*?)</span>",Pattern.DOTALL);
+        Matcher m = p.matcher(splitResult[1]);
+        Pattern p1 = Pattern.compile("<span class=\"badge badge-success\">(.*?)</span>",Pattern.DOTALL);
+        Matcher m1 = p1.matcher(splitResult[1]);
+
+
+        Log.i("META1",m.toString());
+        while (m.find())
+        {
             phoneURLs.add(m.group(1));
+            Log.i("META2",m.group(1));
         }
 
     } catch (InterruptedException | ExecutionException e1) {

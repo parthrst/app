@@ -18,7 +18,7 @@
      <Button
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="Place Order"
+         android:text="Place Repair"
          android:background="@color/colorBlack"
          android:textColor="#FFFFFF"
          android:fontFamily="@font/avenirheavy"
@@ -31,7 +31,7 @@
      <Button
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="View Orders"
+         android:text="View Repairs"
          android:background="@color/colorBlack"
          android:textColor="#FFFFFF"
          android:layout_marginTop="15dp"
@@ -210,7 +210,7 @@
         android:background="@color/colorBlack"
         android:textColor="#FFFFFF"
         android:onClick="OrderRepair"
-        android:text="Order Repair"
+        android:text="CONTINUE"
         android:id="@+id/order_repair_but"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"

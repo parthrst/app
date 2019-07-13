@@ -16,11 +16,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class BackupPhoneSelection extends AppCompatActivity {
+public class BackupPhoneSelection extends AppCompatActivity
+{
     RadioGroup radioGroup;
     RadioButton radioButton;
     Intent  i;
-    String ph;
+    String ph="";
     JSONObject jsonObj;
 
     @Override
@@ -29,7 +30,7 @@ public class BackupPhoneSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup_phone_selection);
         radioGroup=findViewById(R.id.rg);
-        ph="";
+      //  ph="";
 
     }
     public void check(View view){

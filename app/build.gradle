@@ -6,12 +6,13 @@ android {
         applicationId "com.vapps.uvpa"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 11
+        versionName "1.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-    buildTypes {
+    buildTypes
+            {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -59,8 +60,9 @@ dependencies {
 
     //circle imageview
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation('com.paytm:pgplussdk:1.2.3') {
-        transitive = true;
+    implementation('com.paytm:pgplussdk:1.2.3')
+            {
+        transitive = true
     }
 }
 apply plugin: 'com.google.gms.google-services'

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,12 +55,11 @@ public class IssueActivity extends AppCompatActivity
         try {
             String str = i.getStringExtra("repair");
             jsonObj = new JSONObject(str);
-            for (int j = 0; j < problemids.size(); j++)
-            {
-                jsonObj.accumulate("problem_ids", problemids.get(j));
-              //  jsonObj.put("problem_ids", problemids);
-                Log.i("Repair Details", jsonObj.toString());
-            }
+            Log.i("META10",problemids.toString());
+            JSONArray jsonArray = new JSONArray(problemids);
+            Log.i("META10",jsonArray.toString());
+            jsonObj.put("problem_ids",jsonArray);
+
             } catch(JSONException e)
         {
                 e.printStackTrace();

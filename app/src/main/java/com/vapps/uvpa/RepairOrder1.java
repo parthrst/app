@@ -30,7 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -151,7 +151,7 @@ public class RepairOrder1 extends AppCompatActivity
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
-        repair.execute("https://www.repairbuck.com/repairs.json?auth_token=" + sharedPreferences.getString("auth_token", null));
+        repair.execute("https://www.repairbuck.com/mobpayments.json?auth_token=" + sharedPreferences.getString("auth_token", null));
 
 
 
@@ -166,7 +166,12 @@ public class RepairOrder1 extends AppCompatActivity
         }
         else
         {
-            super.onBackPressed();
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+
+
         }
     }
 
@@ -205,7 +210,17 @@ public class RepairOrder1 extends AppCompatActivity
         }
         else if (id == R.id.nav_share)
         {
-
+            try {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Repairbuck");
+                String shareMessage= "\nGet your phone repaired at\n\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=com.vapps.uvpa" + BuildConfig.APPLICATION_ID +"\n\n";
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            } catch(Exception e) {
+                //e.toString();
+            }
         }
        else if (id == R.id.about)
        {
@@ -294,8 +309,9 @@ public class RepairOrder1 extends AppCompatActivity
                     spinner.setAdapter(adapter);
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            brand =Integer.toString(position+51);
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                        {
+                            brand =Integer.toString(position+1);
                             ModelLoader modelLoader = new ModelLoader();
                             modelLoader.execute("https://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
                         }
@@ -402,7 +418,8 @@ public class RepairOrder1 extends AppCompatActivity
         }
 
         @Override
-        protected String doInBackground(String... urls) {
+        protected String doInBackground(String... urls)
+        {
             try
             {
                 String result;

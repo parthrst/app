@@ -73,7 +73,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     JSONObject jsonObj;
     SharedPreferences sharedPreference;
     Intent j;
-
+    int flag=0;
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -100,18 +100,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exit?")
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        MapsActivity.super.onBackPressed();
-                    }
-                }).create().show();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,24 +232,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             hno = findViewById(R.id.hno);
             landmark = findViewById(R.id.lndmrk);
             //orderDetails.put("repair_id", "230");
-            orderDetails.put("room", hno.getText().toString());
-            orderDetails.put("street", landmark.getText().toString());
-            orderDetails.put("area", area);
-            orderDetails.put("city", city);
-
+            if (hno.getText().toString().trim().equals("") || landmark.getText().toString().trim().equals("")) {
+                Toast.makeText(this, "House number/Landmark cannot be left blank", Toast.LENGTH_SHORT).show();
+            }
+            //orderDetails.put("repair_id", "230");
+            else {
+                flag = 1;
+                orderDetails.put("room", hno.getText().toString());
+                orderDetails.put("street", landmark.getText().toString());
+                orderDetails.put("area", area);
+                orderDetails.put("city", city);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         // order.execute("http://www.repairbuck.com/orders.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
         //startActivity(new Intent(MapsActivity.this, ConfirnmationActivity.class));
-        j.putExtra("location", orderDetails.toString());
-        j.putExtra("gadget",intentget.getStringExtra("gadget"));
-       // Log.i("order",  intentget.getStringExtra("gadget").toS);
-        Log.i("gadget",intentget.getStringExtra("gadget"));
-        startActivity(j);
+        if (flag != 0) {
+            j.putExtra("location", orderDetails.toString());
+            j.putExtra("gadget", intentget.getStringExtra("gadget"));
+            // Log.i("order",  intentget.getStringExtra("gadget").toS);
+            Log.i("gadget", intentget.getStringExtra("gadget"));
+            startActivity(j);
+        }
     }
-
 
 }
 /*

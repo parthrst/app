@@ -54,7 +54,7 @@
     <TextView
         android:textColor="#454343"
         android:fontFamily="@font/avenirlightoblique"
-        android:text="(Approx. repair time : 7 Days)"
+        android:text="(Approx. repair time : 5 Days)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18.311sp"
