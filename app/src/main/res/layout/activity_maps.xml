@@ -121,6 +121,7 @@ android:orientation="vertical">
         android:layout_marginLeft="22.5dp"
         android:fontFamily="@font/averinroman"
         android:layout_marginRight="22.5dp"
+
         />
 
     <EditText
