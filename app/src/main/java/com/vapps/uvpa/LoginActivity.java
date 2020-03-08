@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity
                 loginDetails.put("password", mUserPassword.getText().toString());
                 holder.put("user", loginDetails);
                 CredentialsVerifier task = new CredentialsVerifier();
-                task.execute("http://www.amxdp.fun/api/sessions", holder.toString());
+                task.execute("http://www.vanikjain.com/api/sessions", holder.toString());
             }
             else
                 {

@@ -137,8 +137,7 @@ public class RepairOrder1 extends AppCompatActivity
         mobileSeriesSearch.setVisibility(View.GONE);
         place=findViewById(R.id.place);
         orderView=findViewById(R.id.view);
-
-
+        
         View headerView = navigationView.getHeaderView(0);
 
         textViewEmail = headerView.findViewById(R.id.textViewEmail);

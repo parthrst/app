@@ -58,23 +58,23 @@
 
             />
 
-    <EditText
-        android:inputType="textEmailAddress"
-        android:hint="Email"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18.311sp"
-        android:textColor="#0d0101"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginTop="1.373dp"
-        android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginLeft="22.5dp"
+        <EditText
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#0d0101"
+            android:lineSpacingExtra="6.867sp"
+            android:layout_marginTop="1.373dp"
+            android:fontFamily="@font/avenirlight"
+            android:layout_marginRight="22.5dp"
+            android:layout_marginLeft="22.5dp"
 
-        />
+            />
         <EditText
 
             android:hint="Name"
@@ -110,65 +110,65 @@
 
             />
 
-    <EditText
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18.311sp"
-        android:textColor="#0d0101"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginTop="1.373dp"
-        android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginLeft="22.5dp"
+        <EditText
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#0d0101"
+            android:lineSpacingExtra="6.867sp"
+            android:layout_marginTop="1.373dp"
+            android:fontFamily="@font/avenirlight"
+            android:layout_marginRight="22.5dp"
+            android:layout_marginLeft="22.5dp"
 
-        />
-
-
-    <EditText
-        android:inputType="textPassword"
-        android:hint="Confirm Password"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:id="@+id/cpassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18.311sp"
-        android:textColor="#0d0101"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginTop="1.373dp"
-        android:fontFamily="@font/avenirlight"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginLeft="22.5dp"
-
-        />
+            />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Already have an account?"
-        android:onClick="Login"
-        android:textSize="15.311sp"
-        android:textColor="#525050"
-        android:lineSpacingExtra="6.867sp"
-        android:layout_marginTop="5.117dp"
-        android:layout_marginLeft="22.5dp"
-        android:fontFamily="@font/averinroman"
-        android:layout_marginRight="22.5dp"
+        <EditText
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/cpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18.311sp"
+            android:textColor="#0d0101"
+            android:lineSpacingExtra="6.867sp"
+            android:layout_marginTop="1.373dp"
+            android:fontFamily="@font/avenirlight"
+            android:layout_marginRight="22.5dp"
+            android:layout_marginLeft="22.5dp"
+
+            />
 
 
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Already have an account?"
+            android:onClick="Login"
+            android:textSize="15.311sp"
+            android:textColor="#525050"
+            android:lineSpacingExtra="6.867sp"
+            android:layout_marginTop="5.117dp"
+            android:layout_marginLeft="22.5dp"
+            android:fontFamily="@font/averinroman"
+            android:layout_marginRight="22.5dp"
+
+
+            />
 
 
 
 
-</LinearLayout>
+    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
