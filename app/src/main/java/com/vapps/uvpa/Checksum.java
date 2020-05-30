@@ -82,7 +82,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         {
             e.printStackTrace();
         }
-        payment.execute("https://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
+       // payment.execute("https://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
 // vollye , retrofit, asynch
 
     }
@@ -112,6 +112,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         }
         protected String doInBackground(ArrayList<String>... alldata)
         {
+
             JSONParser jsonParser = new JSONParser(Checksum.this);
             String param=
                     "MID="+mid+

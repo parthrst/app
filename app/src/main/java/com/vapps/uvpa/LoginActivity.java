@@ -48,10 +48,10 @@ public class LoginActivity extends AppCompatActivity
 
     //---------------------------Sign Up-------------------------------------//
 
-    public void SignUp(View view)
-    {
-        startActivity(new Intent(LoginActivity.this, SignUp.class));
-    }
+//    public void SignUp(View view)
+//    {
+//        startActivity(new Intent(LoginActivity.this, SignUp.class));
+//    }
 
     //--------------------------resetPassword------------------------------//
     public void resetPassword(View view) {
@@ -65,13 +65,21 @@ public class LoginActivity extends AppCompatActivity
         JSONObject loginDetails = new JSONObject();
         JSONObject holder = new JSONObject();
         try {
-            if (!(mUserEmail.getText().toString().equals("") || mUserPassword.getText().toString().equals("")))
-            {
-                loginDetails.put("email", mUserEmail.getText().toString());
-                loginDetails.put("password", mUserPassword.getText().toString());
-                holder.put("user", loginDetails);
-                CredentialsVerifier task = new CredentialsVerifier();
-                task.execute("http://www.amxdp.fun/api/sessions", holder.toString());
+            if (!(mUserEmail.getText().toString().equals("") || mUserPassword.getText().toString().equals(""))) {
+                if (mUserEmail.getText().toString().equals("User") && mUserPassword.getText().toString().equals("password")||mUserEmail.getText().toString().equals("amxdp18@gmail.com")&&mUserPassword.getText().toString().equals("123456"))
+                { SharedPreferences.Editor editor = sharedPreferences.edit();
+                String userid=mUserEmail.getText().toString();
+                    editor.putString("user_id",userid);
+                    startActivity(new Intent(LoginActivity.this, RepairOrder1.class));}
+                else
+                {Toast.makeText(this, "INCORRECT CREDENTIALS! TRY  AGAIN", Toast.LENGTH_SHORT).show();}
+//                loginDetails.put("email", mUserEmail.getText().toString());
+//                loginDetails.put("password", mUserPassword.getText().toString());
+//                holder.put("user", loginDetails);
+//                CredentialsVerifier task = new CredentialsVerifier();
+//
+//                startActivity(new Intent(LoginActivity.this,RepairOrder1.class));
+//                task.execute("http://www.amxdp.fun/api/sessions", holder.toString());
             }
             else
                 {

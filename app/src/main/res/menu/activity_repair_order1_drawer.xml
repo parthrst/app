@@ -6,11 +6,7 @@
     <group android:checkableBehavior="single">
 
 
-        <item
-            android:id="@+id/bucket"
-            android:icon="@drawable/ic_bucket"
-            android:title="Your Orders"
-            />
+
         <item
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_signout"

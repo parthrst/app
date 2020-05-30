@@ -27,14 +27,78 @@
         <item>OPPO</item>
         <item>VIVO</item>
         <item>MICROMAX</item>
-        <item>BLACKBERRY</item>
         <item>HTC</item>
         <item>LG</item>
         <item>SONY</item>
         <item>ONEPLUS</item>
         <item>NOKIA</item>
-        <item>GIONEE</item>
+
     </string-array>
+    <string-array name="SAMSUNG">
+        <item>Galaxy Note9</item><item>Galaxy S9+</item><item>Galaxy S9</item><item>Galaxy Note8</item><item>Galaxy S8+</item><item>Galaxy S8</item>
+        <item>Galaxy S7 edge</item><item>Galaxy S7</item><item>Galaxy S6 edge+</item><item>Note 5</item><item>Galaxy A8+</item>
+        <item>Galaxy A7 (2017)</item><item>Galaxy A5 (2017)</item><item>A5 (2016)</item><item>A7 (2016)</item>
+
+    </string-array>
+    <string-array name="XAIOMI">
+        <item>Redmi K30</item><item>Mi Note 10 Pro</item><item>Mi Note 10</item><item>Redmi Note 8T</item><item>Redmi 8</item><item>Redmi 8A</item>
+        <item>Redmi Note 8 Pro</item><item>Poco F1</item><item>Redmi Y2</item><item>Redmi Y3</item><item>Mi A3</item><item>Mi A2</item><item>Redmi K20 Pro</item>
+        <item>Redmi K20</item><item>Mi 7A</item>
+    </string-array>
+    <string-array name="MOTOROLA">
+      <item>Moto X4</item><item>Moto G5S Plus</item><item>Moto G5S</item><item>Moto Z2 Force</item><item>Moto E4 Plus</item><item>Moto Z2 Play</item>
+        <item>Moto C Plus</item><item>Moto C</item><item>Moto G5 Plus</item><item>Moto G5</item><item>Moto Z Play</item><item>Moto E3</item>
+        <item>Moto Z Force</item><item>Moto G4 Plus</item><item>Moto G4 Play</item>
+    </string-array>
+    <string-array name="OPPO">
+        <item>F7</item><item>R15 Pro</item><item>R15</item><item>A1</item><item>A71 (2018)</item><item>A83</item><item>F5 Youth</item>
+        <item>F5</item><item>R11s Plus</item><item>R11s</item><item>A71</item><item>A77</item><item>R11 Plus</item><item>R11</item>
+        <item>A77 (Mediatek)</item>
+    </string-array>
+    <string-array name="VIVO">
+        <item>V9</item>
+        <item>X21 UD</item>
+        <item>X21</item>
+        <item>V7</item>
+        <item>X20 Plus</item>
+        <item>X20 Plus UD</item>
+        <item>X20</item>
+        <item>V7+</item>
+        <item>Y65</item>
+        <item>Y69</item><item>Y53</item><item>X9s Plus</item><item>X9s</item><item>V5s</item><item>Y25</item>
+
+    </string-array>
+    <string-array name="MICROMAX">
+        <item>Canvas Infinity Life</item><item>Bharat 5 Pro</item><item>Bharat 5 Plus</item><item>Bharat 5</item><item>Canvas Infinity Pro</item>
+        <item>Bharat 2 Ultra</item><item>Dual 4 E4816</item><item>Canvas Selfie 3 Q460</item><item>Bharat 4 Q440</item>
+        <item>Bharat 3 Q437</item><item>Bharat 2+</item><item>Selfie 2 Note Q4601</item><item>Canvas Infinity</item><item>Evok Dual Note E4815</item>
+        <item>Selfie 2 Q4311</item>
+    </string-array>
+    <string-array name="HTC">
+        <item>Desire 326G dual sim</item><item>One M9+</item><item>One M8s</item><item>One E9+</item><item>One E9</item><item>One M9</item>
+        <item>Desire 820s dual sim</item><item>Desire 626G+</item><item>Desire 626</item><item>Desire 526G+ dual sim</item>
+        <item>Desire 826 dual sim</item><item>Desire 320</item><item>Desire 620G dual sim</item><item>Desire 620</item><item>Nexus 9</item>
+    </string-array>
+    <string-array name="LG">
+        <item>V30S ThinQ</item><item>Zone 4</item><item>K10 (2018)</item><item>K8 (2018)</item><item>Aristo 2</item><item>X4+</item>
+        <item>V30</item><item>Q8</item><item>Q6</item><item>G Pad IV 8.0 FHD</item><item>X venture</item><item>G6</item><item>X power2</item>
+        <item>Watch Sport</item><item>Watch Style</item>
+    </string-array>
+    <string-array name="SONY">
+        <item>Xperia XZ2</item><item>Xperia XZ2 Compact</item><item>Xperia XA2 Ultra</item><item>Xperia XA2</item><item>Xperia L2</item>
+        <item>Xperia R1 (Plus)</item><item>Xperia XZ1</item><item>Xperia XA1 Plus</item><item>Xperia XZ1 Compact</item>
+    <item> Xperia L1</item><item>Xperia XZs</item><item>Xperia XZ Premium</item><item>Xperia XA1 Ultra</item><item>Xperia XA1</item><item>Xperia X Compact</item>
+    </string-array>
+    <string-array name="ONEPLUS">
+        <item>5T</item><item>3T</item><item>One</item><item>5</item><item>3</item><item>X</item><item>2</item><item>7 Pro 5G</item>
+        <item>7 Pro</item><item>7</item><item>6T McLaren</item><item>6T</item><item>6</item>
+    </string-array>
+    <string-array name="NOKIA">
+        <item>8110 4G</item><item>8 Sirocco</item><item>7 plus</item><item>6 (2018)</item><item>3310 4G</item><item>3310 3G</item>105 (2017)<item>130 (2017)</item>
+        <item>3310 (2017)</item><item>150</item><item>216</item><item>230 Dual SIM</item><item>230</item><item>222 Dual SIM</item><item>222</item>
+    </string-array>
+
+
     <string-array name="lap_brand">
         <item>Dell</item>
         <item>Sony</item>

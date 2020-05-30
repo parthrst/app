@@ -136,7 +136,7 @@ public class RepairOrder1 extends AppCompatActivity
         loadingMsg = findViewById(R.id.loading_msg);
         mobileSeriesSearch.setVisibility(View.GONE);
         place=findViewById(R.id.place);
-        orderView=findViewById(R.id.view);
+        //orderView=findViewById(R.id.view);
 
 
         View headerView = navigationView.getHeaderView(0);
@@ -151,7 +151,7 @@ public class RepairOrder1 extends AppCompatActivity
         ArrayAdapter<CharSequence> deviceAdapter = ArrayAdapter.createFromResource(this,R.array.device,R.layout.support_simple_spinner_dropdown_item);
         deviceAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         device.setAdapter(deviceAdapter);
-        repair.execute("https://www.repairbuck.com/mobpayments.json?auth_token=" + sharedPreferences.getString("auth_token", null));
+       // repair.execute("https://www.repairbuck.com/mobpayments.json?auth_token=" + sharedPreferences.getString("auth_token", null));
 
 
 
@@ -198,12 +198,8 @@ public class RepairOrder1 extends AppCompatActivity
         int id = item.getItemId();
 
 
-        if (id == R.id.bucket)
-        {
-            startActivity(new Intent(RepairOrder1.this,Bucket.class));
 
-        }
-        else if (id == R.id.nav_share)
+       if (id == R.id.nav_share)
         {
 
         }
@@ -239,10 +235,10 @@ public class RepairOrder1 extends AppCompatActivity
         order();
 
     }
-    public void viewOrder(View view)
-    {
-        startActivity( new Intent(RepairOrder1.this,Bucket.class));
-    }
+//    public void viewOrder(View view)
+//    {
+//        startActivity( new Intent(RepairOrder1.this,Bucket.class));
+//    }
     public void order()
     {
         gadget="";model="";brand="";
@@ -295,9 +291,39 @@ public class RepairOrder1 extends AppCompatActivity
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            ArrayAdapter<CharSequence> adapter= null;
                             brand =Integer.toString(position+51);
                             ModelLoader modelLoader = new ModelLoader();
-                            modelLoader.execute("https://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
+                            String str=parent.getSelectedItem().toString();
+                            if(str.equals("SAMSUNG"))
+                             adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.SAMSUNG, R.layout.support_simple_spinner_dropdown_item);
+                            if(str.equals("XAIOMI"))
+                                adapter=ArrayAdapter.createFromResource(RepairOrder1.this, R.array.XAIOMI, R.layout.support_simple_spinner_dropdown_item);
+                            if(str.equals("MICROMAX"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.MICROMAX, R.layout.support_simple_spinner_dropdown_item);
+                            if(str.equals("OPPO"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.OPPO, R.layout.support_simple_spinner_dropdown_item);
+                            if(str.equals("VIVO"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.VIVO, R.layout.support_simple_spinner_dropdown_item);
+                            if(str.equals("MOTOROLA"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.MOTOROLA, R.layout.support_simple_spinner_dropdown_item);
+                            if(str.equals("ONEPLUS"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.ONEPLUS, R.layout.support_simple_spinner_dropdown_item);
+                            if(str.equals("SONY"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.SONY, R.layout.support_simple_spinner_dropdown_item);
+
+                            if(str.equals("NOKIA"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.NOKIA,R.layout.support_simple_spinner_dropdown_item);
+
+                            if(str.equals("LG"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.LG, R.layout.support_simple_spinner_dropdown_item);
+
+                            if(str.equals("HTC"))
+                                adapter= ArrayAdapter.createFromResource(RepairOrder1.this, R.array.HTC, R.layout.support_simple_spinner_dropdown_item);
+
+                            mobileSeriesSearch.setAdapter(adapter);
+                            //modelLoader.execute("https://www.repairbuck.com/models/cmodel?name=" + parent.getSelectedItem().toString());
+                            
                         }
 
                         @Override
@@ -366,18 +392,19 @@ public class RepairOrder1 extends AppCompatActivity
             super.onPostExecute(response);
             linearLayout.setVisibility(View.INVISIBLE);
             list2.addAll(seriesNames);
-            try {
-                JSONArray jsonArray = new JSONArray(response);
-                for(int i=0; i < jsonArray.length() ; ++i)
-                {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String series = jsonObject.getString("name");
-                    seriesNames.add(series);
-                }
-            } catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
+            //try {
+                Log.i("Response",response);
+//                JSONArray jsonArray = new JSONArray(response);
+//                for(int i=0; i < jsonArray.length() ; ++i)
+//                {
+//                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                    String series = jsonObject.getString("name");
+//                    seriesNames.add(series);
+//                }
+//            } catch (JSONException e)
+//            {
+//                e.printStackTrace();
+//            }
             seriesNames.removeAll(list2);
             list2.clear();
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(RepairOrder1.this, R.layout.support_simple_spinner_dropdown_item, seriesNames);

@@ -61,7 +61,7 @@ public class BackupPhoneSelection extends AppCompatActivity {
                      j.putExtra("order", repairHolder.toString());
                      j.putExtra("gadget",i.getStringExtra("gadget"));
                     Log.i("gadget",i.getStringExtra("gadget"));
-                     startActivity(j);
+                    startActivity(j);
 
 
                 }

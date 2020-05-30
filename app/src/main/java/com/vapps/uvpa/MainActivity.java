@@ -33,28 +33,31 @@ SharedPreferences sharedPreferences;
             Window window = getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.colorBlack));
         }
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                           startActivity(intent);
+      //startActivity(new Intent(MainActivity.this, RepairOrder1.class));
 
-        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
+//        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
 
 
-        new Handler().postDelayed
-                (new Runnable() {
-                    @Override
-                    public void run()
-                    {
-                        String token = sharedPreferences.getString("auth_token",null);
-                        if (token != null)
-                        {
-                            startActivity(new Intent(MainActivity.this, RepairOrder1.class));
-
-                        }
-                        else {
-                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                        }
-                        finish();
-                    }
-                }, 700);
+//        new Handler().postDelayed
+//                (new Runnable() {
+//                    @Override
+//                    public void run()
+//                    {
+//                        String token = sharedPreferences.getString("auth_token",null);
+//                        if (token != null)
+//                        {
+//                            startActivity(new Intent(MainActivity.this, RepairOrder1.class));
+//
+//                        }
+//                        else {
+//                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                            startActivity(intent);
+//                        }
+//                        finish();
+//                    }
+//                }, 700);
 
 
     }

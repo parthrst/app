@@ -151,7 +151,20 @@ public class Bucket extends AppCompatActivity {
 
             linearLayout.setVisibility(View.GONE);
               try {
-                JSONArray jsonArray = new JSONArray(response);
+                  String rep="{" +"  \"repair\": {"+"\"repair_id\": 1,\n" +
+                          "    \"company_name\": \"SAMSUNG\",\n" +
+                          "    \"model_name\": \"Galaxy S7\",\n" +
+                          "    \"problem_id\": [\n" +
+                          "      1,\n" +
+                          "      2\n" +
+                          "    ]\n" +
+                          "  },\n" +
+                          "  \"status\": \"true\",\n" +
+                          "  \"phone\": 8851211272,\n" +
+                          "  \"amount\": 150\n" +
+                          "}";
+
+                JSONArray jsonArray = new JSONArray(rep);
                  ///////////////////PASTE START/////////
                   if(jsonArray.toString().equals("[]")){
 
@@ -204,6 +217,7 @@ public class Bucket extends AppCompatActivity {
                                       break;
                               }
                           }
+
                           totalList.add(total);
                           txnStatusList.add(txnstatus);
                           addressList.add(address);
