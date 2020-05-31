@@ -76,7 +76,7 @@ public class Bucket extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         String auth=sharedPreferences.getString("auth_token",null);
         Model modelLoader = new Model();
-        modelLoader.execute("https://www.repairbuck.com/mobpayments.json?auth_token="+auth);
+        modelLoader.execute("https://mobile-rb.herokuapp.com/mobpayments.json?auth_token="+auth);
           }
     public int add(String id,String brand,String model,String problem,String backup,String address,String total,String txnid,String txnstatus ) {
         int groupPosition = 0;

@@ -96,7 +96,7 @@ public class SignUp extends AppCompatActivity {
                    regDetails.put("password_confirmation", cpassword.getText().toString());
                    holder.put("user", regDetails);
                    CredentialsReg task = new CredentialsReg();
-                   task.execute("http://www.amxdp.fun/api/registrations", holder.toString());
+                   task.execute("https://devise-app-login.herokuapp.com/api/registrations", holder.toString());
 
                }
            }

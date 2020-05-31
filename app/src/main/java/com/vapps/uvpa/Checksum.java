@@ -82,7 +82,7 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
         {
             e.printStackTrace();
         }
-        payment.execute("https://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
+        payment.execute("https://mobile-rb.herokuapp.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
 // vollye , retrofit, asynch
 
     }
@@ -190,11 +190,11 @@ public class Checksum extends AppCompatActivity implements PaytmPaymentTransacti
             orderDetails.put("status",bundle.getString("STATUS"));
             orderHold.put("mobpayment", orderDetails);
             Log.i("VANIK1", orderHold.toString());
-            mobPayment.execute("https://www.repairbuck.com/mobpayments.json?auth_token=" + sharedPreferences.getString("auth_token", null), orderHold.toString());
+            mobPayment.execute("https://mobile-rb.herokuapp.com/mobpayments.json?auth_token=" + sharedPreferences.getString("auth_token", null), orderHold.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //payment.execute("https://www.repairbuck.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
+        //payment.execute("https://mobile-rb.herokuapp.com/mobbuckets.json?auth_token="+sharedPreferences.getString("auth_token",null),orderHolder.toString());
     }
 
     @Override

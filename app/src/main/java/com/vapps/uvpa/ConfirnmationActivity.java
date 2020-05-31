@@ -77,7 +77,7 @@ backupselection=findViewById(R.id.backup_layout);
               location = intentget.getStringExtra("location");
               gadget = intentget.getStringExtra("gadget");
 
-              if(gadget.equals("Mobile"))
+              if(gadget != null && gadget.equals("Mobile"))
                  baseprice=baseprice+"150";
              else
                  baseprice=baseprice+"250";
@@ -222,17 +222,17 @@ baseamount.setText(baseprice);
                  total.setText(totalString);
                  Log.i("Detials", detials.toString());
 
-         }catch (JSONException e) {
+         }catch (Exception e) {
              e.printStackTrace();
          }
          address.setText(addressString);
          Log.i("gadget", intentget.getStringExtra("gadget"));
              if (gadget.equals("Mobile")) {
-                 repairUrl = "https://www.repairbuck.com/repairs.json?auth_token=";
-                 orderUrl = "https://www.repairbuck.com/orders.json?auth_token=";
+                 repairUrl = "https://mobile-rb.herokuapp.com/repairs.json?auth_token=";
+                 orderUrl = "https://mobile-rb.herokuapp.com/orders.json?auth_token=";
              } else {
-                 repairUrl = "https://www.repairbuck.com/laprepairs.json?auth_token=";
-                 orderUrl = "https://www.repairbuck.com/laporders.json?auth_token=";
+                 repairUrl = "https://mobile-rb.herokuapp.com/laprepairs.json?auth_token=";
+                 orderUrl = "https://mobile-rb.herokuapp.com/laporders.json?auth_token=";
                  backupselection.setVisibility(View.GONE);
              }
 

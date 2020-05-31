@@ -17,7 +17,7 @@
         android:layout_margin="30dp"
         android:id="@+id/logo"
         android:layout_centerInParent="true"
-        android:src="@mipmap/rb1"
+        android:src="@mipmap/ic_launcher"
 
        />
 
